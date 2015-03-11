@@ -1,57 +1,39 @@
+<h2>Contact Information</h2>
+
+<hr />
 
 <% if current_user.login_approval == 'Yes' %>
 <% if current_user.role == 'Admin' or current_user.role == 'Volunteer' %>
 
-<h1>Saved User Contact Information </h1>
-<p>
-  <strong>First Name:</strong>
-      <%= @user.first_name %>
-</p>
-<p>
-  <strong>Last Name:</strong>
-      <%= @user.last_name %>
-</p>
-<p>
-  <strong>Username:</strong>
-      <%= @user.username %>
-</p>
- 
-<p>
-  <strong>Gender:</strong>
-      <%= @user.gender %>
-</p>
- 
-<p>
-  <strong>Email:</strong>
-      <%= @user.email %>
-</p>
+<dl class="dl-horizontal">
+  <dt>First Name</dt>
+  <dd><%= @user.first_name %></dd>
 
-<p>
-  <strong>Location:</strong>
-      <%= @user.location %>
-</p>
+  <dt>Last Name</dt>
+  <dd><%= @user.last_name %></dd>
 
-<p>
-  <strong>Language Contribution:</strong>
-      <%= @user.lang %>
-</p>
+  <dt>Email</dt>
+  <dd><%= @user.email %></dd>
 
-<p>
-  <strong>Contact Number:</strong>
-      <%= @user.contact %>
-</p>
- 
-<p>
-  <strong>Role:</strong>
-      <%= @user.role %>
-</p>
- 
-<p>
-  <strong>Login Approval:</strong>
-      <%= @user.login_approval %>
-</p>
- 
-<%= link_to 'Back', users_path %>
+  <dt>Gender</dt>
+  <dd><%= @user.gender %></dd>
+
+  <dt>Location</dt>
+  <dd><%= @user.location %></dd>
+
+  <dt>Language Contribution</dt>
+  <dd><%= @user.lang %></dd>
+
+  <dt>Contact Number</dt>
+  <dd><%= @user.contact %></dd>
+
+  <dt>Role</dt>
+  <dd><%= @user.role %></dd>
+
+  <dt>Login Approval</dt>
+  <dd><%= @user.login_approval %></dd>
+</dl>
+
 <%= link_to 'Edit', edit_user_path(@user) %>
 
 <% end %>

@@ -2,8 +2,13 @@
 <% if current_user.login_approval == 'Yes' %>
 <% if current_user.role == 'Admin' %>
 
-<%= form_for @user do |f| %>
+<div class="row">
+  <div class="col-md-12">
+
+<%= form_for @user, html: { class: "form-horizontal" } do |f| %>
+
   <% if @user.errors.any? %>
+
   <div id="error_explanation">
     <h2><%= pluralize(@user.errors.count, "error") %> prohibited
       this volunteer contact information from being saved:</h2>
@@ -14,53 +19,86 @@
     </ul>
   </div>
   <% end %>
-  <p>
-    <%= f.label :First_Name %><br/>
-    <%= f.text_field :first_name %>
-  </p>
-  <p>
-    <%= f.label :Last_Name %><br/>
-    <%= f.text_field :last_name %>
-  </p>
- 
-  <p>
-    <%= f.label :Role %>
-    <%= f.select :role, options_for_select([[@user.role, @user.role], ['Contributor' ,'Contributor'], ['Volunteer', 'Volunteer']]) %>
-  </p>
 
-  <p>
-    <%= f.label :Login_Approval %>
-    <%= f.select :login_approval, options_for_select([[@user.login_approval, @user.login_approval], ['Yes' ,'Yes'], ['Not Yet', 'Not Yet']]) %>
-  </p>
+  <div class="form-group">
+    <%= f.label :username, class: "control-label col-sm-3" %>
+    <div class="col-sm-3">
+      <%= f.text_field :username, class: "form-control" %>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :first_name, class: "control-label col-sm-3" %>
+    <div class="col-sm-3">
+      <%= f.text_field :first_name, class: "form-control" %>
+    </div>
+  </div>
 
-  <p>
-    <%= f.label :Email %><br/>
-    <%= f.text_field :email %>
-  </p>
+  <div class="form-group">
+    <%= f.label :last_name, class: "control-label col-sm-3" %>
+    <div class="col-sm-3">
+      <%= f.text_field :last_name, class: "form-control" %>
+    </div>
+  </div>
 
-  <p>
-    <%= f.label :Location %> 
-    <%= f.collection_select(:location, Installation.all, :installation, :installation, :include_blank => "None") %>
-  </p>
+  <div class="form-group">
+    <%= f.label :role, class: "control-label col-sm-3" %>
+    <div class="col-sm-3">
+      <%= f.select :role, options_for_select([[@user.role, @user.role], ['Contributor' ,'Contributor'], ['Volunteer', 'Volunteer']]), class: "form-control"  %>
+    </div>
+  </div>
 
-  <p><%= f.label :Language_Contribution %> 
-    <%= f.collection_select(:lang, Language.all, :name, :name, :include_blank => "All") %>
-  </p>
+  <div class="form-group">
+    <%= f.label :login_approval, class: "control-label col-sm-3" %>
+    <div class="col-sm-3">
+      <%= f.select :login_approval, options_for_select([[@user.login_approval, @user.login_approval], ['Yes' ,'Yes'], ['Not Yet', 'Not Yet']]) %>
+    </div>
+  </div>
 
-  <p>
-    <%= f.label :Contact_Number %><br/>
-    <%= f.text_field :contact %>
-  </p>
+  <div class="form-group">
+    <%= f.label :email, class: "control-label col-sm-3" %>
+    <div class="col-sm-3">
+      <%= f.email_field :email, class: "form-control" %>
+    </div>
+  </div>
 
-  <p>
-    <%= f.label :Gender %>
-    <%= f.select :gender, options_for_select([[@user.gender, @user.gender], ['Male', 'Male'], ['Female' ,'Female'],]) %>
-  </p>
+  <div class="form-group">
+    <%= f.label :location, class: "control-label col-sm-3" %>
+    <div class="col-sm-3">
+      <%= f.collection_select(:location, Installation.all, :installation, :installation, :include_blank => "None") %>
+    </div>
+  </div>
 
-  <p>
-    <%= f.submit %>
-  </p>
+  <div class="form-group">
+    <%= f.label :lang, "Language Contribution", class: "control-label col-sm-3" %>
+    <div class="col-sm-3">
+      <%= f.collection_select(:lang, Language.all, :name, :name, :include_blank => "All") %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :contact, "Contact Number", class: "control-label col-sm-3" %>
+    <div class="col-sm-3">
+      <%= f.text_field :contact, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :location, class: "control-label col-sm-3" %>
+    <div class="col-sm-3">
+      <%= f.select :gender, options_for_select([[@user.gender, @user.gender], ['Male', 'Male'], ['Female' ,'Female'],]) %>
+     </div>
+  </div>     
+
+  <div class="form-group form-actions">
+    <div class="col-sm-offset-3 col-sm-3">
+      <button class="btn btn-primary" type="submit">Update</button>
+    </div>
+  </div>
+
 <% end %>
+  </div>
+</div>
 
 <% end %>
 <% end %>
