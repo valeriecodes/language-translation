@@ -75,37 +75,6 @@
 }
 
 .heading { margin-bottom: 10px; }
-/*h2 { margin-left: 8px; } */
-
-.control-group .field_with_errors label {
-    float: left;
-    padding-top: 5px;
-    text-align: right;
-    width: 140px;
-}
-.field_with_errors label { color: #B94A48; }
-.field_with_errors input, .field_with_errors textarea { border-color: #B94A48; color: #B94A48; }
-#error_explanation {
-    background-color: #FFF0F0;
-    border-bottom: 1px solid #F0C6C6;
-    border-top: 1px solid #F0C6C6;
-    color: #8C3F3F;
-    margin: 0 0 20px 0;
-    padding: 0;
-}
-
-#error_explanation h2 { 
-    background-color: #FFE5E5;
-    color: #8C3F3F;
-    display: block;
-    font-size: 15px;
-    font-style: normal;
-    margin: 0;
-    padding: 0 10px;
-    font-weight: normal;
-  }
-#error_explanation ul { padding-top: 10px; } 
-#error_explanation li { padding-bottom: 5px; font-size: 12px; }
 .help-inline { color: #999999; font-size: 12px; }
 .btn-wrapper { display: inline-block; left: 5px; position: relative; top: 2px; }
 .btn-wrapper span { position: relative; font-size: 12px; right: 5px; padding: 0 0 0 5px; }
@@ -122,49 +91,15 @@ legend { margin-bottom: 30px;
 .notice, .notice .alert-heading {
   color: #468847;
 }
-.ui-datepicker-trigger { margin-left: 5px; }
 .navi-external { margin-left: 0; }
 .navi-external li { margin-right: 8px; display: inline; list-style: none; }
 .navi-external span { margin-right: 10px; }
 hr { margin: 10px 0 15px }
-.right { text-align: right; }
-.mtl { margin-top: 40px; }
-.option { position: absolute; right: 0; top: 5px; }
 .row h2 { margin-bottom: 10px; }
-.h3_title {
-  font-weight: normal;
-  display: block;
-  width: 100%;
-  padding: 0;
-  margin-bottom: 27px;
-  font-size: 19.5px;
-  line-height: 36px;
-  color: #333333;
-  border: 0;
-  border-bottom: 1px solid #eee;
-}
-.date img { position: relative; top: 5px; }
-#preview .light { color: #999; }
-#preview p { color: #000; }
 
-.bdot { margin: 0 0 7px; border-style: dotted; }
-#preview ul, #preview ol { margin-left: 15px; }
-#preview ul li, #preview ol li { margin-bottom: 10px; }
-#loading {  display: block;
-    margin: 0 auto;
-    text-align: center;
-    width: 100px; }
+
 .relative { position: relative; }
 .option_btn { position: absolute; top: 5px; right: 0; }
-.approved {
-    background-color: #468847;
-}
-.pending {
-    background-color: #F89406;
-}
-.draft {
-    background-color: #B94A48;
-}
 .search { text-align: right; }
 .search-query {
   -webkit-border-radius: 5px;
@@ -201,23 +136,11 @@ ul.unstyled li.small { font-size: 12px; }
     float: left
 }
 
-.icon-question-sign {
-    background-position: 0 50%;
-    height: 16px;
-    width: 16px;
-    background-image: url("/assets/help.png");
-}
 
 .list-option { float: right; }
-.loading_form_submit { left: 10px; position: relative; top: 5px; }
 .heading { position: relative; }
-.flag-img { float: left; margin-right: 1px;}
-.helper_list img { position: relative; top: 4px; }
-.helper_list span { margin-right: 15px; display: inline-block; }
 
 .form-horizontal .help-inline { margin-top: 10px; display: inline-block; }
-.remember_block { padding-left: 35px; }
-.remember_block label { font-weight: normal; }
 
 .form-actions {
     padding: 17px 20px 18px;
