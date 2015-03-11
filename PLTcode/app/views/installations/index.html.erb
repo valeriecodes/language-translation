@@ -2,9 +2,8 @@
 <% if current_user.login_approval == 'Yes' %>
 <% if current_user.role == 'Admin' %>
 <h1>Listing posts</h1>
-<p><u><b><%= link_to '+New post', new_installation_path %></b></u></p>
 
-<table id="customers">
+<table class="table table-striped">
   <tr>
      <th>Post</th>
      <th>Email Id</th>
@@ -21,7 +20,7 @@
      <td><%= installation.contact %></td>
       <td><%= link_to 'Show', installation_path(installation) %></td>
       <td><%= link_to 'Edit', edit_installation_path(installation) %></td>
-      <td><%= link_to 'Delete', installation_path(installation), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <td><%= link_to 'Delete', installation_path(installation), method: :delete, class: "btn btn-danger btn-xs", data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 
