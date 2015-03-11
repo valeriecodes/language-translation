@@ -9,21 +9,21 @@ class ApplicationController < ActionController::Base
       params[resource] &&= send(method) if respond_to?(method, true)
   end
 
-  rescue_from ActionController::RoutingError do |exception|
-      redirect_to root_url, :alert => exception.message
-  end
+# rescue_from ActionController::RoutingError do |exception|
+#     redirect_to root_url, :alert => exception.message
+# end
 
-  rescue_from Exception do |exception|
-      redirect_to root_url, :alert => exception.message
-  end
-
-  rescue_from ActiveRecord::RecordNotFound do |exception|
-      redirect_to root_url, :alert => exception.message
-  end
-
-  rescue_from CanCan::AccessDenied do |exception|
-      redirect_to root_url, :alert => exception.message
-  end
+# rescue_from Exception do |exception|
+#     redirect_to root_url, :alert => exception.message
+# end
+#
+# rescue_from ActiveRecord::RecordNotFound do |exception|
+#     redirect_to root_url, :alert => exception.message
+# end
+#
+# rescue_from CanCan::AccessDenied do |exception|
+#     redirect_to root_url, :alert => exception.message
+# end
 
   before_action :authenticate_user!
 # if user is not logged in, then page will be redirected to login page
