@@ -83,7 +83,7 @@ ActiveRecord::Schema.define(version: 20150517102957) do
     t.string   "bk_role",                limit: 255
     t.string   "login_approval",         limit: 255
     t.string   "lang",                   limit: 255
-    t.integer  "role"
+    t.integer  "role_id"
   end
 
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree

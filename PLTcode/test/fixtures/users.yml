@@ -21,9 +21,10 @@
 #  location               :string(255)
 #  contact                :string(255)
 #  gender                 :string(255)
-#  role                   :string(255)
+#  bk_role                :string(255)
 #  login_approval         :string(255)
 #  lang                   :string(255)
+#  role_id                :integer
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

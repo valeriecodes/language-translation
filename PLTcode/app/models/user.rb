@@ -21,9 +21,10 @@
 #  location               :string(255)
 #  contact                :string(255)
 #  gender                 :string(255)
-#  role                   :string(255)
+#  bk_role                :string(255)
 #  login_approval         :string(255)
 #  lang                   :string(255)
+#  role_id                :integer
 #
 
 class User < ActiveRecord::Base
@@ -34,6 +35,12 @@ class User < ActiveRecord::Base
   validates_confirmation_of :password, length: { in: 6..20 }
   validates_presence_of :username, :role, :login_approval, :first_name, :last_name
 
+  default_value_for :role_id, 5
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable
+
+  def role
+    @role ||= Role.new(self.role_id).name
+  end
 end
