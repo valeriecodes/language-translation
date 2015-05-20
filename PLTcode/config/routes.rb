@@ -1,12 +1,12 @@
 Rails.application.routes.draw do
 
-  devise_for :users,  :path_prefix => 'plt', :controllers => { :registrations => "registrations" }
+  devise_for :users, controllers: { registrations: "registrations" }
 
 # :path_prefix - to customise routes
 # :controllers - to override the devise default - 
 #  - for admin to edit the user table records other than username or password without knowing the password.
 
-  resources :users
+  resources :users, path: :members
 
   resources :installations do
     resources :sites

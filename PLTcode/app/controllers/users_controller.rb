@@ -1,12 +1,14 @@
 class UsersController < ApplicationController
  load_and_authorize_resource
 
- def new
-  @user = User.new
- end
+ before_action :set_user, only: [:edit, :show, :destroy, :update]
 
  def index
-  @users = User.all
+  @users = User.paginate(page: params[:page], per_page: 20)
+ end
+
+ def new
+  @user = User.new
  end
 
  def create
@@ -20,23 +22,18 @@ class UsersController < ApplicationController
  end
 
  def edit
-  @user = User.find(params[:id])
  end
 
  def destroy
-  @user = User.find(params[:id])
   @user.destroy
  
   redirect_to users_path
  end
 
  def show
-  @user = User.find(params[:id])
  end
 
  def update
-  @user = User.find(params[:id])
- 
   if @user.update(user_params)
     redirect_to @user
   else
@@ -49,4 +46,7 @@ class UsersController < ApplicationController
     params.require(:user).permit(:first_name, :last_name, :email, :username, :location, :lang, :contact, :gender, :role, :login_approval)
   end
 
+  def set_user
+    @user = User.find(params[:id])
+  end
 end

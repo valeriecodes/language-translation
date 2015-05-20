@@ -4,9 +4,9 @@ SimpleNavigation::Configuration.run do |navigation|
 
   # Define the primary navigation
   navigation.items do |primary|
-    primary.item :users, 'Users', users_path, highlights_on: :subpath do |sub|
+    primary.item :users, 'Members', users_path, highlights_on: :subpath do |sub|
       sub.dom_class = 'nav nav-pills'
-      sub.item :users, 'Guests', users_path
+      sub.item :users, 'Guests', "#"
       sub.item :users, 'Volunteers', "#"
       sub.item :users, 'Contributors', "#"
     end if [:admin, :volunteer].include?(current_user.try(:role))
