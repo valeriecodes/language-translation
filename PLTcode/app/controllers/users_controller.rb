@@ -1,11 +1,17 @@
 class UsersController < ApplicationController
- load_and_authorize_resource
+  load_and_authorize_resource
 
- before_action :set_user, only: [:edit, :show, :destroy, :update]
+  before_action :set_user, only: [:edit, :show, :destroy, :update]
 
- def index
-  @users = User.paginate(page: params[:page], per_page: 20)
- end
+  def index
+    #TODO .where(organization_id: current_organization.id)
+
+    if params[:q].blank?
+      @users = User.paginate(page: params[:page], per_page: 20)
+    else
+      @users = User.user_search(params[:q]).paginate(page: params[:page], per_page: 20)
+    end
+  end
 
  def new
   @user = User.new
@@ -33,13 +39,13 @@ class UsersController < ApplicationController
  def show
  end
 
- def update
-  if @user.update(user_params)
-    redirect_to @user
-  else
-    render 'edit'
+  def update
+    if @user.update(user_params)
+      redirect_to @user
+    else
+      render 'edit'
+    end
   end
- end
  
  private
   def user_params

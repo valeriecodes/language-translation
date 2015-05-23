@@ -25,9 +25,12 @@
 #  login_approval         :string(255)
 #  lang                   :string(255)
 #  role_id                :integer
+#  tsv_data               :tsvector
 #
 
 class User < ActiveRecord::Base
+  include PgSearch
+  
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   default_scope -> { order('created_at DESC') }
@@ -39,6 +42,18 @@ class User < ActiveRecord::Base
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable
+
+  # Search 
+  pg_search_scope :user_search,
+    against: :tsv_data,
+    using: {
+      tsearch: {
+        dictionary: 'english',
+        any_word: true,
+        prefix: true,
+        tsvector_column: 'tsv_data'
+      }
+    }
 
   def role
     @role ||= Role.new(self.role_id).name
