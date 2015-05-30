@@ -4,40 +4,38 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:edit, :show, :destroy, :update]
 
   def index
-    #TODO .where(organization_id: current_organization.id)
-
     if params[:q].blank?
-      @users = User.paginate(page: params[:page], per_page: 20)
+      @users = User.accessible_by(current_ability).paginate(page: params[:page], per_page: 20)
     else
-      @users = User.user_search(params[:q]).paginate(page: params[:page], per_page: 20)
+      @users = User.accessible_by(current_ability).user_search(params[:q]).paginate(page: params[:page], per_page: 20)
     end
   end
 
- def new
-  @user = User.new
- end
-
- def create
-  @user = User.new(user_params)
- 
-  if @user.save
-   redirect_to @user
-  else
-   render 'new'
+  def new
+   @user = User.new
   end
- end
 
- def edit
- end
+  def create
+   @user = User.new(user_params)
 
- def destroy
-  @user.destroy
- 
-  redirect_to users_path
- end
+   if @user.save
+    redirect_to @user
+   else
+    render 'new'
+   end
+  end
 
- def show
- end
+  def edit
+  end
+
+  def destroy
+   @user.destroy
+
+   redirect_to users_path
+  end
+
+  def show
+  end
 
   def update
     if @user.update(user_params)
@@ -47,7 +45,7 @@ class UsersController < ApplicationController
     end
   end
  
- private
+  private
   def user_params
     params.require(:user).permit(:first_name, :last_name, :email, :username, :location, :lang, :contact, :gender, :role, :login_approval)
   end
