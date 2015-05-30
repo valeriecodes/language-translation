@@ -1,10 +1,5 @@
 <h2>Contact Information</h2>
 
-<hr />
-
-<% if current_user.login_approval == 'Yes' %>
-<% if current_user.role == 'Admin' or current_user.role == 'Volunteer' %>
-
 <dl class="dl-horizontal">
   <dt>First Name</dt>
   <dd><%= @user.first_name %></dd>
@@ -35,6 +30,3 @@
 </dl>
 
 <%= link_to 'Edit', edit_user_path(@user) %>
-
-<% end %>
-<% end %>

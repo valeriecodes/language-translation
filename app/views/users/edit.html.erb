@@ -1,14 +1,5 @@
-
-<% if current_user.login_approval == 'Yes' %>
-<% if current_user.role == 'Admin' %>
-
 <h2>Editing User Contact Information</h2>
-<hr />
-<br />
- 
+
 <%= render 'form' %>
  
 <%= link_to 'Back', users_path %>
-
-<% end %>
-<% end %>

@@ -1,7 +1,3 @@
-
-<% if current_user.login_approval == 'Yes' %>
-<% if current_user.role == 'Admin' %>
-
 <div class="row">
   <div class="col-md-12">
 
@@ -42,9 +38,9 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :role, class: "control-label col-sm-3" %>
+    <%= f.label :role_id, class: "control-label col-sm-3" %>
     <div class="col-sm-3">
-      <%= f.select :role, options_for_select([[@user.role, @user.role], ['Contributor' ,'Contributor'], ['Volunteer', 'Volunteer']]), class: "form-control"  %>
+      <%= f.select :role_id, role_options(@user), lass: "form-control"  %>
     </div>
   </div>
 
@@ -84,7 +80,7 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :location, class: "control-label col-sm-3" %>
+    <%= f.label :gender, class: "control-label col-sm-3" %>
     <div class="col-sm-3">
       <%= f.select :gender, options_for_select([[@user.gender, @user.gender], ['Male', 'Male'], ['Female' ,'Female'],]) %>
      </div>
@@ -99,6 +95,3 @@
 <% end %>
   </div>
 </div>
-
-<% end %>
-<% end %>
