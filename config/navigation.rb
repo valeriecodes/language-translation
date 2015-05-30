@@ -4,17 +4,12 @@ SimpleNavigation::Configuration.run do |navigation|
 
   # Define the primary navigation
   navigation.items do |primary|
-    primary.item :users, 'Members', users_path, highlights_on: :subpath do |sub|
-      sub.dom_class = 'nav nav-pills'
-      sub.item :users, 'Guests', "#"
-      sub.item :users, 'Volunteers', "#"
-      sub.item :users, 'Contributors', "#"
-    end if [:admin, :volunteer].include?(current_user.try(:role))
+    primary.item :users, 'Members', users_path, highlights_on: :subpath if [:admin, :volunteer].include?(current_user.try(:role))
     
     primary.item :posts, "Posts", installations_path, highlights_on: :subpath do |sub|
       sub.dom_class = 'nav nav-pills'
       sub.item :photos, 'New post', new_installation_path
-    end  if [:admin, :volunteer].include?(current_user.try(:role))
+    end  if [:admin].include?(current_user.try(:role))
 
     primary.item :sites, "Sites", sites_path, highlights_on: :subpath do |sub|
       sub.dom_class = 'nav nav-pills'
