@@ -1,0 +1,30 @@
+defaults: &defaults
+  adapter:  postgresql
+  port:     5432
+  
+
+development:
+  host:     localhost
+  database: plt_development
+  username: sameera
+  password: nsha185
+  <<: *defaults
+
+test:
+  database: plt_test
+  username: sameera
+  password: nsha185
+  <<: *defaults
+
+production:
+  host:     ec2-23-21-76-246.compute-1.amazonaws.com
+  database: d55u9h6gmdus94
+  username: gqdpyerrqhcgfg
+  password: lvJBKaU3OVfaTpUwg6iMaL0qxZ
+  <<: *defaults
+
+staging:
+  database: plt_staging
+  username: sameera
+  password: nsha185
+  <<: *defaults
