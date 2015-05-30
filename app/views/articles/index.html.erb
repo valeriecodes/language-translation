@@ -1,7 +1,7 @@
+<%# if current_user.login_approval == 'Yes' %>
 
-<% if current_user.login_approval == 'Yes' %>
+<%# if current_user.role == 'Admin' or current_user.role == 'Volunteer' %>
 
-<% if current_user.role == 'Admin' or current_user.role == 'Volunteer' %>
 <h2>Listing photos</h2>
  
 <table class="table table-striped" id="customers">
@@ -15,15 +15,19 @@
   </tr>
  
     <div id="articles">
-        <%= render :partial => 'article', collection: @articles %>
+      <%= render partial: 'article', collection: @articles %>
     </div>
 </table>
 <hr/>
-<% end %>
+<%# end %>
+
+
+
 
 <% if current_user.role == 'Contributor' %>
 <% if current_user.lang == nil %> <!-- do nothing as 1 contributor can contribute to 1 language only -->
 <% else %>
+
 <h1>Listing photos for <%= current_user.lang %> language</h1>
 <p><u><b><%= link_to '+New photo', new_article_path %></b></u></p>
  
@@ -58,5 +62,4 @@
 <% end %>
 <% end %>
 
-<% end %>
-
+<%# end %>
