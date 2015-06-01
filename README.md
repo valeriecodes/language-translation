@@ -13,12 +13,12 @@
 
 1. Rails 4.2.1
 2. Ruby 2.2.0p0
-3. Sqlite3 (development and test), PostgreSQL (deployment)
+3. PostgreSQL (development, test, deployment)
 
 ## Instructions on running the application
 
 1. Download the PLTcode directory.
-2. Enter the application's root directory. `$ cd PLTcode`
+2. Enter the application's root directory.
 3. `$ rake db:migrate`
 4. `$ rake db:seed`
 5. `$ rails s`
