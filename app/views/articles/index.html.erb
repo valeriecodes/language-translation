@@ -4,6 +4,8 @@
 
 <h2>Listing photos</h2>
  
+<%= render partial: "search_form" %>
+
 <table class="table table-striped" id="customers">
   <tr>
     <th>Language</th>
@@ -18,7 +20,9 @@
       <%= render partial: 'article', collection: @articles %>
     </div>
 </table>
-<hr/>
+
+<%= will_paginate @articles %>
+
 <%# end %>
 
 

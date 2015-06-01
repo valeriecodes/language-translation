@@ -13,10 +13,23 @@
 #
 
 class Article < ActiveRecord::Base
- default_scope -> { order('created_at DESC') }
- belongs_to :language
+  include PgSearch
 
- mount_uploader :picture, PictureUploader
+  belongs_to :language
+  default_scope -> { order('created_at DESC') }
 
+  mount_uploader :picture, PictureUploader
+
+  # Search 
+  pg_search_scope :article_search,
+    against: :tsv_data,
+    using: {
+      tsearch: {
+        dictionary: 'english',
+        any_word: true,
+        prefix: true,
+        tsvector_column: 'tsv_data'
+      }
+    }
 
 end

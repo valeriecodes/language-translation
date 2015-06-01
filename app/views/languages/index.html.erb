@@ -1,6 +1,5 @@
-
-<% if current_user.login_approval == 'Yes' %>
-<% if current_user.role == 'Admin' or current_user.role == 'Volunteer' or current_user.role == 'Contributor' %>
+<%# if current_user.login_approval == 'Yes' %>
+<%# if current_user.role == 'Admin' or current_user.role == 'Volunteer' or current_user.role == 'Contributor' %>
 <h1>Listing Languages</h1>
  
 <table class="table table-striped">
@@ -23,6 +22,6 @@
     </tr>
   <% end %>
 </table>
-<hr/>
-  <% end %>
-  <% end %>
+
+<%# end %>
+<%# end %>

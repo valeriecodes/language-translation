@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150523124244) do
+ActiveRecord::Schema.define(version: 20150530111825) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,9 +24,11 @@ ActiveRecord::Schema.define(version: 20150523124244) do
     t.string   "category",    limit: 255
     t.string   "picture",     limit: 255
     t.integer  "language_id"
+    t.tsvector "tsv_data"
   end
 
   add_index "articles", ["language_id"], name: "index_articles_on_language_id", using: :btree
+  add_index "articles", ["tsv_data"], name: "index_articles_tsv", using: :gin
 
   create_table "contributors", force: :cascade do |t|
     t.string   "name",       limit: 255

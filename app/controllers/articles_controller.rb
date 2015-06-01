@@ -1,23 +1,27 @@
 class ArticlesController < ApplicationController
- load_and_authorize_resource
+  load_and_authorize_resource
 
- def new
-  @article = Article.new
- end
-
- def index
-   @articles = Article.where("id > ? and created_at > ?", params[:article_id].to_i, Time.at(params[:after].to_i ) + 1 )
- end
-
- def create
-  @article = Article.new(article_params)
- 
-  if @article.save
-   redirect_to @article
-  else
-   render 'new'
+  def new
+    @article = Article.new
   end
- end
+
+  def index
+    if params[:q].blank?
+      @articles = Article.paginate(page: params[:page], per_page: 20)
+    else
+      @articles = Article.article_search(params[:q]).paginate(page: params[:page], per_page: 20)
+    end
+  end
+
+  def create
+    @article = Article.new(article_params)
+ 
+    if @article.save
+      redirect_to @article
+    else
+      render 'new'
+    end
+  end
 
  def edit
   @article = Article.find(params[:id])
