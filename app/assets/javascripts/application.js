@@ -17,7 +17,8 @@
 
 $(function() {
 		  if ($("#articles").length > 0) {
-		      setTimeout(updateArticles, 10000);
+          //FIXME - Need to fix this later by Isuri
+		      //setTimeout(updateArticles, 10000);
 		  }
 });
 
