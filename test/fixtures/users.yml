@@ -39,8 +39,8 @@ one:
  id: 1
  encrypted_password: <%= User.new.send(:password_digest, 'wander') %> 
  reset_password_token: nil
- reset_password_sent_at: nil
- remember_created_at: nil
+ reset_password_sent_at: <%= Date.yesterday %>
+ remember_created_at: <%= Date.yesterday %>
  sign_in_count: 1
  current_sign_in_at: 2014-08-15 14:06:09
  last_sign_in_at: 2014-08-15 14:06:09
@@ -55,7 +55,7 @@ one:
  location: nil 
  contact: nil
  gender: nil
- role: Admin
+ role_id: 1
  login_approval: Yes
  lang: nil
 
@@ -69,7 +69,7 @@ two:
  location: nil 
  contact: nil
  gender: nil
- role: Volunteer
+ role_id: 2
  login_approval: Yes
  lang: nil
 
@@ -83,7 +83,7 @@ three:
  location: nil 
  contact: nil
  gender: nil
- role: Contributor
+ role_id: 3
  login_approval: Yes
  lang: nil
 
@@ -97,6 +97,6 @@ four:
  location: nil 
  contact: nil
  gender: nil
- role: Guest
+ role_id: 4
  login_approval: Not Yet
  lang: nil
