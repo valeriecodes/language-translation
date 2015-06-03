@@ -30,8 +30,8 @@
   <div class="form-group">
       <div class="col-sm-offset-3 col-sm-3">
         <div>
-          <%= f.label :Role %> ( cannot change ) &nbsp;
-          <%= f.radio_button :role, @user.role, checked:true %> 
+          <%= f.label :role_id %> ( cannot change ) &nbsp;
+          <%= f.radio_button :role_id, @user.role, checked: true %> 
           <%= label :role_current, @user.role %>
         </div>
       </div>

@@ -59,4 +59,5 @@ class User < ActiveRecord::Base
   def role
     @role ||= Role.new(self.role_id).name
   end
+
 end
