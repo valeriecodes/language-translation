@@ -41,7 +41,7 @@ class User < ActiveRecord::Base
 
   default_value_for :role_id, 5
 
-  devise :database_authenticatable, :registerable,
+  devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable
 
   # Search 
