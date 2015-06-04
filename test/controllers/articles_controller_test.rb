@@ -27,11 +27,11 @@ class ArticlesControllerTest < ActionController::TestCase
   end
 
   test "should delete photo" do
-    language = Language.create({:name=>'Chuukese'})
-    article = Article.create!({:language_id=>language.id, :category=>'Food'})
+    language = Language.create({name: 'Chuukese'})
+    article = Article.create!({language_id: language.id, category: 'Food'})
     assert_difference('Article.count',-1) do
       puts Article.count 
-      delete :destroy, :language_id => language.id, :id => article.id
+      delete :destroy, language_id: language.id, id: article.id
       assert_response :redirect
       puts Article.count
     end
