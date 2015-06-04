@@ -1,0 +1,22 @@
+<div class="navbar">
+  <div class="header-nav">
+    <div class="container">
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+
+        <span class="i-bar"></span>
+        <span class="i-bar"></span>
+        <span class="i-bar"></span>
+      </a>
+      <a class="navbar-brand" href="/"><img class="logo_img" width="180px" src="/assets/logo.jpg" alt="PL" /></a>
+      <div class="nav-collapse">
+        <%= render_navigation(:level => 1) %>
+        <% if user_signed_in? %>
+          <p class="navbar-text pull-right">Logged in as <%= link_to current_user.first_name, edit_user_registration_path %><span> </span> <%= link_to 'Log out', destroy_user_session_path, :method => :delete, :id => "sign_out_link" %></p>
+        <% else %>
+          <p class="navbar-text pull-right"><%= link_to "CREATE ACCOUNT", new_user_registration_path %></p>
+          <p class="navbar-text pull-right"><%= link_to "LOGIN", new_user_session_path %></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

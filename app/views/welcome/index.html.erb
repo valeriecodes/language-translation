@@ -1,0 +1,42 @@
+<% if user_signed_in? %>
+
+<p><b><%= link_to 'Edit profile', edit_user_registration_path %></b></p>
+
+<dl class="dl-horizontal">
+  <dt>First Name</dt>
+  <dd><%= current_user.first_name %></dd>
+
+  <dt>Last Name</dt>
+  <dd><%= current_user.last_name %></dd>
+
+  <dt>Email</dt>
+  <dd><%= current_user.email %></dd>
+
+  <dt>Gender</dt>
+  <dd><%= current_user.gender %></dd>
+
+  <dt>Location</dt>
+  <dd><%= current_user.location %></dd>
+
+  <dt>Language Contribution</dt>
+  <dd><%= current_user.lang %></dd>
+
+  <dt>Contact Number</dt>
+  <dd><%= current_user.contact %></dd>
+
+  <dt>Role</dt>
+  <dd><%= current_user.role %></dd>
+
+  <dt>Login Approval</dt>
+  <dd><%= current_user.login_approval %></dd>
+</dl>
+
+<hr/>
+
+<% else %>
+<h3>Please login to use this application.</h3>
+<h3>If you are a new user the please sign up.</h3>
+<% end %>
+
+
+

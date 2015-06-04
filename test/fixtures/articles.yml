@@ -1,0 +1,25 @@
+# == Schema Information
+#
+# Table name: articles
+#
+#  id          :integer          not null, primary key
+#  english     :text
+#  phonetic    :text
+#  created_at  :datetime
+#  updated_at  :datetime
+#  category    :string(255)
+#  picture     :string(255)
+#  language_id :integer
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: 1
+  english: MyText2
+  phonetic: MyTextp2
+
+two:
+  id: 2
+  english: MyText1
+  phonetic: MyTextp1

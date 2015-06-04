@@ -1,0 +1,10 @@
+.DS_Store
+db/schema.rb
+vendor/cache/
+log/*
+config/database.yml
+tmp/*
+public/uploads
+public/uploads/*
+.ruby-version
+Gemfile.lock
