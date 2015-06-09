@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/systers/language-translation.svg?branch=develop)](https://travis-ci.org/systers/language-translation)
 ## GSoc Photo Language Translation Project 2015
 1. Gsoc timeline : 
 2. Developer's Systers profile page : 
