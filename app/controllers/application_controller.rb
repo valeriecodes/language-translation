@@ -30,6 +30,8 @@ class ApplicationController < ActionController::Base
 
   before_action :configure_devise_permitted_parameters, if: :devise_controller?
 
+  alias :authorize_user! authorize!
+
   protected
 
   def configure_devise_permitted_parameters

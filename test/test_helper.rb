@@ -3,6 +3,7 @@ require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 require 'mocha/setup'
 require 'webrat'
+
 Webrat.configure do |config|
   config.mode = :rails
   config.open_error_files = false
@@ -19,4 +20,10 @@ class ActiveSupport::TestCase
   # -- they do not yet inherit this setting
   fixtures :all
   # Add more helper methods to be used by all tests here...
+end
+
+module TestHelpers
+  def json_response
+    @json ||= JSON.parse(response.body)
+  end
 end

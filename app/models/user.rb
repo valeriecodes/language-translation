@@ -3,7 +3,7 @@
 # Table name: users
 #
 #  id                     :integer          not null, primary key
-#  encrypted_password     :string(255)      default(""), not null
+#  encrypted_password     :string(255)      default("")
 #  reset_password_token   :string(255)
 #  reset_password_sent_at :datetime
 #  remember_created_at    :datetime
@@ -26,6 +26,15 @@
 #  lang                   :string(255)
 #  role_id                :integer
 #  tsv_data               :tsvector
+#  invitation_token       :string
+#  invitation_created_at  :datetime
+#  invitation_sent_at     :datetime
+#  invitation_accepted_at :datetime
+#  invitation_limit       :integer
+#  invited_by_id          :integer
+#  invited_by_type        :string
+#  invitations_count      :integer          default(0)
+#  authentication_token   :string
 #
 
 class User < ActiveRecord::Base
@@ -39,10 +48,12 @@ class User < ActiveRecord::Base
   validates_confirmation_of :password, length: { in: 6..20 }
   validates_presence_of :username, :role, :login_approval, :first_name, :last_name
 
+  before_save :ensure_authentication_token
+
   default_value_for :role_id, 5
 
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable
+         :recoverable, :rememberable, :trackable, :token_authenticatable
 
   # Search 
   pg_search_scope :user_search,

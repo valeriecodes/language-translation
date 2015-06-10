@@ -13,16 +13,6 @@
 #  tsv_data    :tsvector
 #
 
-require 'test_helper'
-
-class ArticleTest < ActiveSupport::TestCase
-   test "the truth" do
-     assert true
-   end
-
-   test "should save article/photo without any field" do
-     article = Article.new
-     assert article.save, "Saved the article/photo without any field"
-   end
-
+class ArticleSerializer < ActiveModel::Serializer
+  attributes :id, :english, :phonetic, :category, :picture_url, :created_at
 end
