@@ -34,11 +34,11 @@ class InstallationsControllerTest < ActionController::TestCase
   end
 
   test "should delete installation along with all sites under that installation" do
-    installation = Installation.create!({:installation=>'Azerbaijan'})
-    site = Site.create!({:installation_id=>installation.id, :name=>'Leh'})
+    installation = Installation.create!({installation: 'Azerbaijan'})
+    site = Site.create!({installation_id: installation.id, name:'Leh'})
     assert_difference('Installation.count',-1) do
       puts Installation.count 
-      delete :destroy, :id => installation.id
+      delete :destroy, id: installation.id
       assert_response :redirect
       puts Installation.count
     end
