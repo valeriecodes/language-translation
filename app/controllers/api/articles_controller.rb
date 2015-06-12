@@ -25,6 +25,8 @@ class API::ArticlesController < API::BaseController
   end
 
   def create
+    authorize_user! :create, Article
+
     @record = Article.new(article_params)
 
     respond_with(@record) do |format|
@@ -40,7 +42,7 @@ class API::ArticlesController < API::BaseController
     @record = Article.find(params[:id])
 
     respond_with(@record) do |format|
-      if @article.update(article_params)
+      if @record.update(article_params)
         format.json { render json: @record, root: :article }
       else
         format.json { render json: { errors: @record.errors.to_hash(true) }, status: :unprocessable_entity }
@@ -49,7 +51,7 @@ class API::ArticlesController < API::BaseController
   end
 
   def destroy
-    @article = Article.find(params[:id])
+    @record = Article.find(params[:id])
 
     respond_with(@record) do |format|
       if @record.destroy
