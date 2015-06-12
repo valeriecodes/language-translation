@@ -54,11 +54,11 @@ gem 'cancan'
 gem 'simple-navigation'
 
 group :test, :development do
+  gem 'minitest', '~> 5.7.0'                 # Complete test suite
+  gem 'minitest-rails', '~> 2.2.0'           # Adds MiniTest as the default testing library in Rails 3 and 4
   gem "webrat", "0.7.3", require: false
   gem "mocha", "~> 1.1", require: false
   gem 'quiet_assets'
-  # Annotates Rails/ActiveRecord Models, routes, fixtures based on schema
-  gem 'annotate'
 
   # Show coverage informations directly
   gem 'simplecov', require: false
@@ -69,9 +69,9 @@ group :test, :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
 
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  # gem 'spring',        group: :development
+  gem 'annotate'                              # Annotates Rails/ActiveRecord Models, routes, fixtures based on schema
   gem "rails-erd"
+  gem 'factory_girl_rails'                    # Is a fixtures replacement with a straightforward definition syntax
 end
 
 gem 'memory_test_fix'
