@@ -17,6 +17,9 @@ class Article < ActiveRecord::Base
   include PgSearch
 
   belongs_to :language
+
+  validates :english, :phonetic, presence: true
+
   default_scope -> { order('created_at DESC') }
 
   mount_uploader :picture, PictureUploader
