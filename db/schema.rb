@@ -11,11 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20150530111825) do
-=======
 ActiveRecord::Schema.define(version: 20150610042830) do
->>>>>>> 8359d02... Added authentication_token to the user model
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
