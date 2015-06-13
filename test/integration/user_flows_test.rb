@@ -24,7 +24,7 @@ class UserFlowsTest < ActionDispatch::IntegrationTest
   end
 
   test "should route to user" do
-    assert_routing '/users/1', {controller: "users", action: "show", id: "1"}
+    assert_routing '/members/1', {controller: "users", action: "show", id: "1"}
   end
 
   test "should route to volunteer under site" do

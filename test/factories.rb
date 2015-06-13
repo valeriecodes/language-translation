@@ -5,7 +5,7 @@ FactoryGirl.define do
     sequence(:first_name)     { |n| "Sherlock #{n}" }
     sequence(:last_name)      { |n| "Holmes #{n}" }
     password                  "testing123"
-    authentication_token      Devise.friendly_token 
+    authentication_token      { Devise.friendly_token }
     sequence(:username)       { |n| "uname_#{n}" }
     login_approval            { "Yes" }
   end

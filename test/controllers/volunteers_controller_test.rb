@@ -3,9 +3,14 @@ require 'test_helper'
 class VolunteersControllerTest < ActionController::TestCase
   include Devise::TestHelpers
   fixtures :all
+
   setup do
-    sign_in users(:one)
-    @user = users(:one)
+    @user = create(:user, role_id: 1)
+    sign_in @user
+  end
+
+  def teardown
+    User.delete_all
   end
 
   test "the truth" do

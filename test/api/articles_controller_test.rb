@@ -1,9 +1,11 @@
 require "test_helper"
 
-class ArticlesControllerTest < ActionController::TestCase
+class API::ArticlesControllerTest < ActionController::TestCase
   tests API::ArticlesController
 
   def setup
+    @request.host = "localshot:3000"
+
     @user = create(:user, role_id: 1)
   end
 
