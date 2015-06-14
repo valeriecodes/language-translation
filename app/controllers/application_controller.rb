@@ -10,19 +10,19 @@ class ApplicationController < ActionController::Base
   end
 
 # rescue_from ActionController::RoutingError do |exception|
-#     redirect_to root_url, :alert => exception.message
+#     redirect_to root_url, alert: exception.message
 # end
 
 # rescue_from Exception do |exception|
-#     redirect_to root_url, :alert => exception.message
+#     redirect_to root_url, alert: exception.message
 # end
 #
 # rescue_from ActiveRecord::RecordNotFound do |exception|
-#     redirect_to root_url, :alert => exception.message
+#     redirect_to root_url, alert: exception.message
 # end
 #
 # rescue_from CanCan::AccessDenied do |exception|
-#     redirect_to root_url, :alert => exception.message
+#     redirect_to root_url, alert: exception.message
 # end
 
   before_action :authenticate_user!

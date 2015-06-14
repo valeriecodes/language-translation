@@ -33,13 +33,13 @@ class SitesControllerTest < ActionController::TestCase
   end
 
   test "should delete site along with all volunteers and contributors under it" do
-    installation = Installation.create({:installation => 'Azerbaijan'})
-    site = Site.create!({:installation_id => installation.id, :name=>'Leh'})
-    volunteer = Volunteer.create({:site_id=>site.id, :vname=>'Saumya'})
-    contributor = Contributor.create!({:site_id=>site.id, :name=>'Dipika'})
+    installation = Installation.create({installation: 'Azerbaijan'})
+    site = Site.create!({installation_id: installation.id, name: 'Leh'})
+    volunteer = Volunteer.create({site_id: site.id, vname: 'Saumya'})
+    contributor = Contributor.create!({site_id: site.id, name: 'Dipika'})
     assert_difference('Site.count',-1) do
       puts Site.count 
-      delete :destroy, :id => site.id
+      delete :destroy, id: site.id
       assert_response :redirect
       puts Site.count
     end
