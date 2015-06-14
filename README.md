@@ -1,4 +1,7 @@
 [![Build Status](https://travis-ci.org/systers/language-translation.svg?branch=develop)](https://travis-ci.org/systers/language-translation)
+
+[![Join the chat at https://gitter.im/systers/language-translation](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/systers/language-translation?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 ## GSoc Photo Language Translation Project 2015
 1. Gsoc timeline : 
 2. Developer's Systers profile page : 
