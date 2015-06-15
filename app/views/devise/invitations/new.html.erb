@@ -1,26 +1,29 @@
 <h2><%= t "devise.invitations.new.header" %></h2>
 
-<%= form_for resource, as: resource_name, url: invitation_path(resource_name), html: {method: :post} do |f| %>
+<div class="row">
+  <div class="col-md-12">
+<% puts resource.to_json %>
+<%= form_for resource, as: resource_name, url: invitation_path(resource_name), html: {method: :post, class: "form-horizontal"} do |f| %>
   <%= devise_error_messages! %>
 
   <div class="form-group">
-    <%= f.label :first_name %>
+    <%= f.label :first_name, class: "control-label col-sm-3" %>
     <div class="col-sm-3">
-    <%= f.text_field :first_name %>
+    <%= f.text_field :first_name, class: "form-control" %>
     </div>
   </div>
 
   <div class="form-group">
-    <%= f.label :last_name %>
+    <%= f.label :last_name, class: "control-label col-sm-3" %>
     <div class="col-sm-3">
-    <%= f.text_field :last_name %>
+    <%= f.text_field :last_name, class: "form-control" %>
     </div>
   </div>
 
   <div class="form-group">
-    <%= f.label :email %>
+    <%= f.label :email, class: "control-label col-sm-3" %>
     <div class="col-sm-3">
-    <%= f.text_field :email %>
+    <%= f.text_field :email, class: "form-control" %>
     </div>
   </div>
 
@@ -33,7 +36,9 @@
 
   <div class="form-group form-actions">
     <div class="col-sm-offset-3 col-sm-3">
-    <%= f.submit t("devise.invitations.new.submit_button") %>
+      <%= f.submit t("devise.invitations.new.submit_button"), class: "btn btn-primary" %>
     </div>
   </div>
 <% end %>
+  </div>
+</div>
