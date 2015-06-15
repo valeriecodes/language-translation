@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  devise_for :users, controllers: { registrations: "registrations" }
+  devise_for :users, controllers: { registrations: "registrations", invitations: "invitations" }
 
   # :path_prefix - to customise routes
   # :controllers - to override the devise default - 
