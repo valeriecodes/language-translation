@@ -38,8 +38,8 @@ gem 'jquery-rails'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-gem 'devise', '~> 3.4.1'                # Flexible authentication solution for Rails with Warden
-gem 'devise_invitable', '~> 1.4.1'      # An invitation strategy for devise
+gem 'devise', '~> 3.5.0'                # Flexible authentication solution for Rails with Warden
+gem 'devise_invitable', '~> 1.5.0'      # An invitation strategy for devise
 
 gem 'cancan'
 
