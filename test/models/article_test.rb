@@ -10,6 +10,7 @@
 #  category    :string(255)
 #  picture     :string(255)
 #  language_id :integer
+#  tsv_data    :tsvector
 #
 
 require 'test_helper'
