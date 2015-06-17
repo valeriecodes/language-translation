@@ -10,16 +10,9 @@
 #  category    :string(255)
 #  picture     :string(255)
 #  language_id :integer
+#  tsv_data    :tsvector
 #
 
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  id: 1
-  english: MyText2
-  phonetic: MyTextp2
-
-two:
-  id: 2
-  english: MyText1
-  phonetic: MyTextp1
+class ArticleSerializer < ActiveModel::Serializer
+  attributes :id, :english, :phonetic, :category, :picture_url, :created_at
+end

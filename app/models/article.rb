@@ -10,12 +10,16 @@
 #  category    :string(255)
 #  picture     :string(255)
 #  language_id :integer
+#  tsv_data    :tsvector
 #
 
 class Article < ActiveRecord::Base
   include PgSearch
 
   belongs_to :language
+
+  validates :english, :phonetic, presence: true
+
   default_scope -> { order('created_at DESC') }
 
   mount_uploader :picture, PictureUploader

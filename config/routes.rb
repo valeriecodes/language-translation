@@ -8,6 +8,10 @@ Rails.application.routes.draw do
 
   resources :users, path: :members
 
+  devise_scope :user do
+    post  "users/regenerate_api_key", to: "registrations#regenerate_api_key"
+  end
+
   resources :installations do
     resources :sites
   end
@@ -23,6 +27,14 @@ Rails.application.routes.draw do
 
   resources :articles
 
+  ## API routes
+  namespace :api do
+    resources :users
+    resources :articles
+    resources :installations
+  end
+ 
+
   # You can have the root of your site routed with "root"
-   root 'welcome#index'
+  root 'welcome#index'
 end

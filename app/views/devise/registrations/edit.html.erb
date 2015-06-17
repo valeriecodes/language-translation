@@ -128,6 +128,26 @@
 <% end %>
 
 <hr />
+
+<h3>API key</h3>
+
+<div class="api_key">
+
+  <fieldset>
+  <div class="form-group">
+    <div class="col-sm-3">
+      <p rows="1" onclick="this.focus();this.select()" class="form-control">
+        <%= current_user.authentication_token %>
+      </p>
+    </div>
+  </div>
+  </fieldset>
+
+  <span class="help-inline"><%= link_to "Regenerate", users_regenerate_api_key_path, method: :post %></span>
+  </ul>
+</div>
+
+<hr />
 <h3>Cancel my account</h3>
 
 <fieldset>
