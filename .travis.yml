@@ -4,5 +4,12 @@ addons:
 before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
   - cp config/database.yml.travis config/database.yml
+webhooks:
+    urls:
+        - https://webhooks.gitter.im/e/c5e0daae1aef95763ea2
+    on_success: always  # options: [always|never|change] default: always
+    on_failure: always  # options: [always|never|change] default: always
+    on_start: false     # default: false
+
 # uncomment this line if your project needs to run something other than `rake`:
 # script: bundle exec rspec spec
