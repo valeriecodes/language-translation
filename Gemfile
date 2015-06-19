@@ -37,7 +37,7 @@ gem 'jquery-rails'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-gem 'cancan'
+gem 'cancancan'
 
 gem 'responders'
 gem 'devise', '~> 3.5.0'                # Flexible authentication solution for Rails with Warden
@@ -47,8 +47,6 @@ gem 'devise-token_authenticatable', "~> 0.4.0" # Token Authenticatable module of
 gem 'default_value_for', '3.0.1'      # Provides a way to specify default values for ActiveRecord models
 gem 'will_paginate', '~> 3.0.6'       # Pagination library for Rails
 gem 'active_model_serializers', '0.8.3' # ActiveModel::Serializer implementation and Rails hooks
-
-gem 'cancan'
 
 gem 'simple-navigation'
 
