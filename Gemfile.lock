@@ -48,7 +48,7 @@ GEM
     builder (3.2.2)
     byebug (5.0.0)
       columnize (= 0.9.0)
-    cancan (1.6.10)
+    cancancan (1.10.1)
     carrierwave (0.10.0)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
@@ -212,7 +212,7 @@ DEPENDENCIES
   active_model_serializers (= 0.8.3)
   annotate
   byebug
-  cancan
+  cancancan
   carrierwave
   coffee-rails (~> 4.1.0)
   default_value_for (= 3.0.1)
@@ -240,3 +240,6 @@ DEPENDENCIES
   web-console (~> 2.0)
   webrat (= 0.7.3)
   will_paginate (~> 3.0.6)
+
+BUNDLED WITH
+   1.10.3
