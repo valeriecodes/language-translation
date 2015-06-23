@@ -25,6 +25,8 @@ Rails.application.routes.draw do
     resources :articles
   end
 
+  resources :categories
+
   resources :articles
 
   ## API routes
