@@ -30,6 +30,7 @@
 #
 
 class User < ActiveRecord::Base
+  rolify
   include PgSearch
   
   # Include default devise modules. Others available are:

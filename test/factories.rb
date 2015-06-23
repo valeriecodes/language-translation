@@ -1,4 +1,7 @@
-FactoryGirl.define do
+FactoryGirl.define do  factory :role do
+    
+  end
+
 
   factory :user do 
     sequence(:email)          { |n| "test_user_#{n}@gmail.com" }
