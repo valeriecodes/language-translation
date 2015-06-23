@@ -2,7 +2,6 @@ require 'test_helper'
 
 class SitesControllerTest < ActionController::TestCase
   include Devise::TestHelpers
-  fixtures :all
 
   setup do
     @user = create(:user, role_id: 1)
@@ -11,6 +10,7 @@ class SitesControllerTest < ActionController::TestCase
 
   def teardown
     User.delete_all
+    Site.delete_all
   end
 
   test "the truth" do

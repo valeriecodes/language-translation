@@ -2,7 +2,6 @@ require 'test_helper'
 
 class InstallationsControllerTest < ActionController::TestCase
   include Devise::TestHelpers
-  fixtures :all
 
   test "the truth" do
      assert true
@@ -39,12 +38,14 @@ class InstallationsControllerTest < ActionController::TestCase
   test "should delete installation along with all sites under that installation" do
     installation = Installation.create!({installation: 'Azerbaijan'})
     site = Site.create!({installation_id: installation.id, name:'Leh'})
+
     assert_difference('Installation.count',-1) do
       puts Installation.count 
       delete :destroy, id: installation.id
       assert_response :redirect
       puts Installation.count
     end
+
     assert_nil Installation.find_by_id(installation.id)
     assert_nil Site.find_by_installation_id(installation.id)
     assert_nil Site.find_by_id(site.id)

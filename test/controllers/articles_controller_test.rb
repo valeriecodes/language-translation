@@ -5,10 +5,10 @@ class ArticlesControllerTest < ActionController::TestCase
 
   include Devise::TestHelpers
 
-  fixtures :all
-
   setup do
     @user = create(:user, role_id: 1)
+    @language = create(:language, name: 'Chuukese')
+
     sign_in @user
   end
 
@@ -30,23 +30,36 @@ class ArticlesControllerTest < ActionController::TestCase
 
   test "should create photo and go to its show page" do
     assert_difference('Article.count') do
-        post :create, article: {category: 'Weapon', english: 'Knife', phonetic: "Pihiya"}
+      post :create, article: {
+        category_id: 'Weapon', 
+        english: 'Knife', 
+        phonetic: "Pihiya", 
+        language_id: @language.id, 
+        picture: Rack::Test::UploadedFile.new(File.join(Rails.root, 'test', 'support', 'picture', 'logo.jpg'))
+      }
     end
     
     assert_redirected_to article_path(assigns(:article))
   end
 
   test "should delete photo" do
-    language = Language.create({name: 'Chuukese'})
-    article = Article.create!({language_id: language.id, category: 'Food', english: "Foods", phonetic: "Keema"})
+    category = create(:category)
+
+    article = Article.create!({
+      language_id: @language.id, 
+      category_id: category.id, 
+      english: "Foods", 
+      phonetic: "Keema", 
+      picture: Rack::Test::UploadedFile.new(File.join(Rails.root, 'test', 'support', 'picture', 'logo.jpg'))
+    })
 
     assert_difference('Article.count',-1) do
-      delete :destroy, language_id: language.id, id: article.id
+      delete :destroy, language_id: @language.id, id: article.id
       assert_response :redirect
     end
 
     assert_nil Article.find_by_id(article.id)
-    assert_not_nil Language.find_by_id(language.id)
+    assert_not_nil Language.find_by_id(@language.id)
   end
 
 end

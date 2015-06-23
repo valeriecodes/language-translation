@@ -8,10 +8,6 @@
 #  updated_at :datetime
 #
 
-class Category < ActiveRecord::Base
-  has_many :article
-
-  validates :name, presence: true
-
-  default_scope -> { order('created_at DESC') }
+class CategorySerializer < ActiveModel::Serializer
+  attributes :id, :name
 end

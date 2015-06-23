@@ -2,7 +2,6 @@ require 'test_helper'
 
 class WelcomeControllerTest < ActionController::TestCase
   include Devise::TestHelpers
-  fixtures :all
 
   setup do
     @user = create(:user, role_id: 1)

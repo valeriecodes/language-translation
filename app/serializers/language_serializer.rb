@@ -8,8 +8,6 @@
 #  updated_at :datetime
 #
 
-class Language < ActiveRecord::Base
- has_many :articles, dependent: :destroy
-
- validates :name, presence: true
+class LanguageSerializer < ActiveModel::Serializer
+  attributes :id, :name
 end
