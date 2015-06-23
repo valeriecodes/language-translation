@@ -160,6 +160,7 @@ GEM
     rdoc (4.2.0)
     responders (2.1.0)
       railties (>= 4.2.0, < 5)
+    rolify (4.0.0)
     ruby-graphviz (1.2.2)
     sass (3.4.14)
     sass-rails (5.0.3)
@@ -232,6 +233,7 @@ DEPENDENCIES
   rails (= 4.2.1)
   rails-erd
   responders
+  rolify
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   simple-navigation
