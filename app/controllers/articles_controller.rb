@@ -3,6 +3,7 @@ class ArticlesController < ApplicationController
 
   def new
     @article = Article.new
+    @categories = Category.all
   end
 
   def index
@@ -19,34 +20,37 @@ class ArticlesController < ApplicationController
     if @article.save
       redirect_to @article
     else
+      @categories = Category.all
       render 'new'
     end
   end
 
- def edit
-  @article = Article.find(params[:id])
- end
-
- def destroy
-  @article = Article.find(params[:id])
-  @article.destroy
- 
-  redirect_to articles_path
- end
-
- def show
-  @article = Article.find(params[:id])
- end
-
- def update
-  @article = Article.find(params[:id])
- 
-  if @article.update(article_params)
-    redirect_to @article
-  else
-    render 'edit'
+  def edit
+    @article = Article.find(params[:id])
+    @categories = Category.all
   end
- end
+
+  def destroy
+    @article = Article.find(params[:id])
+    @article.destroy
+
+    redirect_to articles_path
+  end
+
+  def show
+    @article = Article.find(params[:id])
+  end
+
+  def update
+    @article = Article.find(params[:id])
+
+    if @article.update(article_params)
+      redirect_to @article
+    else
+      @categories = Category.all
+      render 'edit'
+    end
+  end
  
  private
   def article_params

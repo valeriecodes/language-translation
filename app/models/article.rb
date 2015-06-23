@@ -7,18 +7,19 @@
 #  phonetic    :text
 #  created_at  :datetime
 #  updated_at  :datetime
-#  category    :string(255)
-#  picture     :string(255)
+#  picture     :string
 #  language_id :integer
 #  tsv_data    :tsvector
+#  category_id :integer
 #
 
 class Article < ActiveRecord::Base
   include PgSearch
 
   belongs_to :language
+  has_one :category
 
-  validates :english, :phonetic, presence: true
+  validates :picture, :language_id, presence: true
 
   default_scope -> { order('created_at DESC') }
 

@@ -31,7 +31,7 @@
   <div class="form-group">
     <%= f.label :category, class: "control-label col-sm-3" %>
     <div class="col-sm-3">
-      <%= f.text_field :category, class: "form-control" %>
+      <%= f.collection_select(:category_id, @categories, :id, :name ) %>
     </div>
   </div>
 
