@@ -31,7 +31,7 @@
 <!-- Roles should be applied upon signing up on organizations -->
 
       <div class="form-group">
-        <%= f.label :last_name, class: "control-label col-sm-3" %>
+        <%= f.label :language, class: "control-label col-sm-3" %>
         <div class="col-sm-3">
           <%= f.collection_select(:lang, Language.all, :name, :name, include_blank: "All", class: "form-control") %>
         </div>
@@ -51,7 +51,7 @@
         </div>
       </div>
 
-      <div><%= f.label :Can_you_login_with_the_registered_role_? %> &nbsp;
+      <div hidden><%= f.label :Can_you_login_with_the_registered_role_? %> &nbsp;
       <%= f.radio_button :login_approval, 'Not Yet', checked:true %> 
       <%= label :login_approval_not_yet, 'Not Yet' %>
       </div>

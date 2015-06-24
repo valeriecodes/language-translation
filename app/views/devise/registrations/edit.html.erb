@@ -30,7 +30,8 @@
 <!-- TODO: Another method for changing roles are needed -->
 
   <div class="form-group">
-    <div class="col-sm-offset-3 col-sm-3">
+    <%= f.label :gender, class: "control-label col-sm-3" %>
+    <div class="col-sm-3">
       <label>
         <%= f.radio_button :gender, 'Male', checked:true %> Male
       </label>
@@ -83,7 +84,7 @@
 
   <hr />
   <div class="form-group">
-    <span class="help-inline">Fill the next 2 fields only if you want to change your password otherwise leave these fields blank.</span>
+    <span class="help-inline">Fill out the following fields only if you wish to change your password.</span>
   </div>
 
   <div class="form-group">

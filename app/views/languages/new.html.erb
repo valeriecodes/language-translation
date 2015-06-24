@@ -1,7 +1,7 @@
 <!-- Welcome -->
 
 <%# if current_user.login_approval == 'Yes' %>
-<%# if current_user.role == 'Admin' %>
+<%# if current_user.has_role? :admin %>
 
 <h1>New language</h1>
  
