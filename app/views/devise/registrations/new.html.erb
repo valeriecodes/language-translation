@@ -28,13 +28,7 @@
         </div>
       </div>
 
-      <div class="form-group">
-          <div class="col-sm-offset-3 col-sm-3">
-            <label>
-              <%= f.radio_button :role, 'Guest', checked:true %>  Guest
-            </label>
-          </div>
-      </div>
+<!-- Roles should be applied upon signing up on organizations -->
 
       <div class="form-group">
         <%= f.label :last_name, class: "control-label col-sm-3" %>
@@ -46,14 +40,14 @@
       <div class="form-group">
         <%= f.label :password, class: "control-label col-sm-3" %>
         <div class="col-sm-3">
-          <%= f.text_field :password, class: "form-control" %>
+          <%= f.password_field :password, class: "form-control" %>
         </div>
       </div>
 
       <div class="form-group">
         <%= f.label :password_confirmation, class: "control-label col-sm-3" %>
         <div class="col-sm-3">
-          <%= f.text_field :password_confirmation, class: "form-control" %>
+          <%= f.password_field :password_confirmation, class: "form-control" %>
         </div>
       </div>
 
