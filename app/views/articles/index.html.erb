@@ -27,6 +27,7 @@
 
 
 
+<% #FIXME - refacor this index view after fixing role system (added by Isuri) %>
 
 <% if current_user.role == 'Contributor' %>
 <% if current_user.lang == nil %> <!-- do nothing as 1 contributor can contribute to 1 language only -->
@@ -54,7 +55,7 @@
 </p> 
 <p>
   <strong>Category:</strong>
-  <%= article.category %>
+  <%= article.category.name %>
 </p>
 <p><%= link_to 'Show', article_path(article) %>
 <%= link_to 'Edit', edit_article_path(article) %></p>

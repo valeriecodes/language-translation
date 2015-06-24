@@ -5,7 +5,7 @@
     <%= link_to article.language.name, article_path(article) %>
   <% end %>
 </td>
-<td><%= article.category %></td>
+<td><%= article.category.name %></td>
 <td><%= article.english %></td>
 <td><%= article.phonetic %></td>
 <td><% if article.picture.present? %>Uploaded<% end %></td>
