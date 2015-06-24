@@ -64,7 +64,6 @@ one:
  location: nil 
  contact: nil
  gender: nil
- role_id: 1
  login_approval: Yes
  lang: nil
 
@@ -78,7 +77,6 @@ two:
  location: nil 
  contact: nil
  gender: nil
- role_id: 2
  login_approval: Yes
  lang: nil
 
@@ -92,7 +90,6 @@ three:
  location: nil 
  contact: nil
  gender: nil
- role_id: 3
  login_approval: Yes
  lang: nil
 
@@ -106,6 +103,5 @@ four:
  location: nil 
  contact: nil
  gender: nil
- role_id: 4
  login_approval: Not Yet
  lang: nil

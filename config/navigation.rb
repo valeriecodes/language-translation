@@ -9,22 +9,22 @@ SimpleNavigation::Configuration.run do |navigation|
     primary.item :posts, "Posts", installations_path, highlights_on: :subpath do |sub|
       sub.dom_class = 'nav nav-pills'
       sub.item :photos, 'New post', new_installation_path
-    end  if [:admin].include?(current_user.try(:role))
+    end  #if [:admin].include?(current_user.try(:role))
 
     primary.item :sites, "Sites", sites_path, highlights_on: :subpath do |sub|
       sub.dom_class = 'nav nav-pills'
       sub.item :photos, 'New site', new_site_path
-    end  if [:admin, :volunteer].include?(current_user.try(:role))
+    end  #if [:admin, :volunteer].include?(current_user.try(:role))
 
     primary.item :languages, "Languages", languages_path, highlights_on: :subpath do |sub|
       sub.dom_class = 'nav nav-pills'
       sub.item :photos, 'New language', new_language_path
-    end  if [:admin, :volunteer].include?(current_user.try(:role))
+    end  #if [:admin, :volunteer].include?(current_user.try(:role))
 
     primary.item :photos, "Photos", articles_path, highlights_on: :subpath do |sub|
       sub.dom_class = 'nav nav-pills'
       sub.item :photos, 'New photo', new_article_path 
-    end  if [:admin, :volunteer, :contributor].include?(current_user.try(:role))
+    end  #if [:admin, :volunteer, :contributor].include?(current_user.try(:role))
 
     primary.dom_class = 'nav'
   end

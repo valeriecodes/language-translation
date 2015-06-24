@@ -44,32 +44,22 @@ class UserTest < ActiveSupport::TestCase
      assert true
    end
 
-   test "should not save user without its fields username, role, login_approval, first_name, last_name" do
+   test "should not save user without its fields username, login_approval, first_name, last_name" do
      user = User.new
      assert_not user.save, "Saved the user without its compulsory fields"
    end
 
    test "should not save user without its field username" do
      user = User.new
-     user.role_id=4
      user.login_approval='Not_Yet'
      user.first_name='Aliaa'
      user.last_name='Bhatt'
      assert_not user.save, "Saved the user without its username"
    end
 
-   test "should not save user without its field role" do
-     user = User.new
-     user.username='Alia'
-     user.login_approval='Not_Yet'
-     user.first_name='Aliaa'
-     assert_not user.save, "Saved the user without its role"
-   end
-
    test "should not save user without its field login_approval" do
      user = User.new
      user.username='Alia'
-     user.role_id=4
      user.first_name='Aliaa'
      user.last_name='Bhatt'
      assert_not user.save, "Saved the user without its login_approval"
@@ -78,7 +68,6 @@ class UserTest < ActiveSupport::TestCase
    test "should not save user without its field first_name" do
      user = User.new
      user.username='Alia'
-     user.role_id=4
      user.login_approval='Not_Yet'
      user.last_name='Bhatt'
      assert_not user.save, "Saved the user without its first_name"
@@ -87,7 +76,6 @@ class UserTest < ActiveSupport::TestCase
    test "should not save user without its field last_name" do
      user = User.new
      user.username='Alia'
-     user.role_id=4
      user.login_approval='Not_Yet'
      user.first_name='Aliaa'
      assert_not user.save, "Saved the user without its last_name"
@@ -96,7 +84,6 @@ class UserTest < ActiveSupport::TestCase
    test "password and its confirmation are same" do
      user = User.new
      user.username='Alia'
-     user.role_id=4
      user.login_approval='Not_Yet'
      user.first_name='Aliaa'
      user.last_name='Bhatt'
@@ -108,7 +95,6 @@ class UserTest < ActiveSupport::TestCase
    test "password (is empty) and its confirmation are different" do
      user = User.new
      user.username='Alia'
-     user.role_id=4
      user.login_approval='Not_Yet'
      user.first_name='Aliaa'
      user.last_name='Bhatt'
@@ -120,7 +106,6 @@ class UserTest < ActiveSupport::TestCase
    test "password and its confirmation are different" do
      user = User.new
      user.username='Alia'
-     user.role_id=4
      user.login_approval='Not_Yet'
      user.first_name='Aliaa'
      user.last_name='Bhatt'
