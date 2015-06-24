@@ -4,27 +4,27 @@ SimpleNavigation::Configuration.run do |navigation|
 
   # Define the primary navigation
   navigation.items do |primary|
-    primary.item :users, 'Members', users_path, highlights_on: :subpath if [:admin, :volunteer].include?(current_user.try(:role))
+    primary.item :users, 'Members', users_path, highlights_on: :subpath if current_user and current_user.has_any_role? :admin, :volunteer
     
     primary.item :posts, "Posts", installations_path, highlights_on: :subpath do |sub|
       sub.dom_class = 'nav nav-pills'
       sub.item :photos, 'New post', new_installation_path
-    end  #if [:admin].include?(current_user.try(:role))
+    end  if current_user and current_user.has_role? :admin
 
     primary.item :sites, "Sites", sites_path, highlights_on: :subpath do |sub|
       sub.dom_class = 'nav nav-pills'
       sub.item :photos, 'New site', new_site_path
-    end  #if [:admin, :volunteer].include?(current_user.try(:role))
+    end  if current_user and current_user.has_any_role? :admin, :volunteer
 
     primary.item :languages, "Languages", languages_path, highlights_on: :subpath do |sub|
       sub.dom_class = 'nav nav-pills'
       sub.item :photos, 'New language', new_language_path
-    end  #if [:admin, :volunteer].include?(current_user.try(:role))
+    end  if current_user and current_user.has_any_role? :admin, :volunteer
 
     primary.item :photos, "Photos", articles_path, highlights_on: :subpath do |sub|
       sub.dom_class = 'nav nav-pills'
       sub.item :photos, 'New photo', new_article_path 
-    end  #if [:admin, :volunteer, :contributor].include?(current_user.try(:role))
+    end  if current_user and current_user.has_any_role? :admin, :volunteer, :contributor
 
     primary.dom_class = 'nav'
   end
