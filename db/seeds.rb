@@ -8,7 +8,14 @@
 
 # must be taken care of at the time of production.
 
-   users = User.create([{ username: 'Admin1' , first_name: 'Adam', last_name: 'Wilkins', login_approval: 'Yes', 
-		   password: 'admin1', password_confirmation: 'admin1', email: 'saumyagurtu@gmail.com'}])
-   users = User.create([{ username: 'Admin2' , first_name: 'Neil', last_name: 'Bohr', login_approval: 'Yes', 
-		   password: 'admin2', password_confirmation: 'admin2', email: 'saumya.gurtu@students.iiit.ac.in'}])
+   user = User.create({ username: 'Admin1' , first_name: 'Adam', last_name: 'Wilkins', login_approval: 'Yes',
+		   password: 'admin1', password_confirmation: 'admin1', email: 'saumyagurtu@gmail.com'})
+   User.find(user.id).add_role :admin
+
+   user = User.create({ username: 'Admin2' , first_name: 'Neil', last_name: 'Bohr', login_approval: 'Yes',
+		   password: 'admin2', password_confirmation: 'admin2', email: 'saumya.gurtu@students.iiit.ac.in'})
+   User.find(user.id).add_role :admin
+
+   Installation.create({installation: "Chuukese Post", email: "hello@hello.world", address: "helloworld, helloworld", contact: "0123456789"})
+   Site.create({installation_id: 1, name: "Site A"})
+   Language.create({name: "Chuukese"})
