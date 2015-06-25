@@ -59,7 +59,7 @@ one:
  updated_at: 2014-08-15 14:06:54
  first_name: Walter
  last_name: Wilkins
- email: nil 
+ email: a@a.a
  username: Wander
  location: nil 
  contact: nil
@@ -72,7 +72,7 @@ two:
  encrypted_password: <%= User.new.send(:password_digest, 'rose') %> 
  first_name: Rose
  last_name: Robinson
- email: nil 
+ email: b@b.b
  username: Rose
  location: nil 
  contact: nil
@@ -85,7 +85,7 @@ three:
  encrypted_password: <%= User.new.send(:password_digest, 'pamela') %> 
  first_name: Pamela
  last_name: Vickers
- email: nil 
+ email: c@c.c
  username: Pamela
  location: nil 
  contact: nil
@@ -98,7 +98,7 @@ four:
  encrypted_password: <%= User.new.send(:password_digest, 'sylvain') %> 
  first_name: Sylvain
  last_name: Abelard
- email: nil 
+ email: d@d.d
  username: Sylvain
  location: nil 
  contact: nil

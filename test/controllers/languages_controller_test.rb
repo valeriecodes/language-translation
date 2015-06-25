@@ -8,7 +8,8 @@ class LanguagesControllerTest < ActionController::TestCase
   fixtures :all
 
   setup do
-    @user = create(:user) #role
+    @user = create(:user)
+    @user.add_role :admin
     sign_in @user
   end
 
