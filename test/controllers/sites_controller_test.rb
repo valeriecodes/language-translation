@@ -4,7 +4,8 @@ class SitesControllerTest < ActionController::TestCase
   include Devise::TestHelpers
 
   setup do
-    @user = create(:user) #role
+    @user = create(:user)
+    @user.add_role :admin
     sign_in @user
   end
 

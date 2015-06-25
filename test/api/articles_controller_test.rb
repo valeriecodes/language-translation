@@ -6,7 +6,8 @@ class API::ArticlesControllerTest < ActionController::TestCase
   def setup
     @request.host = "localshot:3000"
 
-    @user = create(:user, role_id: 1)
+    @user = create(:user)
+    @user.add_role :admin
     @language = create(:language, name: 'Chuukese')
   end
 

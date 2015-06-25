@@ -6,7 +6,8 @@ class LanguagesControllerTest < ActionController::TestCase
   tests LanguagesController
 
   setup do
-    @user = create(:user) #role
+    @user = create(:user)
+    @user.add_role :admin
     sign_in @user
   end
 

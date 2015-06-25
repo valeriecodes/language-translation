@@ -6,9 +6,9 @@ class ArticlesControllerTest < ActionController::TestCase
   include Devise::TestHelpers
 
   setup do
-    @user = create(:user, role_id: 1)
+    @user = create(:user)
+    @user.add_role :admin
     @language = create(:language, name: 'Chuukese')
-
     sign_in @user
   end
 
