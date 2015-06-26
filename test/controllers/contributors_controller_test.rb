@@ -6,7 +6,8 @@ class ContributorsControllerTest < ActionController::TestCase
   fixtures :all
 
   setup do
-    @user = create(:user, role_id: 1)
+    @user = create(:user)
+    @user.add_role :admin
     sign_in @user
   end
 

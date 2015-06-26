@@ -6,7 +6,7 @@
   <tr>
     <th>Post</th>
     <th>Site</th>
-<% if current_user.role == 'Admin' %>
+<% if current_user.has_role? :admin %>
     <th colspan="2"></th>
 <% else %>
     <th colspan="2"></th>
@@ -15,11 +15,11 @@
  
   <% @sites.each do |site| %>
     <tr>
-      <td><%#= site.installation.installation %></td>
+      <td><%= site.installation.installation if site.installation %></td>
       <td><%= site.name %></td>
       <td><%= link_to 'Show', site_path(site) %></td>
       <td><%= link_to 'Edit', edit_site_path(site) %>
-<% if current_user.role == 'Admin' %>
+<% if current_user.has_role? :admin %>
       <%= link_to 'Delete', site_path(site), method: :delete, class: "btn btn-danger btn-xs", data: { confirm: 'Are you sure?' } %></td>
 <% end %>
     </tr>

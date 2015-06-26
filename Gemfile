@@ -38,6 +38,7 @@ gem 'jquery-rails'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 gem 'cancancan'
+gem 'rolify'
 
 gem 'responders'
 gem 'devise', '~> 3.5.0'                # Flexible authentication solution for Rails with Warden

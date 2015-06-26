@@ -5,27 +5,20 @@ class Ability
     # Define abilities for the passed in user here. For example:
     @user = (user ||= User.new) # guest user (not logged in)
 
-    send(@user.role)
-  end
+    # four roles exist: admin, volunteer, contributor, guest, non-users
 
-  private
-  def admin
-    can :manage, :all
-  end
-
-  def volunteer
-    can [:read, :update], Site
-    can :read, [Language]
-    can :manage, [Article]
-    can :read, User, role_id: [2, 3, 4]
-    can :manage, User, role_id: @user.role_id
-  end
-
-  def contributor
-    can [:read, :create, :update], Article
-  end
-
-  def anon
-    can :read, Article
+    if user.has_role? :admin
+      can :manage, :all
+    elsif user.has_role? :volunteer
+      can [:read, :update], Site
+      can :read, [Language]
+      can :manage, [Article]
+      can :read, User, role_id: [2, 3, 4]
+      can :manage, User, role_id: @user.role_id
+    elsif user.has_role? :contributor
+      can [:read, :create, :update], Article
+    else
+      can :read, Article
+    end
   end
 end
