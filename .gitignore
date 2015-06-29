@@ -21,10 +21,13 @@ vendor/cache/
 # Ignore config.
 config/database.yml
 
+# Ignore unnecessary files
 *.swp
 .DS_S*
-.keep
 
 # Ignore IntelliJ files
 /.idea
 *.iml
+
+# Ignore bower-managed components
+/vendor/assets/bower_components/*

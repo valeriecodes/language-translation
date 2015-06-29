@@ -10,7 +10,7 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require 'bootstrap'
- *= require 'custom'
+ *= require bootstrap/dist/css/bootstrap
+ *= require custom
  *= require_self
  */
