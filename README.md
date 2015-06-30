@@ -25,5 +25,6 @@
 2. Enter the application's root directory.
 3. `$ rake db:migrate`
 4. `$ rake db:seed`
-5. `$ rails s`
-6. Enter `localhost:3000` on a web browser
+5. `$ bower install`
+6. `$ rails s`
+7. Enter `localhost:3000` on a web browser
