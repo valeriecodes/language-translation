@@ -1,20 +1,19 @@
-
-<% if current_user.login_approval == 'Yes' %>
+<% if current_user.login_approval_at %>
 <% if current_user.has_role? :admin %>
-
 <div class="row">
   <div class="col-md-12">
-<%= form_for @installation, html: {class: "form-horizontal"} do |f| %>
-  <% if @installation.errors.any? %>
-    <div id="error_explanation">
+    <%= form_for @installation, html: {class: "form-horizontal"} do |f| %>
+
+    <% if @installation.errors.any? %>
+      <div id="error_explanation">
         <h2><%= pluralize(@installation.errors.count, "error") %> prohibited this post contact information from being saved:</h2>
-	     <ul>
-		 <% @installation.errors.full_messages.each do |msg| %>
-		        <li><%= msg %></li>
-	         <% end %>
-	     </ul>
-     </div>
-   <% end %>
+        <ul>
+          <% @installation.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
 
     <div class="form-group">
       <%= f.label :installation, "Post", class: "control-label col-sm-3" %>
@@ -49,8 +48,8 @@
         <button class="btn btn-primary" type="submit">Create Post</button>
       </div>
     </div>
-<% end %>
 
+    <% end %>
   </div>
 </div>
 <% end %>

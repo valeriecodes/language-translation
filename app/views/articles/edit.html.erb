@@ -1,5 +1,4 @@
-
-<% if current_user.login_approval == 'Yes' %>
+<% if current_user.login_approval_at %>
 <% if current_user.has_any_role? :admin, :volunteer, :contributor %>
 <h1>Editing photo</h1>
  
