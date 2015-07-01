@@ -7,8 +7,8 @@
 #  phonetic    :text
 #  created_at  :datetime
 #  updated_at  :datetime
-#  category    :string(255)
-#  picture     :string(255)
+#  category    :string
+#  picture     :string
 #  language_id :integer
 #  tsv_data    :tsvector
 #
