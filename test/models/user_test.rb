@@ -21,12 +21,10 @@
 #  location               :string
 #  contact                :string
 #  gender                 :string
-#  bk_role                :string
-#  login_approval         :string
 #  lang                   :string
-#  role_id                :integer
 #  tsv_data               :tsvector
 #  authentication_token   :string
+#  login_approval_at      :datetime
 #
 
 require 'test_helper'
