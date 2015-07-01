@@ -22,8 +22,9 @@
   <dt>Contact Number</dt>
   <dd><%= @user.contact %></dd>
 
-  <dt>Login Approval</dt>
-  <dd><%= @user.login_approval %></dd>
+  <% if !@user.login_approval_at %>
+    <dd><b>The user first needs to be approved to use the account.</b></dd>
+  <% end %>
 </dl>
 
 <%= link_to 'Edit', edit_user_path(@user) %>

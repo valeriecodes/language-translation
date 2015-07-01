@@ -1,92 +1,83 @@
 <div class="row">
   <div class="col-md-12">
+    <%= form_for @user, html: { class: "form-horizontal" } do |f| %>
 
-<%= form_for @user, html: { class: "form-horizontal" } do |f| %>
-
-  <% if @user.errors.any? %>
-
-  <div id="error_explanation">
-    <h2><%= pluralize(@user.errors.count, "error") %> prohibited
-      this volunteer contact information from being saved:</h2>
-    <ul>
-    <% @user.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
+    <% if @user.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@user.errors.count, "error") %> prohibited
+        this volunteer contact information from being saved:</h2>
+        <ul>
+          <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
     <% end %>
-    </ul>
-  </div>
-  <% end %>
 
-  <div class="form-group">
-    <%= f.label :username, class: "control-label col-sm-3" %>
-    <div class="col-sm-3">
-      <%= f.text_field :username, class: "form-control" %>
+    <div class="form-group">
+      <%= f.label :username, class: "control-label col-sm-3" %>
+      <div class="col-sm-3">
+        <%= f.text_field :username, class: "form-control" %>
+      </div>
     </div>
-  </div>
-  
-  <div class="form-group">
-    <%= f.label :first_name, class: "control-label col-sm-3" %>
-    <div class="col-sm-3">
-      <%= f.text_field :first_name, class: "form-control" %>
+
+    <div class="form-group">
+      <%= f.label :first_name, class: "control-label col-sm-3" %>
+      <div class="col-sm-3">
+        <%= f.text_field :first_name, class: "form-control" %>
+      </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <%= f.label :last_name, class: "control-label col-sm-3" %>
-    <div class="col-sm-3">
-      <%= f.text_field :last_name, class: "form-control" %>
+    <div class="form-group">
+      <%= f.label :last_name, class: "control-label col-sm-3" %>
+      <div class="col-sm-3">
+        <%= f.text_field :last_name, class: "form-control" %>
+      </div>
     </div>
-  </div>
 
-<!-- TODO: Roles are to be set elsewhere -->
+    <!-- TODO: Roles are to be set elsewhere -->
 
-  <div class="form-group">
-    <%= f.label :login_approval, class: "control-label col-sm-3" %>
-    <div class="col-sm-3">
-      <%= f.select :login_approval, options_for_select([[@user.login_approval, @user.login_approval], ['Yes' ,'Yes'], ['Not Yet', 'Not Yet']]) %>
+    <div class="form-group">
+      <%= f.label :email, class: "control-label col-sm-3" %>
+      <div class="col-sm-3">
+        <%= f.email_field :email, class: "form-control" %>
+      </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <%= f.label :email, class: "control-label col-sm-3" %>
-    <div class="col-sm-3">
-      <%= f.email_field :email, class: "form-control" %>
+    <div class="form-group">
+      <%= f.label :location, class: "control-label col-sm-3" %>
+      <div class="col-sm-3">
+        <%= f.collection_select(:location, Installation.all, :installation, :installation, :include_blank => "None") %>
+      </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <%= f.label :location, class: "control-label col-sm-3" %>
-    <div class="col-sm-3">
-      <%= f.collection_select(:location, Installation.all, :installation, :installation, :include_blank => "None") %>
+    <div class="form-group">
+      <%= f.label :lang, "Language Contribution", class: "control-label col-sm-3" %>
+      <div class="col-sm-3">
+        <%= f.collection_select(:lang, Language.all, :name, :name, :include_blank => "All") %>
+      </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <%= f.label :lang, "Language Contribution", class: "control-label col-sm-3" %>
-    <div class="col-sm-3">
-      <%= f.collection_select(:lang, Language.all, :name, :name, :include_blank => "All") %>
+    <div class="form-group">
+      <%= f.label :contact, "Contact Number", class: "control-label col-sm-3" %>
+      <div class="col-sm-3">
+        <%= f.text_field :contact, class: "form-control" %>
+      </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <%= f.label :contact, "Contact Number", class: "control-label col-sm-3" %>
-    <div class="col-sm-3">
-      <%= f.text_field :contact, class: "form-control" %>
+    <div class="form-group">
+      <%= f.label :gender, class: "control-label col-sm-3" %>
+      <div class="col-sm-3">
+        <%= f.select :gender, options_for_select([[@user.gender, @user.gender], ['Male', 'le'], ['Female' ,'Female'],]) %>
+      </div>
+    </div>     
+
+    <div class="form-group form-actions">
+      <div class="col-sm-offset-3 col-sm-3">
+        <button class="btn btn-primary" type="submit">Update</button>
+      </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <%= f.label :gender, class: "control-label col-sm-3" %>
-    <div class="col-sm-3">
-      <%= f.select :gender, options_for_select([[@user.gender, @user.gender], ['Male', 'Male'], ['Female' ,'Female'],]) %>
-     </div>
-  </div>     
-
-  <div class="form-group form-actions">
-    <div class="col-sm-offset-3 col-sm-3">
-      <button class="btn btn-primary" type="submit">Update</button>
-    </div>
-  </div>
-
-<% end %>
+    <% end %>
   </div>
 </div>
