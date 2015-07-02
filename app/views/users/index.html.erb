@@ -1,35 +1,3 @@
-<h3><%= t("Members") %></h3>
-
 <%= render partial: "search_form" %>
 
-<table class="table table-striped">
-  <tr>
-    <th>Name</th>
-    <th>Username</th>
-    <th>Gender</th>
-    <th>Email</th>
-    <th>Location</th>
-    <th>Language</th>
-    <th>Mobile</th>
-    <th>Login Approval</th>
-    <th colspan="3"></th>
-  </tr>
- 
-  <% @users.each do |user| %>
-    <tr>
-      <td><%= "#{user.first_name} #{user.last_name}" %></td>
-      <td><%= user.username %></td>
-      <td><%= user.gender %></td>
-      <td><%= user.email %></td>
-      <td><%= user.location %></td>
-      <td><%= user.lang %></td>
-      <td><%= user.contact %></td>
-      <td><%= user.login_approval_at %></td>
-      <td><%= link_to 'Show', user_path(user) %></td>
-      <td><%= link_to 'Edit', edit_user_path(user) %></td>
-      <td><%= link_to 'Delete', user_path(user), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    </tr>
-  <% end %>
-</table>
-
-<%= will_paginate @users %>
+<%= react_component 'UsersIndexBox', {data:@users} %>
