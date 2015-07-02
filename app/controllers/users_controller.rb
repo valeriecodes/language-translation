@@ -44,6 +44,30 @@ class UsersController < ApplicationController
       render 'edit'
     end
   end
+
+  def approve_user
+    @user = User.find(params[:user_id])
+    @user.login_approval_at = Time.now
+    respond_to do |format|
+      if @user.save
+        format.json { render json: User.accessible_by(current_ability), status: :ok }
+      else
+        format.json { render json: @user.errors, status: :unprocessable_entity}
+      end
+    end
+  end
+
+  def disapprove_user
+    @user = User.find(params[:user_id])
+    @user.login_approval_at = nil
+    respond_to do |format|
+      if @user.save
+        format.json { render json: User.accessible_by(current_ability), status: :ok }
+      else
+        format.json { render json: @user.errors, status: :unprocessable_entity}
+      end
+    end
+  end
  
   private
   def user_params
