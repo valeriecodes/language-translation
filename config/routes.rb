@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   #  - for admin to edit the user table records other than username or password without knowing the password.
 
   resources :users, path: :members
+  post "members/approve", to: "users#approve_user"
+  post "members/disapprove", to: "users#disapprove_user"
 
   devise_scope :user do
     post  "users/regenerate_api_key", to: "registrations#regenerate_api_key"
