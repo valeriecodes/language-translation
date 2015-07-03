@@ -16,11 +16,11 @@
 <p>
   <strong>Volunteers:</strong>
   <ol>
-    <% @site.volunteers.each do |volunteer| %>
+    <% @volunteers.each do |volunteer| %>
     <li>
-      <%= volunteer.vname %>&nbsp;
+      <%= volunteer.name %>&nbsp;
       <% if current_user.has_role? :admin %>
-      <%= link_to 'Delete', [volunteer.site, volunteer], method: :delete, data: { confirm: 'Are you sure?' } %>
+      <%= link_to 'Delete', [volunteer], method: :delete, data: { confirm: 'Are you sure?' } %>
       <% end %>
     </li>
     <% end %>
@@ -29,42 +29,20 @@
 
 <% if current_user.has_role? :admin %>
   <h2>Add a volunteer name:</h2>
-  <%= form_for([@site, @site.volunteers.build]) do |f| %>
-    <% if @site.volunteers.build.errors.any? %>
-    <% end %>
-    <p>
-	    <%= f.label :Volunteer_Name %><br>
-	    <%= f.text_field :vname %>
-    </p>
-    <p>
-	    <%= f.submit %>
-    </p>
-  <% end %>
 <% end %>
 
 <p>
   <strong>Contributors:</strong>
   <ol>
-    <% @site.contributors.each do |contributor| %>
+    <% @contributors.each do |contributor| %>
     <li>
-      <%= contributor.name %>&nbsp;<%= link_to 'Delete', [contributor.site, contributor], method: :delete, data: { confirm: 'Are you sure?' } %>
-    </li>	     
+      <%= contributor.name %>&nbsp;<%= link_to 'Delete', [contributor], method: :delete, data: { confirm: 'Are you sure?' } %>
+    </li>
     <% end %>
   </ol>
 </p>
 
 <h2>Add a contributor name:</h2>
-<%= form_for([@site, @site.contributors.build]) do |f| %>
-  <% if @site.contributors.build.errors.any? %>
-  <% end %>
-  <p>
-  	<%= f.label :Contributor_Name %><br>
-  	<%= f.text_field :name %>
-  </p>
-  <p>
-  	<%= f.submit %>
-  </p>
-<% end %>
 
 <%= link_to 'Back', sites_path %>
 <%= link_to 'Edit', edit_site_path(@site) %>
