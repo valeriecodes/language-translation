@@ -8,11 +8,11 @@
 
 # must be taken care of at the time of production.
 
-   user = User.create({ username: 'Admin1' , first_name: 'Adam', last_name: 'Wilkins', login_approval: 'Yes',
+   user = User.create({ username: 'Admin1' , first_name: 'Adam', last_name: 'Wilkins', login_approval_at: Time.now,
 		   password: 'admin1', password_confirmation: 'admin1', email: 'saumyagurtu@gmail.com'})
    User.find(user.id).add_role :admin
 
-   user = User.create({ username: 'Admin2' , first_name: 'Neil', last_name: 'Bohr', login_approval: 'Yes',
+   user = User.create({ username: 'Admin2' , first_name: 'Neil', last_name: 'Bohr', login_approval_at: Time.now,
 		   password: 'admin2', password_confirmation: 'admin2', email: 'saumya.gurtu@students.iiit.ac.in'})
    User.find(user.id).add_role :admin
 

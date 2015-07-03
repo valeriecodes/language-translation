@@ -5,9 +5,9 @@ class UsersController < ApplicationController
 
   def index
     if params[:q].blank?
-      @users = User.accessible_by(current_ability).paginate(page: params[:page], per_page: 20)
+      @users = User.accessible_by(current_ability)
     else
-      @users = User.accessible_by(current_ability).user_search(params[:q]).paginate(page: params[:page], per_page: 20)
+      @users = User.accessible_by(current_ability).user_search(params[:q])
     end
   end
 
@@ -44,10 +44,34 @@ class UsersController < ApplicationController
       render 'edit'
     end
   end
+
+  def approve_user
+    @user = User.find(params[:user_id])
+    @user.login_approval_at = Time.now
+    respond_to do |format|
+      if @user.save
+        format.json { render json: User.accessible_by(current_ability), status: :ok }
+      else
+        format.json { render json: @user.errors, status: :unprocessable_entity}
+      end
+    end
+  end
+
+  def disapprove_user
+    @user = User.find(params[:user_id])
+    @user.login_approval_at = nil
+    respond_to do |format|
+      if @user.save
+        format.json { render json: User.accessible_by(current_ability), status: :ok }
+      else
+        format.json { render json: @user.errors, status: :unprocessable_entity}
+      end
+    end
+  end
  
   private
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :username, :location, :lang, :contact, :gender, :login_approval)
+    params.require(:user).permit(:first_name, :last_name, :email, :username, :location, :lang, :contact, :gender)
   end
 
   def set_user

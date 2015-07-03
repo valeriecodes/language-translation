@@ -10,7 +10,7 @@ FactoryGirl.define do  factory :role do
     password                  "testing123"
     authentication_token      { Devise.friendly_token }
     sequence(:username)       { |n| "uname_#{n}" }
-    login_approval            { "Yes" }
+    login_approval_at         { 2.weeks.ago }
   end
 
   factory :article do
