@@ -16,7 +16,25 @@ FactoryGirl.define do  factory :role do
   factory :article do
     sequence(:english)        { |n| "English Text #{n}" }
     sequence(:phonetic)       { |n| "Phonetic Text #{n}" }
-    category                  "sample"
+  end
+
+  factory :installation do
+    installation              "Location"
+    sequence(:email)          { |n| "location_user_#{n}@gmail.com" }
+    address                   "Location address"
+    contact                   "9900 0000 00"
+  end
+
+  factory :language do
+    name                      "English"
+  end
+
+  factory :site do
+    name                      "Site Name"
+  end
+
+  factory :category do
+    name                      "Pet"
   end
 
 end

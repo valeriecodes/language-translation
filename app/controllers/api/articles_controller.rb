@@ -39,6 +39,8 @@ class API::ArticlesController < API::BaseController
   end
 
   def update
+    authorize_user! :update, Article
+
     @record = Article.find(params[:id])
 
     respond_with(@record) do |format|
@@ -51,6 +53,8 @@ class API::ArticlesController < API::BaseController
   end
 
   def destroy
+    authorize_user! :destroy, Article
+
     @record = Article.find(params[:id])
 
     respond_with(@record) do |format|

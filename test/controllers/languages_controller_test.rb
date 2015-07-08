@@ -5,8 +5,6 @@ class LanguagesControllerTest < ActionController::TestCase
 
   tests LanguagesController
 
-  fixtures :all
-
   setup do
     @user = create(:user)
     @user.add_role :admin
@@ -43,7 +41,15 @@ class LanguagesControllerTest < ActionController::TestCase
 
   test "should delete language along with all photos under that language" do
     language = Language.create!({name: 'Sanskrit'})
-    article = Article.create!({language_id: language.id, category: 'Weapon', english: "Foods", phonetic: "Keema" })
+    category = create(:category)
+
+    article = Article.create!({
+      language_id: language.id, 
+      category_id: category.id, 
+      english: "Foods", 
+      phonetic: "Keema",
+      picture: Rack::Test::UploadedFile.new(File.join(Rails.root, 'test', 'support', 'picture', 'logo.jpg'))
+    })
 
     assert_difference('Language.count',-1) do
       delete :destroy, id: language.id

@@ -27,6 +27,8 @@ Rails.application.routes.draw do
     resources :articles
   end
 
+  resources :categories
+
   resources :articles
 
   ## API routes
@@ -34,6 +36,8 @@ Rails.application.routes.draw do
     resources :users
     resources :articles
     resources :installations
+    resources :categories
+    resources :languages
   end
  
 

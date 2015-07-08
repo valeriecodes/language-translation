@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: languages
+# Table name: categories
 #
 #  id         :integer          not null, primary key
 #  name       :string
@@ -8,8 +8,6 @@
 #  updated_at :datetime
 #
 
-class Language < ActiveRecord::Base
- has_many :articles, dependent: :destroy
-
- validates :name, presence: true
+class CategorySerializer < ActiveModel::Serializer
+  attributes :id, :name
 end

@@ -21,14 +21,22 @@ ActiveRecord::Schema.define(version: 20150701125539) do
     t.text     "phonetic"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "category"
     t.string   "picture"
     t.integer  "language_id"
     t.tsvector "tsv_data"
+    t.integer  "category_id"
   end
 
   add_index "articles", ["language_id"], name: "index_articles_on_language_id", using: :btree
   add_index "articles", ["tsv_data"], name: "index_articles_tsv", using: :gin
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "categories", ["name"], name: "index_categories_on_name", using: :btree
 
   create_table "contributors", force: :cascade do |t|
     t.string   "name"

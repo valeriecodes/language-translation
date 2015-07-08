@@ -24,5 +24,11 @@ module Pj1
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    # default generator options for minitset.
+    # This equals rails generate model MyModel --spec --skip-fixture
+    config.generators do |g|
+      g.test_framework :mini_test, spec: true, fixture: false
+    end
   end
 end

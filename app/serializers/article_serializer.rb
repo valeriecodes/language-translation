@@ -7,10 +7,10 @@
 #  phonetic    :text
 #  created_at  :datetime
 #  updated_at  :datetime
-#  category    :string
 #  picture     :string
 #  language_id :integer
 #  tsv_data    :tsvector
+#  category_id :integer
 #
 
 class ArticleSerializer < ActiveModel::Serializer

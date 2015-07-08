@@ -73,6 +73,7 @@ group :test, :development do
   gem 'annotate'                              # Annotates Rails/ActiveRecord Models, routes, fixtures based on schema
   gem "rails-erd"
   gem 'factory_girl_rails'                    # Is a fixtures replacement with a straightforward definition syntax
+  gem 'git'
 end
 
 gem 'memory_test_fix'

@@ -8,10 +8,6 @@
 #  updated_at :datetime
 #
 
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  name: MyString
-
-two:
-  name: MyString
+class LanguageSerializer < ActiveModel::Serializer
+  attributes :id, :name
+end

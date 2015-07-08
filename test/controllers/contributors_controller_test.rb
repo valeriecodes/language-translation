@@ -3,8 +3,6 @@ require 'test_helper'
 class ContributorsControllerTest < ActionController::TestCase
   include Devise::TestHelpers
 
-  fixtures :all
-
   setup do
     @user = create(:user)
     @user.add_role :admin
@@ -20,9 +18,9 @@ class ContributorsControllerTest < ActionController::TestCase
   end
 
   test "no route like /contributors exists" do
-	assert_raises(ActionController::UrlGenerationError) do
-	  get :index
-	end
+    assert_raises(ActionController::UrlGenerationError) do
+      get :index
+    end
   end
 
 end

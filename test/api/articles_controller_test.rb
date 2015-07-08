@@ -8,6 +8,7 @@ class API::ArticlesControllerTest < ActionController::TestCase
 
     @user = create(:user)
     @user.add_role :admin
+    @language = create(:language, name: 'Chuukese')
   end
 
   def teardown
@@ -19,7 +20,10 @@ class API::ArticlesControllerTest < ActionController::TestCase
     describe "when all article renders" do
       before(:each) do
         3.times {
-          create(:article)
+          create(:article, { 
+            language_id: @language.id, 
+            picture: Rack::Test::UploadedFile.new(File.join(Rails.root, 'test', 'support', 'picture', 'logo.jpg'))
+          })
         }
       end
 
@@ -35,7 +39,12 @@ class API::ArticlesControllerTest < ActionController::TestCase
   describe "Get #show" do
     describe "when fetch one article" do 
       before(:each) do 
-        @article = create(:article, english: 'Cat',  phonetic: "Tac")
+        @article = create(:article, { 
+          english: 'Cat',  
+          phonetic: "Tac",
+          language_id: @language.id, 
+          picture: Rack::Test::UploadedFile.new(File.join(Rails.root, 'test', 'support', 'picture', 'logo.jpg'))
+        })
       end
 
       it "should return article attributes" do
@@ -54,7 +63,12 @@ class API::ArticlesControllerTest < ActionController::TestCase
   describe "POST #create" do
     describe "when a article is successfully created" do 
       before(:each) do 
-        attributes = attributes_for(:article, {  english: 'Cat',  phonetic: "Tac" })
+        attributes = attributes_for(:article, { 
+          english: 'Cat',  
+          phonetic: "Tac",
+          language_id: @language.id, 
+          picture: Rack::Test::UploadedFile.new(File.join(Rails.root, 'test', 'support', 'picture', 'logo.jpg'))
+        })
 
         post :create, { format: :json, auth_token: @user.authentication_token, article: attributes }
       end
@@ -82,14 +96,19 @@ class API::ArticlesControllerTest < ActionController::TestCase
         assert_equal 422, response.status
 
         assert          error_response["errors"]
-        assert_includes error_response["errors"]["phonetic"], "Phonetic can't be blank"
+        assert_includes error_response["errors"]["language_id"], "Language can't be blank"
       end
     end
   end
 
   describe "PUT/PATCH #update" do 
     before(:each) do 
-      @article = create(:article, english: 'Cat',  phonetic: "Tac")
+      @article = create(:article, { 
+        english: 'Cat',  
+        phonetic: "Tac",
+        language_id: @language.id, 
+        picture: Rack::Test::UploadedFile.new(File.join(Rails.root, 'test', 'support', 'picture', 'logo.jpg'))
+      })
     end
 
     describe "when is successfully updated" do 
@@ -106,7 +125,7 @@ class API::ArticlesControllerTest < ActionController::TestCase
 
     describe "when is not updated" do
       before(:each) do 
-        put :update, { format: :json, auth_token: @user.authentication_token, id: @article.id, article: { english: "" }}
+        put :update, { format: :json, auth_token: @user.authentication_token, id: @article.id, article: { language_id: "" }}
       end
 
       it "render an error json for the resource" do 
@@ -114,7 +133,7 @@ class API::ArticlesControllerTest < ActionController::TestCase
 
         assert_equal 422, response.status
         assert            article["errors"]
-        assert_includes   article["errors"]["english"], "English can't be blank"
+        assert_includes   article["errors"]["language_id"], "Language can't be blank"
       end
     end
   end
@@ -122,7 +141,12 @@ class API::ArticlesControllerTest < ActionController::TestCase
   describe "DELETE #destroy" do
     describe "delete" do 
       before(:each) do
-        @article = create(:article, english: 'Cat',  phonetic: "Tac")
+        @article = create(:article, { 
+          english: 'Cat',  
+          phonetic: "Tac",
+          language_id: @language.id, 
+          picture: Rack::Test::UploadedFile.new(File.join(Rails.root, 'test', 'support', 'picture', 'logo.jpg'))
+        })
       end
 
       it "render josn response for the deleted object" do 
