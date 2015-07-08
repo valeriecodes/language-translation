@@ -31,3 +31,6 @@ config/database.yml
 
 # Ignore bower-managed components
 /vendor/assets/bower_components/*
+
+# Ignore coverage files
+coverage/
