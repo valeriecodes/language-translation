@@ -29,9 +29,11 @@ class ArticlesControllerTest < ActionController::TestCase
   end
 
   test "should create photo and go to its show page" do
+    category = create(:category)
+
     assert_difference('Article.count') do
       post :create, article: {
-        category_id: 'Weapon', 
+        category_id: category.id, 
         english: 'Knife', 
         phonetic: "Pihiya", 
         language_id: @language.id, 
