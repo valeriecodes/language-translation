@@ -23,8 +23,8 @@ SimpleNavigation::Configuration.run do |navigation|
 
     primary.item :category, "Category", categories_path, highlights_on: :subpath do |sub|
       sub.dom_class = 'nav nav-pills'
-      sub.item :category, 'New photo', new_category_path 
-    end  if [:admin].include?(current_user.try(:role))
+      sub.item :category, 'New Category', new_category_path 
+    end if current_user and current_user.has_any_role? :admin, :volunteer
 
     primary.item :photos, "Photos", articles_path, highlights_on: :subpath do |sub|
       sub.dom_class = 'nav nav-pills'

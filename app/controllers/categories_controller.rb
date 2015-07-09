@@ -3,38 +3,53 @@ class CategoriesController < ApplicationController
 
   load_and_authorize_resource
 
+  respond_to :html
+
   def index
     @categories = Category.paginate(page: params[:page], per_page: 20)
+
+    respond_with(@categories)
   end
 
   def new
     @category = Category.new
+
+    respond_with(@category)
   end
 
   def create
     @category = Category.new(category_params)
  
-    if @category.save
-      redirect_to @category
-    else
-      render 'new'
+    respond_with(@category) do |format|
+      if @category.save
+        flash[:notice] = "Category successfully created."
+        format.html { redirect_to category_path(@category) }
+      else
+        flash[:error] = "Sorry, failed to create category due to errors."
+        format.html { render 'new' }
+      end
     end
   end
 
   def update
     @category = Category.find(params[:id])
 
-    if @category.update(category_params)
-      redirect_to @category
-    else
-      render 'edit'
+    respond_with(@category) do |format|
+      if @category.update(category_params)
+        flash[:notice] = "Category successfully updated."
+        format.html { redirect_to category_path(@category) }
+      else
+        flash[:error] = "Sorry, failed to update category due to errors."
+        format.html { render 'edit' }
+      end
     end
   end
 
   def destroy
     @category.destroy
 
-    redirect_to categories_path
+    flash[:notice] = "Category has been deleted."
+    respond_with(@category)
   end
  
  private
