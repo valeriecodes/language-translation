@@ -5,9 +5,9 @@ class UsersController < ApplicationController
 
   def index
     if params[:q].blank?
-      @users = User.accessible_by(current_ability)
+      @users = User.accessible_by(current_ability).page(params[:page]).per(20)
     else
-      @users = User.accessible_by(current_ability).user_search(params[:q])
+      @users = User.accessible_by(current_ability).user_search(params[:q]).page(params[:page]).per(20)
     end
   end
 

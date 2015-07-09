@@ -4,9 +4,9 @@ class API::ArticlesController < API::BaseController
     authorize_user! :read, Article
 
     if params[:q].blank?
-      @records = Article.paginate(page: params[:page], per_page: 20)
+      @records = Article.page(params[:page]).per(20)
     else
-      @records = Article.article_search(params[:q]).paginate(page: params[:page], per_page: 20)
+      @records = Article.article_search(params[:q]).page(params[:page]).per(20)
     end
 
     respond_with(@records) do |format|

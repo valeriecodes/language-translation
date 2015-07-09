@@ -3,7 +3,7 @@ class API::CategoriesController < API::BaseController
   def index
     authorize_user! :read, Category
 
-    @records = Category.paginate(page: params[:page], per_page: 20)
+    @records = Category.page(params[:page]).per(20)
 
     respond_with(@records) do |format|
       format.json { render json: @records, root: :categories }

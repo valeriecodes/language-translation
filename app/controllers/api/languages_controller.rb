@@ -3,7 +3,7 @@ class API::LanguagesController < API::BaseController
   def index
     authorize_user! :read, Language
 
-    @records = Language.paginate(page: params[:page], per_page: 20)
+    @records = Language.page(params[:page]).per(20)
 
     respond_with(@records) do |format|
       format.json { render json: @records, root: :languages }

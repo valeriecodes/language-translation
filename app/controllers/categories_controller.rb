@@ -6,7 +6,7 @@ class CategoriesController < ApplicationController
   respond_to :html
 
   def index
-    @categories = Category.paginate(page: params[:page], per_page: 20)
+    @categories = Category.page(params[:page]).per(20)
 
     respond_with(@categories)
   end
