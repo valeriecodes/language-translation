@@ -1,48 +1,12 @@
 <% if current_user.login_approval_at %>
 <% if current_user.has_any_role? :admin, :volunteer %>
 
-<h1>Saved site information</h1>
-
-<p>
-  <strong>Post:</strong>
-  <%= @site.installation.installation %>
-</p>
-
-<p>
-  <strong>Site name:</strong>
-  <%= @site.name %>
-</p>
-
-<p>
-  <strong>Volunteers:</strong>
-  <ol>
-    <% @volunteers.each do |volunteer| %>
-    <li>
-      <%= volunteer.name %>&nbsp;
-      <% if current_user.has_role? :admin %>
-      <%= link_to 'Delete', [volunteer], method: :delete, data: { confirm: 'Are you sure?' } %>
-      <% end %>
-    </li>
-    <% end %>
-  </ol>
-</p>
-
-<% if current_user.has_role? :admin %>
-  <h2>Add a volunteer name:</h2>
-<% end %>
-
-<p>
-  <strong>Contributors:</strong>
-  <ol>
-    <% @contributors.each do |contributor| %>
-    <li>
-      <%= contributor.name %>&nbsp;<%= link_to 'Delete', [contributor], method: :delete, data: { confirm: 'Are you sure?' } %>
-    </li>
-    <% end %>
-  </ol>
-</p>
-
-<h2>Add a contributor name:</h2>
+<%= react_component 'SitesShowBox',
+      {data: {
+        site: @site,
+        post: @site.installation,
+        volunteers: @volunteers,
+        contributors: @contributors}}%>
 
 <%= link_to 'Back', sites_path %>
 <%= link_to 'Edit', edit_site_path(@site) %>
