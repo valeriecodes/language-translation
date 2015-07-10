@@ -10,6 +10,7 @@
 #
 
 class Site < ActiveRecord::Base
+  resourcify
   default_scope -> { order('created_at DESC') }
   belongs_to :installation
 

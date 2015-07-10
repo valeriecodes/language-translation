@@ -18,10 +18,9 @@ Rails.application.routes.draw do
     resources :sites
   end
 
-  resources :sites do
-    resources :volunteers
-    resources :contributors
-  end
+  resources :sites
+  post "sites/add_role", to: "sites#add_role"
+  post "sites/remove_role", to: "sites#remove_role"
 
   resources :languages do
     resources :articles
