@@ -5,9 +5,12 @@ class Ability
     # Define abilities for the passed in user here. For example:
     @user = (user ||= User.new) # guest user (not logged in)
 
-    # four roles exist: admin, volunteer, contributor, guest, non-users
+    # following roles exist: superadmin, admin, volunteer, contributor, guest, non-users
 
-    if user.has_role? :admin
+    if user.has_role? :superadmin
+      can :manage, :all
+      can :read, ActiveAdmin::Page, name: "Dashboard", namespace_name: :superadmin
+    elsif user.has_role? :admin
       can :manage, :all
     elsif user.has_role? :volunteer
       can [:read, :update], Site

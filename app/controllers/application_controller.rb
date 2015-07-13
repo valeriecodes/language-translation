@@ -32,6 +32,10 @@ class ApplicationController < ActionController::Base
 
   alias :authorize_user! authorize!
 
+  def access_denied(exception)
+      redirect_to root_path, alert: exception.message
+  end
+
   protected
 
   def configure_devise_permitted_parameters
