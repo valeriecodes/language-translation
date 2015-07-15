@@ -15,6 +15,8 @@ Rails.application.routes.draw do
     post  "users/regenerate_api_key", to: "registrations#regenerate_api_key"
   end
 
+  resources :organizations
+
   resources :installations do
     resources :sites
   end
