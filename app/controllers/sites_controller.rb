@@ -6,7 +6,7 @@ class SitesController < ApplicationController
   end
 
   def index
-    @sites = Site.all
+    @sites = Site.page(params[:page]).per(20)
   end
 
   def create

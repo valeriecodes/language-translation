@@ -10,7 +10,7 @@ class InstallationsController < ApplicationController
  end
 
  def index
-   @installations = Installation.all
+   @installations = Installation.page(params[:page]).per(20)
  end
 
  def show

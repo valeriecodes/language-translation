@@ -10,9 +10,9 @@ class ArticlesController < ApplicationController
 
   def index
     if params[:q].blank?
-      @articles = Article.includes(:category, :language).paginate(page: params[:page], per_page: 20)
+      @articles = Article.includes(:category, :language).page(params[:page]).per(20)
     else
-      @articles = Article.includes(:category, :language).article_search(params[:q]).paginate(page: params[:page], per_page: 20)
+      @articles = Article.includes(:category, :language).article_search(params[:q]).page(params[:page]).per(20)
     end
   end
 
