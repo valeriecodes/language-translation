@@ -26,6 +26,14 @@
 </p>
 
 <%= link_to 'Back', articles_path %>
+
+<% if can?(:delete, @article) && @article.draft? %>
+  <%= link_to 'Publish', publish_article_path(@article), method: :post %>
+<% else %>
+  <%= link_to 'Unpublish', unpublish_article_path(@article), method: :post %>
+<% end %>
+
+<br />
 <%= link_to 'Edit', edit_article_path(@article) %>
 
 <%# end %>

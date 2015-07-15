@@ -46,15 +46,23 @@ gem 'cancancan'
 gem 'rolify'
 
 gem 'responders'
-gem 'devise', '~> 3.5.0'                # Flexible authentication solution for Rails with Warden
-gem 'devise_invitable', '~> 1.5.0'      # An invitation strategy for devise
-gem 'devise-token_authenticatable', "~> 0.4.0" # Token Authenticatable module of devise. 
+# Flexible authentication solution for Rails with Warden
+gem 'devise', '~> 3.5.0'
+# An invitation strategy for devise
+gem 'devise_invitable', '~> 1.5.0'
+# Token Authenticatable module of devise. 
+gem 'devise-token_authenticatable', "~> 0.4.0"
 
-gem 'default_value_for', '3.0.1'      # Provides a way to specify default values for ActiveRecord models
-gem 'active_model_serializers', '0.8.3' # ActiveModel::Serializer implementation and Rails hooks
-gem 'kaminari', "~> 0.16.3"             # A Scope & Engine based, clean, powerful, customizable and sophisticated paginator for Rails
+# Provides a way to specify default values for ActiveRecord models
+gem 'default_value_for', '3.0.1'
+# ActiveModel::Serializer implementation and Rails hooks
+gem 'active_model_serializers', '0.8.3'
+# A Scope & Engine based, clean, powerful, customizable and sophisticated paginator for Rails
+gem 'kaminari', "~> 0.16.3"
 
 gem 'simple-navigation'
+#AASM - State machines for Ruby classes
+gem 'aasm'
 
 group :test, :development do
   gem 'minitest', '~> 5.7.0'                 # Complete test suite

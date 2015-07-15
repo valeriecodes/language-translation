@@ -15,6 +15,7 @@
 
 class Article < ActiveRecord::Base
   include PgSearch
+  include AASM
 
   belongs_to :language
   belongs_to :category
@@ -37,5 +38,18 @@ class Article < ActiveRecord::Base
         tsvector_column: 'tsv_data'
       }
     }
+
+  aasm column: :state do
+    state :draft, initial: true
+    state :published
+
+    event :publish do
+      transitions from: :draft, to: :published
+    end
+
+    event :unpublish do
+      transitions from: :published, to: :draft
+    end
+  end  
 
 end

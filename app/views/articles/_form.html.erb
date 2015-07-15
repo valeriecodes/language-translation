@@ -30,7 +30,7 @@
     <div class="form-group">
       <%= f.label :category, class: "control-label col-sm-3" %>
       <div class="col-sm-3">
-        <%= f.collection_select(:category_id, @categories, :id, :name ) %>
+        <%= f.collection_select(:category_id, @categories, :id, :name) %>
       </div>
     </div>
 
@@ -59,6 +59,15 @@
       <span class="help-inline">( If you wish to change the picture, click on browse and upload the new file.)</span>
       <% end %>
     </div>
+
+    <% if can?(:delete, Article) %>
+      <div class="form-group">
+        <%= f.label :state, "Publish", class: "control-label col-sm-3" %>
+        <div class="col-sm-3">
+          <%= f.select :state, [["Unpublish", 'draft'], ['Publish', 'published']], {}, class: "form-control" %>
+        </div>
+      </div>
+    <% end %>
 
     <div class="form-group form-actions">
       <div class="col-sm-offset-3 col-sm-3">

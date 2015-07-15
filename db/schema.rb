@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20150716181235) do
     t.integer  "language_id"
     t.tsvector "tsv_data"
     t.integer  "category_id"
+    t.string   "state",       default: "draft"
   end
 
   add_index "articles", ["language_id"], name: "index_articles_on_language_id", using: :btree

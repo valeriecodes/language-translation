@@ -37,11 +37,14 @@ class ArticlesControllerTest < ActionController::TestCase
         english: 'Knife', 
         phonetic: "Pihiya", 
         language_id: @language.id, 
-        picture: Rack::Test::UploadedFile.new(File.join(Rails.root, 'test', 'support', 'picture', 'logo.jpg'))
+        picture: Rack::Test::UploadedFile.new(File.join(Rails.root, 'test', 'support', 'picture', 'logo.jpg')),
+        state: "published"
       }
     end
     
     assert_redirected_to article_path(assigns(:article))
+
+    assert_equal "published", assigns(:article).state
   end
 
   test "should delete photo" do
