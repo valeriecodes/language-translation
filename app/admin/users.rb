@@ -31,4 +31,18 @@ ActiveAdmin.register User do
     column :lang
     column :login_approval_at
   end
+
+  form do |f|
+    f.inputs "New User" do
+      f.input :email
+      f.input :username
+      f.input :first_name
+      f.input :last_name
+      f.input :location
+      f.input :contact
+      f.input :gender
+      f.input :lang
+    end
+    f.actions
+  end
 end
