@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150715161314) do
+ActiveRecord::Schema.define(version: 20150716131426) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,15 +52,6 @@ ActiveRecord::Schema.define(version: 20150715161314) do
   end
 
   add_index "categories", ["name"], name: "index_categories_on_name", using: :btree
-
-  create_table "contributors", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "site_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "contributors", ["site_id"], name: "index_contributors_on_site_id", using: :btree
 
   create_table "installations", force: :cascade do |t|
     t.string   "installation"
@@ -139,14 +130,5 @@ ActiveRecord::Schema.define(version: 20150715161314) do
   end
 
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
-
-  create_table "volunteers", force: :cascade do |t|
-    t.string   "vname"
-    t.integer  "site_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "volunteers", ["site_id"], name: "index_volunteers_on_site_id", using: :btree
 
 end
