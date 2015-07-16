@@ -25,11 +25,14 @@
 #  tsv_data               :tsvector
 #  authentication_token   :string
 #  login_approval_at      :datetime
+#  organization_id        :integer
 #
 
 class User < ActiveRecord::Base
   rolify
   include PgSearch
+
+  belongs_to :organization
   
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

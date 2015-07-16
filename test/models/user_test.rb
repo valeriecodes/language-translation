@@ -25,6 +25,7 @@
 #  tsv_data               :tsvector
 #  authentication_token   :string
 #  login_approval_at      :datetime
+#  organization_id        :integer
 #
 
 require 'test_helper'
