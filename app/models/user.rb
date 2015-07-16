@@ -42,7 +42,7 @@ class User < ActiveRecord::Base
   default_scope -> { order('created_at DESC') }
   validates_uniqueness_of :username
   validates_confirmation_of :password, length: { in: 6..20 }
-  validates_presence_of :username, :email, :first_name, :last_name
+  validates_presence_of :username, :email, :first_name, :last_name, :organization_id
 
   before_save :ensure_authentication_token
 

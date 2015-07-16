@@ -37,11 +37,13 @@
     @props.onUserApproval(data)
   render: ->
     clickApproval = @handleApproval
-    userNodes = @props.data.map((user) ->
-      `<UserNode key={user.id} user={user} onUserApproval={clickApproval}/>`)
+    organizations = @props.data.organizations
+    userNodes = @props.data.users.map((user) ->
+      `<UserNode key={user.id} user={user} organization={organizations[user.organization_id - 1]} onUserApproval={clickApproval}/>`)
     `<table className="UserIndexList table table-striped">
       <thead>
         <tr>
+          <th>Organization</th>
           <th>Name</th>
           <th>Gender</th>
           <th>Email</th>
@@ -69,6 +71,7 @@
       else `<div>Waiting<button onClick={this.handleApproval} className='btn btn-default'><span className='glyphicon glyphicon-ok' /></button></div>`
     show_url = "members/" + @props.user.id
     `<tr>
+      <td>{this.props.organization.name}</td>
       <td><a href={show_url}>{this.props.user.first_name} {this.props.user.last_name}</a></td>
       <td>{this.props.user.gender}</td>
       <td>{this.props.user.email}</td>

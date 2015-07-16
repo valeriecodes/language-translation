@@ -46,6 +46,6 @@ class InstallationsController < ApplicationController
 
  private
    def installation_params
-       params.require(:installation).permit(:installation, :email, :address, :contact)
+       params.require(:installation).permit(:installation, :email, :address, :contact, :organization_id)
    end
 end

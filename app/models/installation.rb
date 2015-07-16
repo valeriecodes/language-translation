@@ -15,5 +15,5 @@
 class Installation < ActiveRecord::Base
  belongs_to :organization
  has_many :sites, dependent: :destroy
- validates :installation, presence: true
+ validates_presence_of :installation, :organization_id
 end
