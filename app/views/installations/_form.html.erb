@@ -15,7 +15,7 @@
       </div>
     <% end %>
 
-    <div class="form-group">
+    <div class="form-group hidden">
       <%= f.label :organization_id, "Organization", class: "control-label col-sm-3" %>
       <div class="col-sm-3">
         <%= f.collection_select(:organization_id, Organization.all, :id, :name, prompt: true) %>

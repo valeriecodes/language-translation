@@ -10,7 +10,7 @@ class InstallationsController < ApplicationController
  end
 
  def index
-   @installations = Installation.page(params[:page]).per(20)
+   @installations = current_user.organization.installations.page(params[:page]).per(20)
  end
 
  def show
@@ -36,6 +36,7 @@ class InstallationsController < ApplicationController
 
  def create
      @installation = Installation.new(installation_params)
+     @installation.organization_id = current_user.organization.id
 	 
      if @installation.save
         redirect_to @installation

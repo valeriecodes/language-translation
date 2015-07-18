@@ -6,7 +6,10 @@ class SitesController < ApplicationController
   end
 
   def index
-    @sites = Site.page(params[:page]).per(20)
+    current_user.organization.installations.each do |a|
+      @sites << a.sites
+    end
+    @sites = @sites.page(params[:page]).per(20)
   end
 
   def create
