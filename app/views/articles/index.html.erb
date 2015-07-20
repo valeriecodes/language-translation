@@ -35,7 +35,9 @@
 <% else %>
 
 <h1>Listing photos for <%= current_user.lang %> language</h1>
-<p><u><b><%= link_to '+New photo', new_article_path %></b></u></p>
+<p>
+<%= link_to '+New photo', new_article_path %>
+</p>
  
 <ol>
   <% @articles.each do |article| %>
