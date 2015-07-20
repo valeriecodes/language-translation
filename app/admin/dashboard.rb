@@ -24,7 +24,8 @@ ActiveAdmin.register_page "Dashboard" do
       column do
         panel "Sites" do
           Site.unscoped.order("installation_id").map do |site|
-            li link_to(site.name + " (" + Installation.find(site.installation_id).installation + ")", admin_post_path(site))
+            installation_name = Installation.find(site.installation_id).installation
+            li link_to(site.name + " (" + installation_name + ")", admin_post_path(site))
           end
         end
       end
@@ -55,7 +56,9 @@ ActiveAdmin.register_page "Dashboard" do
         panel "Articles" do
           ul do
             Article.unscoped.order("updated_at").last(20).map do |article|
-              li link_to(article.english + " (" + Language.find(article.language_id).name + ", " + Category.find(article.category_id).name + ")", admin_article_path(article))
+              language_name = Language.find(article.language_id).name
+              category_name = Category.find(article.category_id).name
+              li link_to(article.english + " (" + language_name + ", " + category_name + ")", admin_article_path(article))
             end
           end
         end
