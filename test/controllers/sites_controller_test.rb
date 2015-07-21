@@ -26,20 +26,24 @@ class SitesControllerTest < ActionController::TestCase
   end
 
   test "should create site and go to its show page" do
+    installation = Installation.create({installation: 'Azerbaijan', organization_id: @user.organization.id })
+
     assert_difference('Site.count') do
-        post :create, site: {name: 'Devoll'}
+        post :create, site: {name: 'Devoll', installation_id: installation.id}
     end
     assert_redirected_to site_path(assigns(:site))
   end
 
-  test "should not create language without its name" do
+  test "should not create site without its name" do
+    installation = Installation.create({installation: 'Azerbaijan', organization_id: @user.organization.id })
+
     assert_no_difference('Site.count') do
-      post :create, site: {name: nil}
+      post :create, site: {name: nil, installation_id: installation.id }
     end
   end
 
   test "should delete site along with all volunteers and contributors under it" do
-    installation = Installation.create({installation: 'Azerbaijan'})
+    installation = Installation.create({installation: 'Azerbaijan', organization_id: @user.organization.id })
     site = Site.create!({installation_id: installation.id, name: 'Leh'})
 
     #volunteer = Volunteer.create({site_id: site.id, vname: 'Saumya'})
