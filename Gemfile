@@ -40,6 +40,8 @@ gem 'react-rails', '~> 1.0'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+gem 'activeadmin', '~> 1.0.0.pre1'
+
 gem 'cancancan'
 gem 'rolify'
 

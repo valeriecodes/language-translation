@@ -33,6 +33,8 @@ class User < ActiveRecord::Base
   
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :token_authenticatable
 
   default_scope -> { order('created_at DESC') }
   validates_uniqueness_of :username
@@ -40,9 +42,6 @@ class User < ActiveRecord::Base
   validates_presence_of :username, :email, :first_name, :last_name
 
   before_save :ensure_authentication_token
-
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :token_authenticatable
 
   # Search 
   pg_search_scope :user_search,
