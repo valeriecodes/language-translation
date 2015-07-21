@@ -38,8 +38,17 @@
   render: ->
     clickApproval = @handleApproval
     organizations = @props.data.organizations
+    admins = @props.data.admins
+    volunteers = @props.data.volunteers
+    contributors = @props.data.contributors
     userNodes = @props.data.users.map((user) ->
-      `<UserNode key={user.id} user={user} organization={organizations[user.organization_id - 1]} onUserApproval={clickApproval}/>`)
+      organization = organizations[user.organization_id - 1]
+      role =
+        if (admins.indexOf(user.id) > -1) then 'Admin'
+        else if (volunteers.indexOf(user.id) > -1) then 'Volunteer'
+        else if (contributors.indexOf(user.id) > -1) then 'Contributor'
+        else 'Guest'
+      `<UserNode key={user.id} user={user} organization={organization} role={role} onUserApproval={clickApproval}/>`)
     `<table className="UserIndexList table table-striped">
       <thead>
         <tr>
@@ -51,6 +60,7 @@
           <th>Location</th>
           <th>Language</th>
           <th>Mobile</th>
+          <th>Role</th>
           <th>Login Approval</th>
         </tr>
       </thead>
@@ -79,5 +89,6 @@
       <td>{this.props.user.location}</td>
       <td>{this.props.user.lang}</td>
       <td>{this.props.user.contact}</td>
+      <td>{this.props.role}</td>
       <td>{login_approval}</td>
     </tr>`
