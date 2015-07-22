@@ -37,7 +37,7 @@ class InstallationsControllerTest < ActionController::TestCase
   end
 
   test "should delete installation along with all sites under that installation" do
-    installation = Installation.create!({installation: 'Azerbaijan'})
+    installation = Installation.create!({installation: 'Azerbaijan', organization_id: @user.organization.id })
     site = Site.create!({installation_id: installation.id, name:'Leh'})
 
     assert_difference('Installation.count',-1) do

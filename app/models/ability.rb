@@ -11,7 +11,9 @@ class Ability
       can :manage, :all
       can :read, ActiveAdmin::Page, name: "Dashboard", namespace_name: :superadmin
     elsif user.has_role? :admin
-      can :manage, :all
+      can :manage, [Language, Category, Article]
+      can :manage, [Installation, User], organization_id: @user.organization.id
+      can :manage, Site, installation_id: @user.organization.installations.map { |a| a.id }
     elsif user.has_role? :volunteer
       can [:read, :update], Site
       can :read, [Language]

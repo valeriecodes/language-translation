@@ -6,7 +6,10 @@ class SitesController < ApplicationController
   end
 
   def index
-    @sites = Site.page(params[:page]).per(20)
+    current_user.organization.installations.each do |a|
+      @sites << a.sites
+    end
+    @sites = @sites.page(params[:page]).per(20)
   end
 
   def create
@@ -60,9 +63,9 @@ class SitesController < ApplicationController
         end
       end
     elsif(action == 'contributor')
-      repond_to do |format|
+      respond_to do |format|
         if @user.add_role :contributor, @site
-          format.json { render json: (User.with_role :volunteer, @site), status: :ok}
+          format.json { render json: (User.with_role :contributor, @site), status: :ok}
         else
           format.json { render json: @user.errors, status: :unprocessable_entity}
         end
@@ -84,9 +87,9 @@ class SitesController < ApplicationController
         end
       end
     elsif(action == 'contributor')
-      repond_to do |format|
+      respond_to do |format|
         if @user.remove_role :contributor, @site
-          format.json { render json: (User.with_role :volunteer, @site), status: :ok}
+          format.json { render json: (User.with_role :contributor, @site), status: :ok}
         else
           format.json { render json: @user.errors, status: :unprocessable_entity}
         end

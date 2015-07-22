@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150713185005) do
+ActiveRecord::Schema.define(version: 20150716181235) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,15 +53,6 @@ ActiveRecord::Schema.define(version: 20150713185005) do
 
   add_index "categories", ["name"], name: "index_categories_on_name", using: :btree
 
-  create_table "contributors", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "site_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "contributors", ["site_id"], name: "index_contributors_on_site_id", using: :btree
-
   create_table "installations", force: :cascade do |t|
     t.string   "installation"
     t.string   "email"
@@ -69,12 +60,21 @@ ActiveRecord::Schema.define(version: 20150713185005) do
     t.string   "contact"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "organization_id"
   end
+
+  add_index "installations", ["organization_id"], name: "index_installations_on_organization_id", using: :btree
 
   create_table "languages", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "organizations", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "roles", force: :cascade do |t|
@@ -120,10 +120,12 @@ ActiveRecord::Schema.define(version: 20150713185005) do
     t.tsvector "tsv_data"
     t.string   "authentication_token"
     t.datetime "login_approval_at"
+    t.integer  "organization_id"
   end
 
   add_index "users", ["authentication_token"], name: "index_users_on_authentication_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["organization_id"], name: "index_users_on_organization_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["tsv_data"], name: "index_users_tsv", using: :gin
 
@@ -134,13 +136,6 @@ ActiveRecord::Schema.define(version: 20150713185005) do
 
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
 
-  create_table "volunteers", force: :cascade do |t|
-    t.string   "vname"
-    t.integer  "site_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "volunteers", ["site_id"], name: "index_volunteers_on_site_id", using: :btree
-
+  add_foreign_key "installations", "organizations"
+  add_foreign_key "users", "organizations"
 end
