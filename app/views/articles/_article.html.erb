@@ -8,6 +8,7 @@
 <td><%= article.category.name %></td>
 <td><%= article.english %></td>
 <td><%= article.phonetic %></td>
+<td><%= article.state.try(:humanize) %></td>
 <td><% if article.picture.present? %>Uploaded<% end %></td>
 <td><%= link_to 'Edit', edit_article_path(article) %></td>
 <% if current_user.has_any_role? :admin, :volunteer %>

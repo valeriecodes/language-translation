@@ -1,6 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    aasm (4.2.0)
     actionmailer (4.2.1)
       actionpack (= 4.2.1)
       actionview (= 4.2.1)
@@ -262,6 +263,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  aasm
   active_model_serializers (= 0.8.3)
   activeadmin (~> 1.0.0.pre1)
   annotate

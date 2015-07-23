@@ -3,10 +3,6 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   devise_for :users, controllers: { registrations: "registrations" }
 
-  # :path_prefix - to customise routes
-  # :controllers - to override the devise default - 
-  #  - for admin to edit the user table records other than username or password without knowing the password.
-
   resources :users, path: :members
   post "members/approve", to: "users#approve_user"
   post "members/disapprove", to: "users#disapprove_user"
@@ -31,7 +27,12 @@ Rails.application.routes.draw do
 
   resources :categories
 
-  resources :articles
+  resources :articles do
+    member do
+      post :publish
+      post :unpublish
+    end
+  end
 
   ## API routes
   namespace :api do

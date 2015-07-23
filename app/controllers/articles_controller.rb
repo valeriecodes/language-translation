@@ -1,7 +1,9 @@
 class ArticlesController < ApplicationController
-  before_action :set_article, only: [:show, :edit, :update, :destroy]
+  before_action :set_article, only: [:show, :edit, :update, :destroy, :publish, :unpublish]
 
   load_and_authorize_resource
+
+  respond_to :html, :json
 
   def new
     @article = Article.new
@@ -48,10 +50,44 @@ class ArticlesController < ApplicationController
       render 'edit'
     end
   end
+
+  def publish
+    respond_with(@article) do |format|
+      if @article.publish!
+        flash[:notice] = "The article has been published."
+
+        format.html { redirect_to article_path(@article) }
+        format.json { render json: @article, location: article_path(@article) }
+      else
+        flash[:error] = "Failed to publish the article, please try again."
+
+        format.html { redirect_to article_path(@article) }
+        format.json { render json: @article.errors.to_hash(true), status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def unpublish
+    respond_with(@article) do |format|
+      if @article.unpublish!
+        flash[:notice] = "The article has been drafted."
+
+        format.html { redirect_to article_path(@article) }
+        format.json { render json: @article, location: article_path(@article) }
+      else
+        flash[:error] = "Failed to draft the article, please try again."
+
+        format.html { redirect_to article_path(@article) }
+        format.json { render json: @article.errors.to_hash(true), status: :unprocessable_entity }
+      end
+    end
+  end
  
  private
   def article_params
-    params.require(:article).permit(:category_id, :english, :phonetic, :picture, :language_id)
+    params.require(:article).permit(:category_id, :english, :phonetic, :picture, :language_id).tap do |whitelisted|
+      whitelisted[:state] = params[:article][:state] if can?(:delete, Article)
+    end
   end
 
   def set_article
