@@ -1,12 +1,12 @@
 <% if current_user.login_approval_at %>
 <% if current_user.has_any_role? :admin, :volunteer %>
 
-<%= react_component 'SitesShowBox',
-      {data: {
+<%= react_component 'SitesShowBox', {data: {
         site: @site,
         post: @site.installation,
         volunteers: @volunteers,
-        contributors: @contributors}}%>
+        contributors: @contributors
+    }}%>
 
 <%= link_to 'Back', sites_path %>
 <%= link_to 'Edit', edit_site_path(@site) %>
