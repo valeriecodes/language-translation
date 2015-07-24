@@ -45,6 +45,7 @@ class UsersController < ApplicationController
     end
   end
 
+  #Called from Users Index: app/assets/javascripts/components/users/index.js.jsx.coffee
   def approve_user
     @user = User.find(params[:user_id])
     @user.login_approval_at = Time.now
@@ -65,6 +66,31 @@ class UsersController < ApplicationController
         format.json { render json: User.accessible_by(current_ability), status: :ok }
       else
         format.json { render json: @user.errors, status: :unprocessable_entity}
+      end
+    end
+  end
+
+  #Called from Users Show: app/assets/javascripts/components/users/show.js.jsx.coffee
+  def grant_admin
+    @user = User.find(params[:user_id])
+    @user.add_role :admin
+    respond_to do |format|
+      if @user.save
+        format.json { render json: @user.roles.map{|a| a.name}, status: :ok }
+      else
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def revoke_admin
+    @user = User.find(params[:user_id])
+    @user.remove_role :admin
+    respond_to do |format|
+      if @user.save
+        format.json { render json: @user.roles.map{|a| a.name}, status: :ok }
+      else
+        format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
   end

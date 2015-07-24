@@ -10,7 +10,11 @@ class InstallationsController < ApplicationController
  end
 
  def index
-   @installations = current_user.organization.installations.page(params[:page]).per(20)
+   if current_user.has_role? :superadmin
+     @installations = Installation.all.page(params[:page]).per(20)
+   else
+     @installations = current_user.organization.installations.page(params[:page]).per(20)
+   end
  end
 
  def show
