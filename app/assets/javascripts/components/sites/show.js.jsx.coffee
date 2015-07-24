@@ -1,9 +1,12 @@
 @SitesShowBox = React.createClass
   getInitialState: ->
-    data: @props.data
+    site: @props.site
+    post: @props.post
+    volunteers: @props.volunteers
+    contributors: @props.contributors
   handleVolunteerAddition: (userdata) ->
     userdata.act = "volunteer"
-    userdata.site_id = @state.data.site.id
+    userdata.site_id = @state.site.id
     add_role_url = '/sites/add_role.json'
     $.ajax({
       url: add_role_url
@@ -11,9 +14,7 @@
       type: 'POST'
       data: userdata
       success: ((data) ->
-        newdata = @state.data
-        newdata.volunteers = data.sites #'data' is in form {sites: Array[n]}
-        @setState({data: newdata})
+        @setState({volunteers: data.sites}) #'data' is in form {sites: Array[n]}
       ).bind(this)
       error: ((xhr, status, err) ->
         console.error(add_role_url, status, err.toString())
@@ -21,7 +22,7 @@
     })
   handleContributorAddition: (userdata) ->
     userdata.act = "contributor"
-    userdata.site_id = @state.data.site.id
+    userdata.site_id = @state.site.id
     add_role_url = '/sites/add_role.json'
     $.ajax({
       url: add_role_url
@@ -29,16 +30,14 @@
       type: 'POST'
       data: userdata
       success: ((data) ->
-        newdata = @state.data
-        newdata.contributors = data.sites #'data' is in form {sites: Array[n]}
-        @setState({data: newdata})
+        @setState({contributors: data.sites}) #'data' is in form {sites: Array[n]}
       ).bind(this)
       error: ((xhr, status, err) ->
         console.error(add_role_url, status, err.toString())
       ).bind(this)
     })
   handleRoleRemoval: (userdata) ->
-    userdata.site_id = @state.data.site.id
+    userdata.site_id = @state.site.id
     remove_role_url = '/sites/remove_role.json'
     $.ajax({
       url: remove_role_url
@@ -46,13 +45,10 @@
       type: 'POST'
       data: userdata
       success: ((data) ->
-        newdata = @state.data
         if(userdata.act == 'volunteer')
-          newdata.volunteers = data.sites #'data' is in form {sites: Array[n]}
-          @setState({data: newdata})
+          @setState({volunteers: data.sites}) #'data' is in form {sites: Array[n]}
         else if(userdata.act == 'contributor')
-          newdata.contributors = data.sites #'data' is in form {sites: Array[n]}
-          @setState({data: newdata})
+          @setState({contributors: data.sites}) #'data' is in form {sites: Array[n]}
       ).bind(this)
       error: ((xhr, status, err) ->
         console.error(remove_role_url, status, err.toString())
@@ -60,15 +56,16 @@
     })
   render: ->
     `<div className="SitesShowBox">
-      <h1>{this.state.data.site.name} <span className="h4">{this.state.data.post.installation}</span></h1>
+      <h1>{this.state.site.name} <span className="h4">{this.state.post.installation}</span></h1>
       <br/>
-      <VolunteersList data={this.state.data.volunteers} onRoleAddition={this.handleVolunteerAddition} onRoleRemoval={this.handleRoleRemoval}/>
-      <ContributorsList data={this.state.data.contributors} onRoleAddition={this.handleContributorAddition} onRoleRemoval={this.handleRoleRemoval}/>
+      <VolunteersList data={this.state.volunteers} onRoleAddition={this.handleVolunteerAddition} onRoleRemoval={this.handleRoleRemoval}/>
+      <ContributorsList data={this.state.contributors} onRoleAddition={this.handleContributorAddition} onRoleRemoval={this.handleRoleRemoval}/>
     </div>`
 
 @VolunteersList = React.createClass
   handleRoleAddition: ->
     @props.onRoleAddition({username: React.findDOMNode(@refs.username).value.trim(), action: "", site_id: -1})
+    React.findDOMNode(@refs.username).value = ''
   handleRoleRemoval: (data) ->
     data.act = 'volunteer'
     @props.onRoleRemoval(data)
@@ -95,6 +92,7 @@
 @ContributorsList = React.createClass
   handleRoleAddition: ->
     @props.onRoleAddition({username: React.findDOMNode(@refs.username).value.trim(), act: "", site_id: -1})
+    React.findDOMNode(@refs.username).value = ''
   handleRoleRemoval: (data) ->
     data.act = 'contributor'
     @props.onRoleRemoval(data)
