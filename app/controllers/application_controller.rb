@@ -55,5 +55,3 @@ end
 
 # flash messages/errors are present in config/locals/devise.en.yml
 # authentification criteria, password length, etc. is present in config/initialisers/devise.rb
-
-

@@ -1,6 +1,3 @@
-<%# if current_user.login_approval_at %>
-<%# if current_user.has_any_role? :admin, :volunteer, :contributor %>
-
 <h1>Saved photo </h1>
 <p>
   <strong>Language:</strong>
@@ -22,7 +19,7 @@
  
 <p>
   <strong>Picture:</strong>
-  <%= image_tag(@article.picture_url, :width => 400) if @article.picture.present? %>
+  <%= image_tag(@article.picture_url, width: 400) if @article.picture.present? %>
 </p>
 
 <%= link_to 'Back', articles_path %>
@@ -35,6 +32,3 @@
 
 <br />
 <%= link_to 'Edit', edit_article_path(@article) %>
-
-<%# end %>
-<%# end %>

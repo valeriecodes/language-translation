@@ -8,9 +8,9 @@
       <%= f.label :language_id, "Language", class: "control-label col-sm-3" %>
       <div class="col-sm-3">
         <% if current_user.has_any_role? :admin, :volunteer %>
-        <%= f.collection_select(:language_id, Language.all, :id, :name ) %>
+          <%= f.collection_select(:language_id, Language.all, :id, :name ) %>
         <% elsif current_user.has_role? :contributor %>
-        <%= f.collection_select(:language_id, Language.where("name = ?", current_user.lang), :id, :name) %>
+          <%= f.collection_select(:language_id, Language.where(name: current_user.lang), :id, :name) %>
         <% end %>
       </div>
     </div>
