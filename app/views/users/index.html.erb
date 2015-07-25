@@ -1,8 +1,9 @@
 <%= render partial: "search_form" %>
 
-<%= react_component 'UsersIndexBox', {data: {
+<%= react_component 'UsersIndexBox', {
         users: @users,
         organizations: Organization.order(:id) ,
         admins: User.with_role(:admin).map{|a| a.id},
         volunteers: User.with_role(:volunteer, :any).map{|a| a.id},
-        contributors: User.with_role(:contributor, :any).map{|a| a.id} }} %>
+        contributors: User.with_role(:contributor, :any).map{|a| a.id}
+    } %>

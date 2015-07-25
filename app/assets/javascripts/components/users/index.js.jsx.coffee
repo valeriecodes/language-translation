@@ -1,6 +1,10 @@
 @UsersIndexBox = React.createClass
   getInitialState: ->
-    data: @props.data
+    users: @props.users
+    organizations: @props.organizations
+    admins: @props.admins
+    volunteers: @props.volunteers
+    contributors: @props.contributors
   handleUserApproval: (userdata) ->
     approveurl = 'members/approve.json'
     disapproveurl = 'members/disapprove.json'
@@ -11,7 +15,7 @@
         type: 'POST'
         data: {user_id: userdata.user_id}
         success: ((data) ->
-          @setState({data: data.users})).bind(this)
+          @setState({users: data.users})).bind(this)
         error: ((xhr, status, err) ->
           console.error(approveurl, status, err.toString())).bind(this)
       })
@@ -22,26 +26,34 @@
         type: 'POST'
         data: {user_id: userdata.user_id}
         success: ((data) ->
-          @setState({data: data.users})).bind(this)
+          @setState({users: data.users})).bind(this)
         error: ((xhr, status, err) ->
           console.error(disapproveurl, status, err.toString())).bind(this)
       })
   render: ->
+    users = @state.users
+    organizations = @state.organizations
+    admins = @state.admins
+    volunteers = @state.volunteers
+    contributors = @state.contributors
+
     `<div className="UsersIndexBox">
       <h3>Members</h3>
-      <UsersIndexList data={this.state.data} onUserApproval={this.handleUserApproval}/>
+      <UsersIndexList users={users} organizations={organizations} admins={admins} volunteers={volunteers}
+        contributors={contributors} onUserApproval={this.handleUserApproval}/>
     </div>`
+
 
 @UsersIndexList = React.createClass
   handleApproval: (data) ->
     @props.onUserApproval(data)
   render: ->
     clickApproval = @handleApproval
-    organizations = @props.data.organizations
-    admins = @props.data.admins
-    volunteers = @props.data.volunteers
-    contributors = @props.data.contributors
-    userNodes = @props.data.users.map((user) ->
+    organizations = @props.organizations
+    admins = @props.admins
+    volunteers = @props.volunteers
+    contributors = @props.contributors
+    userNodes = @props.users.map((user) ->
       organization = organizations[user.organization_id - 1]
       role =
         if (admins.indexOf(user.id) > -1) then 'Admin'
@@ -49,6 +61,7 @@
         else if (contributors.indexOf(user.id) > -1) then 'Contributor'
         else 'Guest'
       `<UserNode key={user.id} user={user} organization={organization} role={role} onUserApproval={clickApproval}/>`)
+
     `<table className="UserIndexList table table-striped">
       <thead>
         <tr>
@@ -67,6 +80,7 @@
       <tbody>{userNodes}</tbody>
     </table>`
 
+
 @UserNode = React.createClass
   handleApproval: ->
     user = @props.user
@@ -80,6 +94,7 @@
       then  `<div>{this.props.user.login_approval_at.slice(0,10)}<button onClick={this.handleApproval} className='btn btn-default'><span className='glyphicon glyphicon-remove' /></button></div>`
       else `<div>Waiting<button onClick={this.handleApproval} className='btn btn-default'><span className='glyphicon glyphicon-ok' /></button></div>`
     show_url = "members/" + @props.user.id
+
     `<tr>
       <td>{this.props.organization.name}</td>
       <td><a href={show_url}>{this.props.user.first_name} {this.props.user.last_name}</a></td>

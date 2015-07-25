@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   resources :users, path: :members
   post "members/approve", to: "users#approve_user"
   post "members/disapprove", to: "users#disapprove_user"
+  post "members/grant_admin", to: "users#grant_admin"
+  post "members/revoke_admin", to: "users#revoke_admin"
 
   devise_scope :user do
     post  "users/regenerate_api_key", to: "registrations#regenerate_api_key"
