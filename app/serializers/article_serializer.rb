@@ -11,6 +11,7 @@
 #  language_id :integer
 #  tsv_data    :tsvector
 #  category_id :integer
+#  state       :string           default("draft")
 #
 
 class ArticleSerializer < ActiveModel::Serializer

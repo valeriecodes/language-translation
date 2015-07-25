@@ -35,17 +35,14 @@ module Contributor
     end
 
     test "should create photo as draft article" do
-
-      assert_difference('Article.count') do
-        post :create, article: {
-          category_id: @category.id, 
-          english: 'Knife', 
-          phonetic: "Pihiya", 
-          language_id: @language.id, 
-          picture: Rack::Test::UploadedFile.new(File.join(Rails.root, 'test', 'support', 'picture', 'logo.jpg')),
-          state: "published"
-        }
-      end
+      post :create, article: {
+        category_id: @category.id, 
+        english: 'Knife', 
+        phonetic: "Pihiya", 
+        language_id: @language.id, 
+        picture: Rack::Test::UploadedFile.new(File.join(Rails.root, 'test', 'support', 'picture', 'logo.jpg')),
+        state: "published"
+      }
       
       assert_redirected_to article_path(assigns(:article))
 

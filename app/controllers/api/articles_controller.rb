@@ -1,4 +1,5 @@
 class API::ArticlesController < API::BaseController
+  include StrongParams
 
   def index
     authorize_user! :read, Article
@@ -65,9 +66,5 @@ class API::ArticlesController < API::BaseController
       end
     end
   end
- 
-  private
-  def article_params
-    params.require(:article).permit(:category, :english, :phonetic, :picture, :language_id)
-  end
+
 end
