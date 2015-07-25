@@ -1,8 +1,4 @@
-<% if current_user.login_approval_at %>
-<% if current_user.has_role? :admin %>
 <h2>New post contact information</h2>
 <hr />
  
 <%= render 'form' %>
-<% end %>
-<% end %>
