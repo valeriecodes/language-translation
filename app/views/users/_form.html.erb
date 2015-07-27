@@ -2,17 +2,7 @@
   <div class="col-md-12">
     <%= form_for @user, html: { class: "form-horizontal" } do |f| %>
 
-    <% if @user.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(@user.errors.count, "error") %> prohibited
-        this volunteer contact information from being saved:</h2>
-        <ul>
-          <% @user.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
+    <%= render partial: "shared/error_messages", object: @user %>
 
     <div class="form-group">
       <%= f.label :organization_id, "Organization", class: "control-label col-sm-3" %>

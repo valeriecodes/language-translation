@@ -11,6 +11,7 @@
 #  language_id :integer
 #  tsv_data    :tsvector
 #  category_id :integer
+#  state       :string           default("draft")
 #
 
 class Article < ActiveRecord::Base
@@ -20,12 +21,12 @@ class Article < ActiveRecord::Base
   belongs_to :language
   belongs_to :category
 
-  validates :language_id, presence: true
-
   default_scope -> { order('created_at DESC') }
 
   mount_uploader :picture, PictureUploader
-  validates_presence_of :picture
+  
+  #validates_presence_of :picture
+  validates :picture, presence: true
 
   # Search 
   pg_search_scope :article_search,

@@ -96,7 +96,7 @@ class API::ArticlesControllerTest < ActionController::TestCase
         assert_equal 422, response.status
 
         assert          error_response["errors"]
-        assert_includes error_response["errors"]["language_id"], "Language can't be blank"
+        assert_includes error_response["errors"]["picture"], "Picture can't be blank"
       end
     end
   end
@@ -120,20 +120,6 @@ class API::ArticlesControllerTest < ActionController::TestCase
 
         assert_equal 200, response.status
         assert_equal "Cat - updated", json_response["article"]["english"]
-      end
-    end
-
-    describe "when is not updated" do
-      before(:each) do 
-        put :update, { format: :json, auth_token: @user.authentication_token, id: @article.id, article: { language_id: "" }}
-      end
-
-      it "render an error json for the resource" do 
-        article = json_response
-
-        assert_equal 422, response.status
-        assert            article["errors"]
-        assert_includes   article["errors"]["language_id"], "Language can't be blank"
       end
     end
   end

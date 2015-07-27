@@ -1,6 +1,3 @@
-<% if current_user.login_approval_at %>
-<% if current_user.has_role? :admin %>
-
 <h1>Saved post contact information</h1>
 
 <p>
@@ -41,6 +38,3 @@
 
 <%= link_to 'Back', installations_path %>
 <%= link_to 'Edit', edit_installation_path(@installation) %>
-
-<% end %>
-<% end %>

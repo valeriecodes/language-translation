@@ -1,20 +1,8 @@
-<%# if current_user.login_approval_at %>
-<%# if current_user.has_role? :admin %>
 <div class="row">
   <div class="col-md-12">
     <%= form_for @language, html: {class: "form-horizontal"} do |f| %>
 
-    <% if @language.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(@language.errors.count, "error") %> prohibited
-        this language from being saved:</h2>
-        <ul>
-          <% @language.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
+    <%= render partial: "shared/error_messages", object: @language %>
 
     <div class="form-group">
       <%= f.label :name, class: "control-label col-sm-3" %>
@@ -32,5 +20,3 @@
     <% end %>
   </div>
 </div>
-<%# end %>
-<%# end %>
