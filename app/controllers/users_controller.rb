@@ -9,6 +9,8 @@ class UsersController < ApplicationController
     else
       @users = User.accessible_by(current_ability).user_search(params[:q]).page(params[:page]).per(20)
     end
+
+    @pagination = { current_page: @users.current_page, total_pages: @users.total_pages }
   end
 
   def new

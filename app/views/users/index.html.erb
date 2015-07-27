@@ -7,3 +7,6 @@
         volunteers: User.with_role(:volunteer, :any).map{|a| a.id},
         contributors: User.with_role(:contributor, :any).map{|a| a.id}
     } %>
+
+
+<%= react_component 'PaginatorSection', {totalPages: @pagination[:total_pages], currentPage: @pagination[:current_page], path: users_path } %>
