@@ -68,7 +68,14 @@
 
 
 @ToggleAdminButton = React.createClass
+  getInitialState: ->
+    { showModal: false }
+  closeModal: ->
+    @setState({ showModal: false })
+  openModal: ->
+    @setState({ showModal: true })
   handleToggle: ->
+    @closeModal()
     if ('admin' in @props.user_roles)
       @props.onToggleAdmin({user_id: @props.user.id, action: 'revoke'})
     else
@@ -79,10 +86,27 @@
     button_message =
       if ('admin' in user_roles) then 'Revoke Admin Rights'
       else 'Make Admin'
+    modal_message =
+      if ('admin' in user_roles) then "Do you really want to revoke admin rights from '" + @props.user.username + "'?"
+      else "Do you really want to promote '" + @props.user.username + "' as an admin?"
+    modal =
+      `<Modal show={this.state.showModal} onHide={this.closeModal}>
+        <Modal.Header closeButton>
+          Are you sure?
+        </Modal.Header>
+        <Modal.Body>
+          {modal_message}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={this.closeModal}>No</Button>
+          <Button onClick={this.handleToggle} bsStyle='primary'>Yes</Button>
+        </Modal.Footer>
+      </Modal>`
 
     if ('admin' in current_user_roles or 'superadmin' in current_user_roles)
       `<p className='text-center'>
-        <button onClick={this.handleToggle} className="btn btn-default">{button_message}</button>
+        <Button onClick={this.openModal}>{button_message}</Button>
+        {modal}
       </p>`
     else
       ``
