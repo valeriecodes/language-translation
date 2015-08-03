@@ -2,6 +2,7 @@
 
 <table class="table table-striped">
   <tr>
+     <th>Organization</th>
      <th>Post</th>
      <th>Email Id</th>
      <th>Address</th>
@@ -11,6 +12,7 @@
 
 <% @installations.each do |installation| %>
   <tr>
+     <td><%= installation.organization.name %></td>
      <td><%= installation.installation %></td>
      <td><%= installation.email %></td>
      <td><%= installation.address %></td>
@@ -22,3 +24,5 @@
 <% end %>
 
 </table>
+
+<%= paginate @installations %>

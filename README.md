@@ -1,4 +1,7 @@
 [![Build Status](https://travis-ci.org/systers/language-translation.svg?branch=develop)](https://travis-ci.org/systers/language-translation)
+
+[![Join the chat at https://gitter.im/systers/language-translation](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/systers/language-translation?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 ## GSoc Photo Language Translation Project 2015
 1. Gsoc timeline : 
 2. Developer's Systers profile page : 
@@ -22,5 +25,6 @@
 2. Enter the application's root directory.
 3. `$ rake db:migrate`
 4. `$ rake db:seed`
-5. `$ rails s`
-6. Enter `localhost:3000` on a web browser
+5. `$ bower install`
+6. `$ rails s`
+7. Enter `localhost:3000` on a web browser

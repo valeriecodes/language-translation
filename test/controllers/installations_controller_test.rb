@@ -2,22 +2,25 @@ require 'test_helper'
 
 class InstallationsControllerTest < ActionController::TestCase
   include Devise::TestHelpers
-  fixtures :all
 
   test "the truth" do
      assert true
   end
 
   setup do
-    sign_in users(:one)
-    @user = users(:one)
+    @user = create(:user)
+    @user.add_role :admin
+    sign_in @user
+  end
+
+  def teardown
+    User.delete_all
   end
 
   test "index should render correct template and layout" do
-	get :index
-	assert_template :index
-	assert_template layout: "layouts/application"
-	assert_response :redirect
+    get :index
+    assert_template :index
+    assert_template layout: "layouts/application"
   end
 
   test "should create installation and go to its show page" do
@@ -34,14 +37,16 @@ class InstallationsControllerTest < ActionController::TestCase
   end
 
   test "should delete installation along with all sites under that installation" do
-    installation = Installation.create!({installation: 'Azerbaijan'})
+    installation = Installation.create!({installation: 'Azerbaijan', organization_id: @user.organization.id })
     site = Site.create!({installation_id: installation.id, name:'Leh'})
+
     assert_difference('Installation.count',-1) do
       puts Installation.count 
       delete :destroy, id: installation.id
       assert_response :redirect
       puts Installation.count
     end
+
     assert_nil Installation.find_by_id(installation.id)
     assert_nil Site.find_by_installation_id(installation.id)
     assert_nil Site.find_by_id(site.id)

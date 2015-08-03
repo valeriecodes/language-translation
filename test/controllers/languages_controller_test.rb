@@ -2,10 +2,17 @@ require 'test_helper'
 
 class LanguagesControllerTest < ActionController::TestCase
   include Devise::TestHelpers
-  fixtures :all
+
+  tests LanguagesController
+
   setup do
-    sign_in users(:one)
-    @user = users(:one)
+    @user = create(:user)
+    @user.add_role :admin
+    sign_in @user
+  end
+
+  def teardown
+    User.delete_all
   end
 
   test "the truth" do
@@ -13,10 +20,10 @@ class LanguagesControllerTest < ActionController::TestCase
   end
 
   test "index should render correct template and layout" do
-	get :index
-	assert_template :index
-	assert_template layout: "layouts/application"
-	assert_response :redirect
+    get :index
+
+    assert_template :index
+    assert_template layout: "layouts/application"
   end
 
   test "should create language and go to its show page" do
@@ -28,19 +35,27 @@ class LanguagesControllerTest < ActionController::TestCase
 
   test "should not create language without its name" do
     assert_no_difference('Language.count') do
-        post :create, language: {}
+        post :create, language: {name: nil}
     end
   end
 
   test "should delete language along with all photos under that language" do
     language = Language.create!({name: 'Sanskrit'})
-    article = Article.create!({language_id: language.id, category: 'Weapon'})
+    category = create(:category)
+
+    article = Article.create!({
+      language_id: language.id, 
+      category_id: category.id, 
+      english: "Foods", 
+      phonetic: "Keema",
+      picture: Rack::Test::UploadedFile.new(File.join(Rails.root, 'test', 'support', 'picture', 'logo.jpg'))
+    })
+
     assert_difference('Language.count',-1) do
-      puts Language.count 
       delete :destroy, id: language.id
       assert_response :redirect
-      puts Language.count
     end
+
     assert_nil Language.find_by_id(language.id)
     assert_nil Article.find_by_language_id(language.id)
     assert_nil Article.find_by_id(article.id)

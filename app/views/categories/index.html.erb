@@ -1,0 +1,22 @@
+<h1>Listing categories</h1>
+ 
+<br />
+
+<table class="table table-striped">
+  <tr>
+    <th>Name</th>
+    <th colspan="2"></th>
+  </tr>
+ 
+  <% @categories.each do |category| %>
+    <tr>
+      <td><%= category.name %></td>
+      <td><%= link_to 'Show', category_path(category) %></td>
+      <td><%= link_to 'Edit', edit_category_path(category) %>
+      <%= link_to 'Delete', category_path(category), method: :delete, class: "btn btn-danger btn-xs", data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+</table>
+<hr/>
+
+<%= paginate @categories %>

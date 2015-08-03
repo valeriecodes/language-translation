@@ -3,12 +3,13 @@
 # Table name: languages
 #
 #  id         :integer          not null, primary key
-#  name       :string(255)
+#  name       :string
 #  created_at :datetime
 #  updated_at :datetime
 #
 
 class Language < ActiveRecord::Base
  has_many :articles, dependent: :destroy
+
  validates :name, presence: true
 end

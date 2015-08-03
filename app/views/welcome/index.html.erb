@@ -24,19 +24,16 @@
   <dt>Contact Number</dt>
   <dd><%= current_user.contact %></dd>
 
-  <dt>Role</dt>
-  <dd><%= current_user.role %></dd>
-
-  <dt>Login Approval</dt>
-  <dd><%= current_user.login_approval %></dd>
+  <% if !current_user.login_approval_at %>
+    <dd><b>You first need to be approved to use your account. Ask your administrator for an approval.</b></dd>
+  <% end %>
 </dl>
 
 <hr/>
 
 <% else %>
+
 <h3>Please login to use this application.</h3>
 <h3>If you are a new user the please sign up.</h3>
+
 <% end %>
-
-
-

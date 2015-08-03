@@ -30,11 +30,17 @@ class ApplicationController < ActionController::Base
 
   before_action :configure_devise_permitted_parameters, if: :devise_controller?
 
+  alias :authorize_user! authorize!
+
+  def access_denied(exception)
+      redirect_to root_path, alert: exception.message
+  end
+
   protected
 
   def configure_devise_permitted_parameters
-     registration_params = [:first_name, :last_name, :username, :password, :password_confirmation, :email, :location, :lang, :contact, 
-     :gender, :role, :login_approval]
+     registration_params = [:first_name, :last_name, :email,  :username, :password, :password_confirmation, :location,
+         :lang, :contact, :gender]
 
      if params[:action] == 'update'
          devise_parameter_sanitizer.for(:account_update) { |u| u.permit(registration_params << :current_password)}
@@ -49,5 +55,3 @@ end
 
 # flash messages/errors are present in config/locals/devise.en.yml
 # authentification criteria, password length, etc. is present in config/initialisers/devise.rb
-
-
