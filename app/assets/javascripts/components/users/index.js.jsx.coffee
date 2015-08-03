@@ -56,9 +56,9 @@
     userNodes = @props.users.map((user) ->
       organization = organizations[user.organization_id - 1]
       role =
-        if (admins.indexOf(user.id) > -1) then 'Admin'
-        else if (volunteers.indexOf(user.id) > -1) then 'Volunteer'
-        else if (contributors.indexOf(user.id) > -1) then 'Contributor'
+        if (user.id in admins) then 'Admin'
+        else if (user.id in volunteers) then 'Volunteer'
+        else if (user.id in contributors) then 'Contributor'
         else 'Guest'
       `<UserNode key={user.id} user={user} organization={organization} role={role} onUserApproval={clickApproval}/>`)
 
@@ -82,17 +82,57 @@
 
 
 @UserNode = React.createClass
+  getInitialState: ->
+    showModal: false
+  closeModal: ->
+    @setState({ showModal: false })
+  openModal: ->
+    @setState({ showModal: true })
   handleApproval: ->
+    @closeModal()
     user = @props.user
     if user.login_approval_at
       @props.onUserApproval({user_id: user.id, action: 'disapprove'})
     else
       @props.onUserApproval({user_id: user.id, action: 'approve'})
   render: ->
+    modal_message =
+      if @props.user.login_approval_at
+        "Are you sure that you want to disapprove '" + @props.user.username + "' from signing in?"
+      else
+        "Are you sure that you want to approve '" + @props.user.username + "' to sign in?"
+    modal =
+      `<Modal show={this.state.showModal} onHide={this.closeModal}>
+        <Modal.Header closeButton>
+          Are you sure?
+        </Modal.Header>
+        <Modal.Body>
+          {modal_message}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={this.closeModal}>No</Button>
+          <Button onClick={this.handleApproval} bsStyle='primary'>Yes</Button>
+        </Modal.Footer>
+      </Modal>`
+
     login_approval =
       if @props.user.login_approval_at
-      then  `<div>{this.props.user.login_approval_at.slice(0,10)}<button onClick={this.handleApproval} className='btn btn-default'><span className='glyphicon glyphicon-remove' /></button></div>`
-      else `<div>Waiting<button onClick={this.handleApproval} className='btn btn-default'><span className='glyphicon glyphicon-ok' /></button></div>`
+        `<div>
+          {this.props.user.login_approval_at.slice(0,10)}
+          <button onClick={this.openModal} className='btn btn-default'>
+            <span className='glyphicon glyphicon-remove' />
+          </button>
+          {modal}
+        </div>`
+      else
+        `<div>
+          Waiting
+          <button onClick={this.openModal} className='btn btn-default'>
+            <span className='glyphicon glyphicon-ok' />
+          </button>
+          {modal}
+        </div>`
+
     show_url = "members/" + @props.user.id
 
     `<tr>
