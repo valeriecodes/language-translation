@@ -1,30 +1,22 @@
-class Role
-  attr_accessor :id
+# == Schema Information
+#
+# Table name: roles
+#
+#  id            :integer          not null, primary key
+#  name          :string
+#  resource_id   :integer
+#  resource_type :string
+#  created_at    :datetime
+#  updated_at    :datetime
+#
 
-  ROLES = {1 => :admin, 2 => :volunteer, 3 => :contributor, 4 => :guest, 5 => :anon}
+class Role < ActiveRecord::Base
+  has_and_belongs_to_many :users, :join_table => :users_roles
+  belongs_to :resource, :polymorphic => true
 
-  ROLES.each do |id, name|
-    class_eval <<-"end_eval", __FILE__, __LINE__
-      def #{name}?
-        self.id == #{id}
-      end
+  validates :resource_type,
+            :inclusion => { :in => Rolify.resource_types },
+            :allow_nil => true
 
-      def self.#{name}_id
-        #{id}
-      end
-    end_eval
-  end
-
-  def initialize(role)
-    if role.is_a?(Integer)
-      @id = role
-    else
-      @id = ROLES.select {|id, name| name == role}.keys.first
-    end
-  end
-
-  def name
-    ROLES[self.id]
-  end
-
+  scopify
 end

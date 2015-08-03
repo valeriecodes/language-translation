@@ -7,19 +7,26 @@
 #  phonetic    :text
 #  created_at  :datetime
 #  updated_at  :datetime
-#  category    :string(255)
-#  picture     :string(255)
+#  picture     :string
 #  language_id :integer
 #  tsv_data    :tsvector
+#  category_id :integer
+#  state       :string           default("draft")
 #
 
 class Article < ActiveRecord::Base
   include PgSearch
+  include AASM
 
   belongs_to :language
+  belongs_to :category
+
   default_scope -> { order('created_at DESC') }
 
   mount_uploader :picture, PictureUploader
+  
+  #validates_presence_of :picture
+  validates :picture, presence: true
 
   # Search 
   pg_search_scope :article_search,
@@ -32,5 +39,18 @@ class Article < ActiveRecord::Base
         tsvector_column: 'tsv_data'
       }
     }
+
+  aasm column: :state do
+    state :draft, initial: true
+    state :published
+
+    event :publish do
+      transitions from: :draft, to: :published
+    end
+
+    event :unpublish do
+      transitions from: :published, to: :draft
+    end
+  end  
 
 end

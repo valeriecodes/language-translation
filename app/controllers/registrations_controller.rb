@@ -21,6 +21,15 @@ class RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  def regenerate_api_key
+    current_user.reset_authentication_token!
+    current_user.reload
+
+    respond_with(current_user) do |format|
+      format.html { redirect_to edit_user_registration_path }
+    end
+  end
+
   private
 
   # check if we need password to update user data

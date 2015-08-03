@@ -10,7 +10,11 @@ class InstallationsController < ApplicationController
  end
 
  def index
-   @installations = Installation.all
+   if current_user.has_role? :superadmin
+     @installations = Installation.all.page(params[:page]).per(20)
+   else
+     @installations = current_user.organization.installations.page(params[:page]).per(20)
+   end
  end
 
  def show
@@ -36,6 +40,7 @@ class InstallationsController < ApplicationController
 
  def create
      @installation = Installation.new(installation_params)
+     @installation.organization_id = current_user.organization.id
 	 
      if @installation.save
         redirect_to @installation
@@ -46,6 +51,6 @@ class InstallationsController < ApplicationController
 
  private
    def installation_params
-       params.require(:installation).permit(:installation, :email, :address, :contact)
+       params.require(:installation).permit(:installation, :email, :address, :contact, :organization_id)
    end
 end

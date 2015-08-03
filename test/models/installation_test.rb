@@ -2,13 +2,14 @@
 #
 # Table name: installations
 #
-#  id           :integer          not null, primary key
-#  installation :string(255)
-#  email        :string(255)
-#  address      :text
-#  contact      :string(255)
-#  created_at   :datetime
-#  updated_at   :datetime
+#  id              :integer          not null, primary key
+#  installation    :string
+#  email           :string
+#  address         :text
+#  contact         :string
+#  created_at      :datetime
+#  updated_at      :datetime
+#  organization_id :integer
 #
 
 require 'test_helper'

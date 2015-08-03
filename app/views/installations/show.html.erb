@@ -1,11 +1,15 @@
-
-<% if current_user.login_approval == 'Yes' %>
-<% if current_user.role == 'Admin' %>
 <h1>Saved post contact information</h1>
+
+<p>
+  <strong>Organization:</strong>
+  <%= @installation.organization.name %>
+</p>
+
 <p>
   <strong>Post:</strong>
   <%= @installation.installation %>
 </p>
+
 <p>
   <strong>Email Id:</strong>
   <%= @installation.email %>
@@ -21,14 +25,16 @@
   <%= @installation.contact %>
 </p>
 
-<p><strong>Sites:</strong><ol>
-<% @installation.sites.each do |site| %>
-  <li>
-          <%= site.name %>
-  </li>	     
-<% end %></ol></p>
+<p>
+  <strong>Sites:</strong>
+  <ol>
+    <% @installation.sites.each do |site| %>
+    <li>
+      <%= site.name %>
+    </li>	     
+    <% end %>
+  </ol>
+</p>
 
 <%= link_to 'Back', installations_path %>
 <%= link_to 'Edit', edit_installation_path(@installation) %>
-<% end %>
-<% end %>

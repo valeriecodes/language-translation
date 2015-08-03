@@ -5,10 +5,12 @@ class UsersController < ApplicationController
 
   def index
     if params[:q].blank?
-      @users = User.accessible_by(current_ability).paginate(page: params[:page], per_page: 20)
+      @users = User.accessible_by(current_ability).page(params[:page]).per(20)
     else
-      @users = User.accessible_by(current_ability).user_search(params[:q]).paginate(page: params[:page], per_page: 20)
+      @users = User.accessible_by(current_ability).user_search(params[:q]).page(params[:page]).per(20)
     end
+
+    @pagination = { current_page: @users.current_page, total_pages: @users.total_pages }
   end
 
   def new
@@ -44,10 +46,60 @@ class UsersController < ApplicationController
       render 'edit'
     end
   end
+
+  #Called from Users Index: app/assets/javascripts/components/users/index.js.jsx.coffee
+  def approve_user
+    @user = User.find(params[:user_id])
+    @user.login_approval_at = Time.now
+    respond_to do |format|
+      if @user.save
+        format.json { render json: User.accessible_by(current_ability), status: :ok }
+      else
+        format.json { render json: @user.errors, status: :unprocessable_entity}
+      end
+    end
+  end
+
+  def disapprove_user
+    @user = User.find(params[:user_id])
+    @user.login_approval_at = nil
+    respond_to do |format|
+      if @user.save
+        format.json { render json: User.accessible_by(current_ability), status: :ok }
+      else
+        format.json { render json: @user.errors, status: :unprocessable_entity}
+      end
+    end
+  end
+
+  #Called from Users Show: app/assets/javascripts/components/users/show.js.jsx.coffee
+  def grant_admin
+    @user = User.find(params[:user_id])
+    @user.add_role :admin
+    respond_to do |format|
+      if @user.save
+        format.json { render json: @user.roles.map{|a| a.name}, status: :ok }
+      else
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def revoke_admin
+    @user = User.find(params[:user_id])
+    @user.remove_role :admin
+    respond_to do |format|
+      if @user.save
+        format.json { render json: @user.roles.map{|a| a.name}, status: :ok }
+      else
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
+  end
  
   private
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :username, :location, :lang, :contact, :gender, :role, :login_approval)
+    params.require(:user).permit(:first_name, :last_name, :email, :username, :location, :lang, :contact, :gender, :organization_id)
   end
 
   def set_user

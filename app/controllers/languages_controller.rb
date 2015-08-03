@@ -1,13 +1,13 @@
 class LanguagesController < ApplicationController
- load_and_authorize_resource
+  load_and_authorize_resource
 
- def new
-   @language = Language.new
- end
+  def new
+    @language = Language.new
+  end
 
- def index
-  @languages = Language.all
- end
+  def index
+    @languages = Language.page(params[:page]).per(20)
+  end
 
  def create
   @language = Language.new(language_params)
