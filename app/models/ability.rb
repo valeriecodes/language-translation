@@ -13,6 +13,7 @@ class Ability
 
     elsif user.has_role? :admin
       can :manage, [Language, Category, Article]
+      can :create, [User]
       can :manage, [Installation, User],
           organization_id: @user.organization.id
       can :manage, Site,

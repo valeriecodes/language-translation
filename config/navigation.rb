@@ -5,7 +5,10 @@ SimpleNavigation::Configuration.run do |navigation|
   # Define the primary navigation
   navigation.items do |primary|
     if current_user and current_user.has_any_role? :superadmin, :admin, {name: :volunteer, resource: :any}
-      primary.item :users, 'Members', users_path, highlights_on: :subpath
+      primary.item :users, 'Members', users_path, highlights_on: :subpath do |sub|
+        sub.dom_class = 'nav nav-pills'
+        sub.item :user, 'Invite Member', new_user_path
+      end
     end
 
     if current_user and current_user.has_any_role? :superadmin, :admin

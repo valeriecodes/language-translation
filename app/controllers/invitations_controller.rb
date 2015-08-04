@@ -2,7 +2,7 @@ class InvitationsController < Devise::InvitationsController
 
   private
   def invite_params
-    params.require(resource_name).permit(:email, :first_name, :last_name, :role_id)
+    params.require(resource_name).permit(:email, :first_name, :last_name)
   end
 
   def update_resource_params

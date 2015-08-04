@@ -18,13 +18,17 @@ class UsersController < ApplicationController
   end
 
   def create
-   @user = User.new(user_params)
+    @user = User.new(user_params)
 
-   if @user.save
-    redirect_to @user
-   else
-    render 'new'
-   end
+    respond_to do |format|
+      if @user.save
+        @user.invite!(current_user)
+
+        format.html { redirect_to @user }
+      else
+        format.html { render 'new' }
+      end
+    end
   end
 
   def edit

@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-md-12">
 
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {method: :put, class: "form-horizontal" }) do |f| %>
+  <%= form_for(resource, as: resource_name, url: update_user_registration_path, html: {method: :put, class: "form-horizontal" }) do |f| %>
     <fieldset>
     <legend>Edit <%= resource_name.to_s.humanize %> Profile</legend>
     <%= devise_error_messages! %>
@@ -135,7 +135,7 @@
     </div>
     </fieldset>
 
-    <span class="help-inline"><%= link_to "Regenerate", users_regenerate_api_key_path, method: :post %></span>
+    <span class="help-inline"><%= link_to "Regenerate", regenerate_api_key_path, method: :post %></span>
     </ul>
   </div>
 
