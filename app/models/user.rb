@@ -37,6 +37,10 @@
 #
 
 class User < ActiveRecord::Base
+  attr_accessor :accepte_invitation
+
+  GENGER={male: "Male", female: "Female"}
+
   rolify
   include PgSearch
 
@@ -48,8 +52,10 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :token_authenticatable, :invitable
 
   default_scope -> { order('created_at DESC') }
+
   validates_uniqueness_of :username
-  validates_confirmation_of :password, length: { in: 6..20 }
+
+  # validates_confirmation_of :password, length: { in: 6..20 }
 
   validates_presence_of :username, :email, :first_name, :last_name, :organization_id
 

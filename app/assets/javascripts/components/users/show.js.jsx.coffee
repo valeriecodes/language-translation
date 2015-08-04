@@ -50,6 +50,9 @@
         <dt>Name</dt>
         <dd>{user.first_name} {user.last_name}</dd>
 
+        <dt>Username</dt>
+        <dd>{user.username}</dd>
+
         <dt>Email</dt>
         <dd>{user.email}</dd>
 
@@ -61,6 +64,9 @@
 
         <dt>Contact Number</dt>
         <dd>{user.contact}</dd>
+
+        <dt>Gender</dt>
+        <dd>{user.gender}</dd>
       </dl>
       <p className="text-center"><strong>{login_approval_message}</strong></p>
       <ToggleAdminButton current_user_roles={current_user_roles} user={user} user_roles={user_roles} onToggleAdmin={clickToggle} />

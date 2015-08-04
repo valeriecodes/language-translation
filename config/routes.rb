@@ -24,19 +24,16 @@ Rails.application.routes.draw do
     get     :activate,          to: "devise/confirmations#new",    as: :new_user_confirmation
     get     :confirmation,      to: "devise/confirmations#show"
 
-    get     :accept_invitation, to: "invitations#edit",     as: :accept_user_invitation
-    put     :accept_invitation, to: "invitations#update"
-
-    # post    :invitation,        to: "invitations#create",   as: :user_invitation
-    # get     :invitation,        to: "invitations#new",      as: :new_user_invitation
+    get     :accept_invitation, to: "devise/invitations#edit",     as: :user_invitation
+    put     :accept_invitation, to: "devise/invitations#update"
   end
 
   resources :users, path: :members do 
     collection do
-      post :approve,        to: :approve_user
-      post :disapprove,     to: :disapprove_user
-      post :grant_admin,    to: :grant_admin
-      post :revoke_admin,   to: :revoke_admin
+      post :approve,        action: :approve_user
+      post :disapprove,     action: :disapprove_user
+      post :grant_admin,    action: :grant_admin
+      post :revoke_admin,   action: :revoke_admin
     end
   end
 

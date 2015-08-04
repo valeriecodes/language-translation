@@ -22,9 +22,9 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        @user.invite!(current_user)
-
-        format.html { redirect_to @user }
+         @user.invite!(current_user) if params[:user][:accepte_invitation] == "0"
+         
+        format.html { redirect_to users_path }
       else
         format.html { render 'new' }
       end
@@ -103,7 +103,7 @@ class UsersController < ApplicationController
  
   private
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :username, :location, :lang, :contact, :gender, :organization_id)
+    params.require(:user).permit(:first_name, :last_name, :email, :username, :location, :lang, :contact, :gender, :organization_id, :accepte_invitation,:password)
   end
 
   def set_user
