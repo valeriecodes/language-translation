@@ -61,8 +61,10 @@ gem 'active_model_serializers'
 gem 'kaminari'
 
 gem 'simple-navigation'
-#AASM - State machines for Ruby classes
+# AASM - State machines for Ruby classes
 gem 'aasm'
+# A lightweight Sass tool set
+gem 'bourbon'
 
 group :test, :development do
   # Adds MiniTest as the default testing library in Rails 3 and 4
