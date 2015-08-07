@@ -25,13 +25,11 @@ $icon-more_copy: "\e618";
 
 
 @font-face {
-  font-family: icons;
+  font-family: 'vgo';
   src: url(/assets/icons/icons.eot);
-  src: url(/assets/icons/icons.eot?#iefix) format('embedded-opentype'),
-    url(/assets/icons/icons.woff2) format('woff2'),
+  src: url(/assets/icons/icons.woff2) format('woff2'),
     url(/assets/icons/icons.woff) format('woff'),
-    url(/assets/icons/icons.ttf) format('truetype'),
-    url(/assets/icons/icons.svg?#icons) format('svg');
+    url(/assets/icons/icons.ttf) format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -148,7 +146,7 @@ $icon-more_copy: "\e618";
 
 
 .icon-action:before {
-  content: "\e618";
+  content: "\e60f";
 }
 
 .AppControls-filter {
