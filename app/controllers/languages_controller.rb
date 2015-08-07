@@ -9,6 +9,12 @@ class LanguagesController < ApplicationController
     @languages = Language.page(params[:page]).per(20)
   end
 
+  def show
+    respond_to do |format|
+      format.html { render nothing: true }
+    end
+  end
+
  def create
   @language = Language.new(language_params)
  

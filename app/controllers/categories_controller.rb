@@ -11,6 +11,12 @@ class CategoriesController < ApplicationController
     respond_with(@categories)
   end
 
+  def show
+    respond_with(@product) do |format|
+      format.html { render nothing: true }
+    end
+  end
+
   def new
     @category = Category.new
 
