@@ -2,6 +2,11 @@ class SitesController < ApplicationController
   load_and_authorize_resource
 
   def new
+    if current_user.has_role? :superadmin
+      @installations = Installation.all
+    else
+      @installations = current_user.organization.installations
+    end
     @site = Site.new
   end
 
@@ -18,6 +23,11 @@ class SitesController < ApplicationController
     if @site.save
       redirect_to @site
     else
+      if current_user.has_role? :superadmin
+        @installations = Installation.all
+      else
+        @installations = current_user.organization.installations
+      end
       render 'new'
     end
   end

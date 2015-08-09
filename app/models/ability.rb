@@ -15,6 +15,7 @@ class Ability
       can :manage, [Language, Category, Article]
       can :manage, [Installation, User],
           organization_id: @user.organization.id
+      can :new, Site
       can :manage, Site,
           installation_id: @user.organization.installations.map { |a| a.id }
 
