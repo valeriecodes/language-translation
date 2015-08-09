@@ -5,7 +5,7 @@
     <%= render partial: "shared/error_messages", object: @site %>
 
     <div class="form-group">
-      <%= f.label :country_id, "Post", class: "control-label col-sm-3" %>
+      <%= f.label :country_id, "Country", class: "control-label col-sm-3" %>
       <div class="col-sm-3">
         <%= f.collection_select(:country_id, @countries, :id, :name)  %>
       </div>

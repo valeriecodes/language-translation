@@ -1,7 +1,7 @@
 @SitesShowBox = React.createClass
   getInitialState: ->
     site: @props.site
-    post: @props.post
+    country: @props.country
     volunteers: @props.volunteers
     contributors: @props.contributors
     alertVisible: false
@@ -72,7 +72,7 @@
         </Alert>`
 
     `<div className="SitesShowBox">
-      <h1>{this.state.site.name} <span className="h4">{this.state.post.name}</span></h1>
+      <h1>{this.state.site.name} <span className="h4">{this.state.country.name}</span></h1>
       <br/>
       {alert}
       <VolunteersList data={this.state.volunteers} onRoleAddition={this.handleVolunteerAddition} onRoleRemoval={this.handleRoleRemoval}/>

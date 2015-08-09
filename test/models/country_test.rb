@@ -21,7 +21,7 @@ class CountryTest < ActiveSupport::TestCase
 
    test "should not save country without its field name" do
      country = Country.new
-     assert_not country.save, "Saved the post without its name"
+     assert_not country.save, "Saved the country without its name"
    end
 
 end

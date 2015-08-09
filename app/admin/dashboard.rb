@@ -25,7 +25,7 @@ ActiveAdmin.register_page "Dashboard" do
         panel "Sites" do
           Site.unscoped.order("country_id").map do |site|
             country_name = Country.find(site.country_id).name
-            li link_to(site.name + " (" + country_name + ")", admin_post_path(site))
+            li link_to(site.name + " (" + country_name + ")", admin_site_path(site))
           end
         end
       end
