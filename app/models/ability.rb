@@ -25,7 +25,7 @@ class Ability
     elsif user.has_role? :volunteer, :any
       #Volunteers all belong to an Organization as well as a Site. They can only read Languages and Categories, but they can
       # manage Articles. They can also read other users, but they are only allowed to manage the contributors that belong
-      # to the same organization. They do not have access to other Installations, but they can read and update Sites.
+      # to the same organization. They do not have access to other Installations, but they can read and update the Site they belong to.
       can :read, [Language, Category]
       can :manage, [Article]
       can :read, User,
@@ -34,7 +34,7 @@ class Ability
           organization_id: @user.organization.id,
           id: User.with_any_role({name: :contributor, resource: :any}, :guest).map { |a| a.id }
       can [:read, :update], Site,
-          installation_id: @user.organization.installations.map { |a| a.id }
+          id: Site.with_role(:volunteer, @user).map { |a| a.id }
 
     elsif user.has_role? :contributor, :any
       #Contributors all belong to an Organization as well as a Site. They can only read, create, and update Articles
