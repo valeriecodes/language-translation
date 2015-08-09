@@ -12,8 +12,16 @@
 #  organization_id :integer
 #
 
-class Installation < ActiveRecord::Base
- belongs_to :organization
- has_many :sites, dependent: :destroy
- validates_presence_of :installation, :organization_id
+require 'test_helper'
+
+class CountryTest < ActiveSupport::TestCase
+   test "the truth" do
+     assert true
+   end
+
+   test "should not save country without its field name" do
+     country = Country.new
+     assert_not country.save, "Saved the post without its name"
+   end
+
 end

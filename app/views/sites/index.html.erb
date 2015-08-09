@@ -11,7 +11,7 @@
  
   <% @sites.each do |site| %>
     <tr>
-      <td><%= site.installation.installation if site.installation %></td>
+      <td><%= site.country.name if site.country %></td>
       <td><%= site.name %></td>
       <td><%= link_to 'Show', site_path(site) %></td>
       <td><%= link_to 'Edit', edit_site_path(site) %>

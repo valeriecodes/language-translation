@@ -11,8 +11,8 @@ class UserFlowsTest < ActionDispatch::IntegrationTest
     assert_routing '/articles/1', {controller: "articles", action: "show", id: "1"}
   end
 
-  test "should route to installation" do
-    assert_routing '/installations/1', {controller: "installations", action: "show", id: "1"}
+  test "should route to country" do
+    assert_routing '/countries/1', {controller: "countries", action: "show", id: "1"}
   end
 
   test "should route to site" do

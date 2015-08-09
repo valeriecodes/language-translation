@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
   resources :organizations
 
-  resources :installations do
+  resources :countries do
     resources :sites
   end
 
@@ -40,7 +40,7 @@ Rails.application.routes.draw do
   namespace :api do
     resources :users
     resources :articles
-    resources :installations
+    resources :countries
     resources :categories
     resources :languages
   end

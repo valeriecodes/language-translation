@@ -72,7 +72,7 @@
         </Alert>`
 
     `<div className="SitesShowBox">
-      <h1>{this.state.site.name} <span className="h4">{this.state.post.installation}</span></h1>
+      <h1>{this.state.site.name} <span className="h4">{this.state.post.name}</span></h1>
       <br/>
       {alert}
       <VolunteersList data={this.state.volunteers} onRoleAddition={this.handleVolunteerAddition} onRoleRemoval={this.handleRoleRemoval}/>

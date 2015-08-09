@@ -20,9 +20,9 @@ SimpleNavigation::Configuration.run do |navigation|
     end
 
     if current_user and current_user.has_any_role? :superadmin, :admin
-      primary.item :posts, "Posts", installations_path, highlights_on: :subpath do |sub|
+      primary.item :countries, "Countries", countries_path, highlights_on: :subpath do |sub|
         sub.dom_class = 'nav nav-pills'
-        sub.item :new_post, 'New post', new_installation_path
+        sub.item :countries, 'New country', new_country_path
       end
     end
 
@@ -45,7 +45,7 @@ SimpleNavigation::Configuration.run do |navigation|
     end
 
     if current_user and current_user.has_any_role? :superadmin, :admin, {name: :volunteer, resource: :any}
-      primary.item :category, "Category", categories_path, highlights_on: :subpath do |sub|
+      primary.item :categories, "Categories", categories_path, highlights_on: :subpath do |sub|
         sub.dom_class = 'nav nav-pills'
         sub.item :new_category, 'New Category', new_category_path
       end
