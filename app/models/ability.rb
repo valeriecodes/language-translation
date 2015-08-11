@@ -14,8 +14,11 @@ class Ability
 
     elsif user.has_role? :admin
       #Admins all belong to an organization. They can manage Languages, Categories and Articles freely,
-      # but they can only manage the Installations, Sites, and Users that belong to their own organization.
+      # but they can only manage the Installations, Sites, and Users that belong to their own organization
+      # as well as read and update the organization they belong to.
       can :manage, [Language, Category, Article]
+      can [:read, :update], Organization,
+          id: @user.organization.id
       can :manage, [Installation, User],
           organization_id: @user.organization.id
       can :new, Site

@@ -8,6 +8,17 @@ SimpleNavigation::Configuration.run do |navigation|
       primary.item :users, 'Members', users_path, highlights_on: :subpath
     end
 
+    if current_user and current_user.has_role? :superadmin
+      primary.item :organizations, "Organizations", organizations_path, highlights_on: :subpath do |sub|
+        sub.dom_class = 'nav nav-pills'
+        sub.item :new_organization, 'New Organization', new_organization_path
+      end
+    end
+
+    if current_user and current_user.has_role? :admin
+      primary.item :organization, "My Organization", organization_path(current_user.organization)
+    end
+
     if current_user and current_user.has_any_role? :superadmin, :admin
       primary.item :posts, "Posts", installations_path, highlights_on: :subpath do |sub|
         sub.dom_class = 'nav nav-pills'
