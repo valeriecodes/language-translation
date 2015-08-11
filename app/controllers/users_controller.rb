@@ -14,7 +14,7 @@ class UsersController < ApplicationController
   end
 
   def new
-   @user = User.new
+    @user = User.new
   end
 
   def create
@@ -22,7 +22,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-         @user.invite!(current_user) if params[:user][:accepte_invitation] == "0"
+        @user.invite!(current_user) if params[:user][:accept_invitation] == "0"
          
         format.html { redirect_to users_path }
       else
@@ -35,9 +35,9 @@ class UsersController < ApplicationController
   end
 
   def destroy
-   @user.destroy
+    @user.destroy
 
-   redirect_to users_path
+    redirect_to users_path
   end
 
   def show
@@ -103,7 +103,7 @@ class UsersController < ApplicationController
  
   private
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :username, :location, :lang, :contact, :gender, :organization_id, :accepte_invitation,:password)
+    params.require(:user).permit(:first_name, :last_name, :email, :username, :location, :lang, :contact, :gender, :organization_id, :accept_invitation, :password)
   end
 
   def set_user

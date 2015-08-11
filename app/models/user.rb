@@ -37,7 +37,7 @@
 #
 
 class User < ActiveRecord::Base
-  attr_accessor :accepte_invitation
+  attr_accessor :accept_invitation
 
   GENGER={male: "Male", female: "Female"}
 
@@ -48,16 +48,14 @@ class User < ActiveRecord::Base
   
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  devise :database_authenticatable, :registerable, :validatable,
          :recoverable, :rememberable, :trackable, :token_authenticatable, :invitable
 
   default_scope -> { order('created_at DESC') }
 
   validates_uniqueness_of :username
 
-  # validates_confirmation_of :password, length: { in: 6..20 }
-
-  validates_presence_of :username, :email, :first_name, :last_name, :organization_id
+  validates_presence_of :username, :first_name, :last_name, :organization_id
 
   before_save :ensure_authentication_token
 
