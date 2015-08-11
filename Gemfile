@@ -3,9 +3,9 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails' , '4.2.1'
 # Use PostgreSQL as the database for Active Record
-gem "pg"
+gem 'pg'
 # pg_search builds ActiveRecord named scopes that take advantage of PostgreSQL's full text search
-gem 'pg_search', '~> 0.7.9'
+gem 'pg_search'
 
 gem 'carrierwave'
 # Use SCSS for stylesheets
@@ -51,24 +51,24 @@ gem 'devise', '~> 3.5.0'
 # An invitation strategy for devise
 gem 'devise_invitable', '~> 1.5.0'
 # Token Authenticatable module of devise. 
-gem 'devise-token_authenticatable', "~> 0.4.0"
+gem 'devise-token_authenticatable', '~> 0.4.0'
 
 # Provides a way to specify default values for ActiveRecord models
-gem 'default_value_for', '3.0.1'
+gem 'default_value_for', '~> 3.0.0'
 # ActiveModel::Serializer implementation and Rails hooks
-gem 'active_model_serializers', '0.8.3'
+gem 'active_model_serializers'
 # A Scope & Engine based, clean, powerful, customizable and sophisticated paginator for Rails
-gem 'kaminari', "~> 0.16.3"
+gem 'kaminari'
 
 gem 'simple-navigation'
 #AASM - State machines for Ruby classes
 gem 'aasm'
 
 group :test, :development do
-  gem 'minitest', '~> 5.7.0'                 # Complete test suite
-  gem 'minitest-rails', '~> 2.2.0'           # Adds MiniTest as the default testing library in Rails 3 and 4
-  gem "webrat", "0.7.3", require: false
-  gem "mocha", "~> 1.1", require: false
+  # Adds MiniTest as the default testing library in Rails 3 and 4
+  gem 'minitest-rails'
+  gem 'webrat', require: false
+  gem 'mocha', require: false
   gem 'quiet_assets'
 
   # Show coverage informations directly
@@ -81,7 +81,7 @@ group :test, :development do
   gem 'web-console', '~> 2.0'
 
   gem 'annotate'                              # Annotates Rails/ActiveRecord Models, routes, fixtures based on schema
-  gem "rails-erd"
+  gem 'rails-erd'
   gem 'factory_girl_rails'                    # Is a fixtures replacement with a straightforward definition syntax
   gem 'git'
 end
