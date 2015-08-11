@@ -1,0 +1,30 @@
+<h1>Country information</h1>
+
+<p>
+    <strong>Organization:</strong>
+    <%= @country.organization.name %>
+</p>
+
+<p>
+    <strong>Name:</strong>
+    <%= @country.name %>
+</p>
+
+<p>
+    <strong>Manager:</strong>
+    <%= link_to @country.user.username, user_path(@country.user) if @country.user %>
+</p>
+
+<p>
+    <strong>Sites:</strong>
+    <ol>
+        <% @country.sites.each do |site| %>
+            <li>
+                <%= site.name %>
+            </li>
+        <% end %>
+    </ol>
+</p>
+
+<%= link_to 'Back', countries_path %>
+<%= link_to 'Edit', edit_country_path(@country) %>

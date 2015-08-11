@@ -11,12 +11,10 @@ FactoryGirl.define do
     name                      "Pet"
   end
 
-  factory :installation do
+  factory :country do
     organization
-    installation              "Location"
-    sequence(:email)          { |n| "location_user_#{n}@gmail.com" }
-    address                   "Location address"
-    contact                   "9900 0000 00"
+    user
+    name                      "Location"
   end
 
   factory :language do
@@ -28,7 +26,7 @@ FactoryGirl.define do
   end
 
   factory :site do
-    installation
+    country
     name                      "Site Name"
   end
 

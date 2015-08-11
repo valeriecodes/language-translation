@@ -14,21 +14,21 @@ class Ability
 
     elsif user.has_role? :admin
       #Admins all belong to an organization. They can manage Languages, Categories and Articles freely,
-      # but they can only manage the Installations, Sites, and Users that belong to their own organization
+      # but they can only manage the Countries, Sites, and Users that belong to their own organization
       # as well as read and update the organization they belong to.
       can :manage, [Language, Category, Article]
       can [:read, :update], Organization,
           id: @user.organization.id
-      can :manage, [Installation, User],
+      can :manage, [Country, User],
           organization_id: @user.organization.id
       can :new, Site
       can :manage, Site,
-          installation_id: @user.organization.installations.map { |a| a.id }
+          country_id: @user.organization.countries.map { |a| a.id }
 
     elsif user.has_role? :volunteer, :any
       #Volunteers all belong to an Organization as well as a Site. They can only read Languages and Categories, but they can
       # manage Articles. They can also read other users, but they are only allowed to manage the contributors that belong
-      # to the same organization. They do not have access to other Installations, but they can read and update the Site they belong to.
+      # to the same organization. They do not have access to other Countries, but they can read and update the Site they belong to.
       can :read, [Language, Category]
       can :manage, [Article]
       can :read, User,

@@ -3,15 +3,15 @@ class SitesController < ApplicationController
 
   def new
     if current_user.has_role? :superadmin
-      @installations = Installation.all
+      @countries = Country.all
     else
-      @installations = current_user.organization.installations
+      @countries = current_user.organization.countries
     end
     @site = Site.new
   end
 
   def index
-    current_user.organization.installations.each do |a|
+    current_user.organization.countries.each do |a|
       @sites << a.sites
     end
     @sites = @sites.page(params[:page]).per(20)
@@ -24,9 +24,9 @@ class SitesController < ApplicationController
       redirect_to @site
     else
       if current_user.has_role? :superadmin
-        @installations = Installation.all
+        @countries = Country.all
       else
-        @installations = current_user.organization.installations
+        @countries = current_user.organization.countries
       end
       render 'new'
     end
@@ -109,7 +109,7 @@ class SitesController < ApplicationController
 
   private
   def site_params
-    params.require(:site).permit(:name, :installation_id)
+    params.require(:site).permit(:name, :country_id)
   end
 
 end

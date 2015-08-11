@@ -14,14 +14,14 @@
 
 require 'test_helper'
 
-class InstallationTest < ActiveSupport::TestCase
+class CountryTest < ActiveSupport::TestCase
    test "the truth" do
      assert true
    end
 
-   test "should not save installation without its field installation" do
-     installation = Installation.new
-     assert_not installation.save, "Saved the post without its name"
+   test "should not save country without its field name" do
+     country = Country.new
+     assert_not country.save, "Saved the country without its name"
    end
 
 end
