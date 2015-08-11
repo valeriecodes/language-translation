@@ -20,7 +20,6 @@
 //= require plugins/paginator
 //= require components
 //= require underscore
-//= require_tree .
 
 $(function() {
 		  if ($("#articles").length > 0) {

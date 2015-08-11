@@ -28,7 +28,7 @@ class CategoriesControllerTest < ActionController::TestCase
 
     assert_equal "Books", assigns(:category).name
     assert_equal "Category successfully created.", flash[:notice]
-    assert_redirected_to category_path(assigns(:category))
+    assert_redirected_to edit_category_path(assigns(:category))
   end
 
   test "should not create a category without name" do
@@ -45,7 +45,7 @@ class CategoriesControllerTest < ActionController::TestCase
 
     assert_equal "Cars", assigns(:category).name
     assert_equal "Category successfully updated.", flash[:notice]
-    assert_redirected_to category_path(assigns(:category))
+    assert_redirected_to edit_category_path(assigns(:category))
   end
 
   test "should not update without category name" do
