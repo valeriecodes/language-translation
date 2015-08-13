@@ -1,4 +1,6 @@
 class RegistrationsController < Devise::RegistrationsController
+	layout "no_user", only: [:new, :create]
+
   def update
     @user = User.find(current_user.id)
 

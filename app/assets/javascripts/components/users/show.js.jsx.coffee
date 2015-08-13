@@ -35,35 +35,62 @@
     user_roles = @state.user_roles
     organization = @state.organization
     gender = ''
+    memberEditUrl = "/members/" + @state.user.id + "/edit"
+
     login_approval_message =
       if user.login_approval_at then ''
       else 'The user first needs to be approved to use the account.'
     clickToggle = @handleAdminToggle
 
-    `<div className="UsersShowBox">
-      <h2>Contact Information</h2>
-      <br/>
-      <dl className="dl-horizontal">
-        <dt>Organization</dt>
-        <dd>{organization.name}</dd>
+    `<div>
+      <header className="app-bar promote-layer">
+       <div className="app-bar-container">
+         <button className="menu"><span className="icon-menu"></span></button>
+         
+         <div className="Heading">
+            <a href="/members/" className="Back">
+              <span className="icon-chevron-left-thin"></span><span className="Back-text">Back</span>
+            </a>
+           <h1 className="title"><span>Member</span></h1>
+         </div>
+       </div>
+      </header>
 
-        <dt>Name</dt>
-        <dd>{user.first_name} {user.last_name}</dd>
+      <main className="UsersShowBox">
+        <div className="Form u-pushTopBottom clear">
+          <div className="g--half">
+            <h3 className="title">Member #{user.id}</h3>
 
-        <dt>Email</dt>
-        <dd>{user.email}</dd>
+            <dl className="Info">
+              <dt>Organization</dt>
+              <dd>{organization.name} <a href={memberEditUrl} className="Info-more">Edit</a></dd>
 
-        <dt>Location</dt>
-        <dd>{user.location}</dd>
+              <dt>Name</dt>
+              <dd>{user.first_name} {user.last_name}</dd>
 
-        <dt>Language</dt>
-        <dd>{user.lang}</dd>
+              <dt>Email</dt>
+              <dd>{user.email}</dd>
 
-        <dt>Contact Number</dt>
-        <dd>{user.contact}</dd>
-      </dl>
-      <p className="text-center"><strong>{login_approval_message}</strong></p>
-      <ToggleAdminButton current_user_roles={current_user_roles} user={user} user_roles={user_roles} onToggleAdmin={clickToggle} />
+              <dt>Location</dt>
+              <dd>{user.location || "N/A"}</dd>
+
+              <dt>Language</dt>
+              <dd>{user.lang || "N/A"}</dd>
+
+              <dt>Contact Number</dt>
+              <dd>{user.contact || "N/A"}</dd>
+            </dl>
+          </div>
+
+          <div className="g--half g--last">
+            <dl class="Info">
+            </dl>
+            <p className="text-center"><strong>{login_approval_message}</strong></p>
+            <ToggleAdminButton current_user_roles={current_user_roles} user={user} user_roles={user_roles} onToggleAdmin={clickToggle} />
+          </div>
+
+        </div>
+    </main>
     </div>`
 
 

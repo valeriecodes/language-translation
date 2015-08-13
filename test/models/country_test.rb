@@ -1,15 +1,13 @@
 # == Schema Information
 #
-# Table name: installations
+# Table name: countries
 #
 #  id              :integer          not null, primary key
-#  installation    :string
-#  email           :string
-#  address         :text
-#  contact         :string
+#  name            :string
 #  created_at      :datetime
 #  updated_at      :datetime
 #  organization_id :integer
+#  user_id         :integer
 #
 
 require 'test_helper'
