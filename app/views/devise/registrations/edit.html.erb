@@ -41,8 +41,6 @@
       </div>
     </div>
 
-<!-- TODO: Another method for changing roles are needed -->
-
     <div class="form-group">
       <%= f.label :gender, class: "control-label col-sm-3" %>
       <div class="col-sm-3">
@@ -58,14 +56,14 @@
     <div class="form-group">
       <%= f.label :location, class: "control-label col-sm-3" %>
       <div class="col-sm-3">
-        <%= f.collection_select(:location, Installation.all, :installation, :installation, :include_blank => "None") %>
+        <%= f.collection_select(:location, Country.all, :name, :name, :include_blank => "None") %>
       </div>
     </div>
 
     <div class="form-group">
       <%= f.label :lang, "Language Contribution", class: "control-label col-sm-3" %>
       <div class="col-sm-3">
-        <%= f.collection_select(:lang, Language.all, :name, :name, :include_blank => "All") %>
+        <%= f.collection_select(:lang, Language.all, :name, :name, :include_blank => "None") %>
       </div>
     </div>
 

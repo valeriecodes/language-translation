@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150716181235) do
+ActiveRecord::Schema.define(version: 20150804172305) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,17 +54,16 @@ ActiveRecord::Schema.define(version: 20150716181235) do
 
   add_index "categories", ["name"], name: "index_categories_on_name", using: :btree
 
-  create_table "installations", force: :cascade do |t|
-    t.string   "installation"
-    t.string   "email"
-    t.text     "address"
-    t.string   "contact"
+  create_table "countries", force: :cascade do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "organization_id"
+    t.integer  "user_id"
   end
 
-  add_index "installations", ["organization_id"], name: "index_installations_on_organization_id", using: :btree
+  add_index "countries", ["organization_id"], name: "index_countries_on_organization_id", using: :btree
+  add_index "countries", ["user_id"], name: "index_countries_on_user_id", using: :btree
 
   create_table "languages", force: :cascade do |t|
     t.string   "name"
@@ -91,12 +90,12 @@ ActiveRecord::Schema.define(version: 20150716181235) do
 
   create_table "sites", force: :cascade do |t|
     t.string   "name"
-    t.integer  "installation_id"
+    t.integer  "country_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "sites", ["installation_id"], name: "index_sites_on_installation_id", using: :btree
+  add_index "sites", ["country_id"], name: "index_sites_on_country_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -148,6 +147,7 @@ ActiveRecord::Schema.define(version: 20150716181235) do
 
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
 
-  add_foreign_key "installations", "organizations"
+  add_foreign_key "countries", "organizations"
+  add_foreign_key "countries", "users"
   add_foreign_key "users", "organizations"
 end

@@ -12,8 +12,9 @@
 #  organization_id :integer
 #
 
-class Installation < ActiveRecord::Base
- belongs_to :organization
- has_many :sites, dependent: :destroy
- validates_presence_of :installation, :organization_id
+class Country < ActiveRecord::Base
+  belongs_to :organization
+  belongs_to :user
+  has_many :sites, dependent: :destroy
+  validates_presence_of :name, :organization_id
 end

@@ -28,25 +28,25 @@
         login_approval_at: Time.now, password: 'contributor', password_confirmation: 'contributor', email: 'con@tri.butor'}
     ])
 
-    installations = Installation.create([
-        { organization: organizations.first, installation: "Kenya", email: "a@a.a", address: "Kenya", contact: "0123456789"},
-        { organization: organizations.second, installation: "Micronesia", email: "b@b.b", address: "Micronesia", contact: "1234567890"},
-        { organization: organizations.third, installation: "Haiti", email: "c@c.c", address: "Haiti", contact: "2345678901"},
-        { organization: organizations.fourth, installation: "Philippines", email: "d@d.d", address: "Philippines", contact: "3456789012"},
-        { organization: organizations.first, installation: "Nepal", email: "e@e.e", address: "Nepal", contact: "4567890123"}
+    countries = Country.create([
+        { organization: organizations.first, user: users.first, name: "Kenya"},
+        { organization: organizations.second, user: users.second, name: "Micronesia"},
+        { organization: organizations.third, name: "Haiti"},
+        { organization: organizations.fourth, name: "Philippines"},
+        { organization: organizations.first, user: users.first, name: "Nepal"}
     ])
 
     sites = Site.create([
-        { installation: installations.first, name: "Nairobi"},
-        { installation: installations.first, name: "Mombasa"},
-        { installation: installations.second, name: "Caroline Islands"},
-        { installation: installations.second, name: "Gilbert Islands"},
-        { installation: installations.third, name: "Port-au-Prince"},
-        { installation: installations.third, name: "Les Cayes"},
-        { installation: installations.fourth, name: "Manilla"},
-        { installation: installations.fourth, name: "Caloocan"},
-        { installation: installations.fifth, name: "Kathmandu"},
-        { installation: installations.fifth, name: "Pokhara"}
+        { country: countries.first, name: "Nairobi"},
+        { country: countries.first, name: "Mombasa"},
+        { country: countries.second, name: "Caroline Islands"},
+        { country: countries.second, name: "Gilbert Islands"},
+        { country: countries.third, name: "Port-au-Prince"},
+        { country: countries.third, name: "Les Cayes"},
+        { country: countries.fourth, name: "Manilla"},
+        { country: countries.fourth, name: "Caloocan"},
+        { country: countries.fifth, name: "Kathmandu"},
+        { country: countries.fifth, name: "Pokhara"}
     ])
 
     categories = Category.create([

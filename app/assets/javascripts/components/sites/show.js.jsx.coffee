@@ -1,9 +1,16 @@
 @SitesShowBox = React.createClass
   getInitialState: ->
     site: @props.site
-    post: @props.post
+    country: @props.country
     volunteers: @props.volunteers
     contributors: @props.contributors
+    alertVisible: false
+
+  handleAlertShow: ->
+    @setState({ alertVisible: true })
+  handleAlertDismiss: ->
+    @setState({ alertVisible: false })
+
   handleVolunteerAddition: (userdata) ->
     userdata.act = "volunteer"
     userdata.site_id = @state.site.id
@@ -17,6 +24,7 @@
         @setState({volunteers: data.sites}) #'data' is in form {sites: Array[n]}
       ).bind(this)
       error: ((xhr, status, err) ->
+        @handleAlertShow()
         console.error(add_role_url, status, err.toString())
       ).bind(this)
     })
@@ -33,6 +41,7 @@
         @setState({contributors: data.sites}) #'data' is in form {sites: Array[n]}
       ).bind(this)
       error: ((xhr, status, err) ->
+        @handleAlertShow()
         console.error(add_role_url, status, err.toString())
       ).bind(this)
     })
@@ -54,10 +63,18 @@
         console.error(remove_role_url, status, err.toString())
       ).bind(this)
     })
+
   render: ->
+    alert =
+      if @state.alertVisible
+        `<Alert bsStyle='danger' onDismiss={this.handleAlertDismiss}>
+          <h4>Something's wrong. Please check if you have entered the username correctly</h4>
+        </Alert>`
+
     `<div className="SitesShowBox">
-      <h1>{this.state.site.name} <span className="h4">{this.state.post.installation}</span></h1>
+      <h1>{this.state.site.name} <span className="h4">{this.state.country.name}</span></h1>
       <br/>
+      {alert}
       <VolunteersList data={this.state.volunteers} onRoleAddition={this.handleVolunteerAddition} onRoleRemoval={this.handleRoleRemoval}/>
       <ContributorsList data={this.state.contributors} onRoleAddition={this.handleContributorAddition} onRoleRemoval={this.handleRoleRemoval}/>
     </div>`

@@ -12,7 +12,7 @@
 class Site < ActiveRecord::Base
   resourcify
   default_scope -> { order('created_at DESC') }
-  belongs_to :installation
+  belongs_to :country
 
   #has_many :volunteers , dependent: :destroy
   #has_many :contributors , dependent: :destroy
