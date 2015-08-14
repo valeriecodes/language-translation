@@ -22,7 +22,7 @@
   <div class="Form u-pushTopBottom clear Form--dual">
   <div class="Form--dualDivider">
     <div class="g--half">
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {method: :put, class: "" }) do |f| %>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {method: :put, id: "_form" }) do |f| %>
 
   <%= devise_error_messages! %>
 

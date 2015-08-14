@@ -120,6 +120,9 @@ $icon-more_copy: "\e618";
 .icon-more_copy:before {
   content: "\e618";
 }
+.icon-chevron-left-thin:before {
+  content: "\e605";
+}
 
 [class^="icon-"], [class*=" icon-"] {
   font-family: 'vgo';
