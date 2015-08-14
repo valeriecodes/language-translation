@@ -17,6 +17,10 @@
   }
 }
 
+.User-content {
+  .ErrorExplanation { margin: 0 -20px 20px !important; }
+}
+
 #flash {
   position: relative;
   margin: 0 -20px 20px -20px; padding: 20px; font-size: 15px; line-height: 1;
@@ -51,11 +55,14 @@
     .Form-note {
       margin: 3px 0 0 0; padding: 0; color: #999; font-size: 13px;
     }
-    &.Form-group--error {
-      label { color: $colorRed; }
+    &.Form-group {
+      .field_with_errors {
+        label { color: $colorRed; }
+        input, textarea { border: 1px solid #D0021B !important  }
           .Form-note {
             color: $colorRed;
           }
+      }
     }
   }
   input[type="search"] {

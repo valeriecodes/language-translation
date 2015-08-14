@@ -48,6 +48,6 @@ SimpleNavigation::Configuration.run do |navigation|
       end
     end
 
-    primary.dom_class = 'nav'
+    primary.dom_class = 'nav sidebarNav'
   end
 end
