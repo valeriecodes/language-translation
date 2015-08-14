@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,9 +10,10 @@
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %> 
 </head>
-  <body>
-    <%= yield %>
-
-    <%= render "shared/header" %>
+  <body class="User">
+    <h1 class="Logo"><%= image_tag ("logo.jpg")%></h1>
+    <main>
+      <%= yield %>
+    </main>
   </body>
 </html>
