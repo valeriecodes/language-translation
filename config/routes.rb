@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
 
+  # Route config for ActiveAdmin
   ActiveAdmin.routes(self)
+  # Route config for Devise controllers
   devise_for :users, controllers: { registrations: "registrations", sessions: "sessions", passwords: "passwords"}
 
   resources :users, path: :members
+  # Routes for custom methods (for use with ReactJS)
   post "members/approve", to: "users#approve_user"
   post "members/disapprove", to: "users#disapprove_user"
   post "members/grant_admin", to: "users#grant_admin"
@@ -20,6 +23,7 @@ Rails.application.routes.draw do
   end
 
   resources :sites
+  # Routes for custom methods (for use with ReactJS)
   post "sites/add_role", to: "sites#add_role"
   post "sites/remove_role", to: "sites#remove_role"
 
@@ -44,7 +48,6 @@ Rails.application.routes.draw do
     resources :categories
     resources :languages
   end
- 
 
   # You can have the root of your site routed with "root"
   root 'welcome#index'

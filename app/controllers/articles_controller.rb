@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   include StrongParams
-  
+
   before_action :set_article, only: [:show, :edit, :update, :destroy, :publish, :unpublish]
 
   load_and_authorize_resource
@@ -22,7 +22,7 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.new(article_params)
- 
+
     if @article.save
       redirect_to @article
     else
@@ -84,8 +84,8 @@ class ArticlesController < ApplicationController
       end
     end
   end
- 
- private
+
+  private
   def set_article
     @article = Article.includes(:category, :language).find(params[:id])
   end

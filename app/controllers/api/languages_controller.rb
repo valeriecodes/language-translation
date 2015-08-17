@@ -61,7 +61,7 @@ class API::LanguagesController < API::BaseController
       end
     end
   end
- 
+
   private
   def language_params
     params.require(:language).permit(:name)

@@ -10,12 +10,11 @@
 #
 
 class Site < ActiveRecord::Base
-  resourcify
-  default_scope -> { order('created_at DESC') }
+  resourcify #This line is added to add Site model as a resource for the Rolify gem. (contributors, volunteers)
   belongs_to :country
 
-  #has_many :volunteers , dependent: :destroy
-  #has_many :contributors , dependent: :destroy
-  
   validates :name, presence: true
+
+  # default order when calling the Site model
+  default_scope -> { order('created_at DESC') }
 end

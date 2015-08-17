@@ -1,78 +1,78 @@
 <header class="app-bar promote-layer">
- <div class="app-bar-container">
-   <button class="menu"><span class="icon-menu"></span></button>
-   
-   <div class="Heading">
-     <h1 class="title"><span>Sites</span></h1>
-   </div>
- </div>
+    <div class="app-bar-container">
+        <button class="menu"><span class="icon-menu"></span></button>
+
+        <div class="Heading">
+            <h1 class="title"><span>Sites</span></h1>
+        </div>
+    </div>
 </header>
 
 <main>
-  <div class="AppControls">
-    <div class="AppControls--box AppControls-left">
-      <form class="Form Form--inline AppControls-search">
-        <div class="Form-group">
-          <input type="search" class="Form-control" id="search" placeholder="Search Sites" />
+    <div class="AppControls">
+        <div class="AppControls--box AppControls-left">
+            <form class="Form Form--inline AppControls-search">
+                <div class="Form-group">
+                    <input type="search" class="Form-control" id="search" placeholder="Search Sites" />
+                </div>
+                <button type="submit" class="btn btn-default icon-search">Search</button>
+            </form>
         </div>
-        <button type="submit" class="btn btn-default icon-search">Search</button>
-      </form>
+
+        <div class="AppControls--box AppControls-middle"></div>
+
+        <div class="AppControls--box AppControls-right">
+            <a class="button--icontext button--ricontext" href="<%= new_site_path %>"><i class="icon-plus"></i> <span>New Site</span></a>
+        </div>
     </div>
 
-    <div class="AppControls--box AppControls-middle"></div>
+    <div class="CardListTable">
+        <ul class="CardListTable-body">
 
-    <div class="AppControls--box AppControls-right">
-      <a class="button--icontext button--ricontext" href="<%= new_site_path %>"><i class="icon-plus"></i> <span>New Site</span></a>
-    </div>
-  </div>
+            <% @sites.each do |site| %>
+                <li>
+                    <ul class="CardListTableRow">
+                        <li class="CardListTable-cal u-w30px" data-th="#">
+                            <div class="CardListTable-content">
+                                <%= link_to site.id, site_path(site) %>
+                            </div>
+                        </li>
 
-  <div class="CardListTable">
-    <ul class="CardListTable-body">
+                        <li class="CardListTable-cal u-w180px" data-th="Post">
+                            <div class="CardListTable-content">
+                                <%= site.country.name if site.country %>
+                            </div>
+                        </li>
 
-    <% @sites.each do |site| %>
-      <li>
-        <ul class="CardListTableRow">
-          <li class="CardListTable-cal u-w30px" data-th="#">
-            <div class="CardListTable-content">
-              <%= link_to site.id, site_path(site) %>
-            </div>
-          </li>
+                        <li class="CardListTable-cal u-w300px" data-th="Site">
+                            <div class="CardListTable-content">
+                                <%= site.name %>
+                            </div>
+                        </li>
 
-          <li class="CardListTable-cal u-w180px" data-th="Post">
-            <div class="CardListTable-content">
-              <%= site.country.name if site.country %>
-            </div>
-          </li>
+                        <li class="CardListTable-cal CardListTable-cal--noheading u-w60px tar" data-th="Action">
+                            <div class="CardListTable-content">
+                                <div class="dropdown">
+                                    <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="button--icon" href="#"><i class="icon-action"></i></a>
+                                    <ul class="dropdown-menu u-rightPopup">
+                                        <li>
+                                            <%= link_to 'Edit', edit_site_path(site) %>
+                                        </li>
+                                        <% if current_user.has_role? :admin %>
+                                            <li>
+                                                <%= link_to 'Delete', site_path(site), method: :delete, class: "btn btn-danger btn-xs", data: { confirm: 'Are you sure?' } %>
+                                            </li>
+                                        <% end %>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
 
-          <li class="CardListTable-cal u-w300px" data-th="Site">
-            <div class="CardListTable-content">
-              <%= site.name %>
-            </div>
-          </li>
-
-          <li class="CardListTable-cal CardListTable-cal--noheading u-w60px tar" data-th="Action">
-            <div class="CardListTable-content">
-              <div class="dropdown">
-                <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="button--icon" href="#"><i class="icon-action"></i></a>
-                <ul class="dropdown-menu u-rightPopup">
-                  <li>
-                    <%= link_to 'Edit', edit_site_path(site) %>
-                  </li>
-                  <% if current_user.has_role? :admin %>
-                    <li>
-                      <%= link_to 'Delete', site_path(site), method: :delete, class: "btn btn-danger btn-xs", data: { confirm: 'Are you sure?' } %>
-                    </li>
-                  <% end %>
-                </ul>
-              </div>
-            </div>
-          </li>
-
+                    </ul>
+                </li>
+            <% end %>
         </ul>
-      </li>
-    <% end %>
-    </ul>
-  </div>
+    </div>
 
-  <%= paginate @sites %>
+    <%= paginate @sites %>
 </main>

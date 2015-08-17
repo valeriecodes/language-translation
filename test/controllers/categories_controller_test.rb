@@ -23,7 +23,7 @@ class CategoriesControllerTest < ActionController::TestCase
     assert_template layout: "layouts/application"
   end
 
-  test "should create one category and rediect to the #show" do 
+  test "should create one category and rediect to the #show" do
     post :create, category: {name: "Books"}
 
     assert_equal "Books", assigns(:category).name

@@ -1,7 +1,7 @@
 class PasswordsController < Devise::PasswordsController
-       layout "no_user"
+  layout "no_user"
 
-       def create
+  def create
     super
   end
 

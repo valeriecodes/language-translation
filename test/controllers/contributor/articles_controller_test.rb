@@ -35,15 +35,16 @@ module Contributor
     end
 
     test "should create photo as draft article" do
-      post :create, article: {
-        category_id: @category.id, 
-        english: 'Knife', 
-        phonetic: "Pihiya", 
-        language_id: @language.id, 
-        picture: Rack::Test::UploadedFile.new(File.join(Rails.root, 'test', 'support', 'picture', 'logo.jpg')),
-        state: "published"
-      }
-      
+      post :create,
+           article: {
+               category_id: @category.id,
+               english: 'Knife',
+               phonetic: "Pihiya",
+               language_id: @language.id,
+               picture: Rack::Test::UploadedFile.new(File.join(Rails.root, 'test', 'support', 'picture', 'logo.jpg')),
+               state: "published"
+           }
+
       assert_redirected_to article_path(assigns(:article))
 
       assert_equal "draft", assigns(:article).state

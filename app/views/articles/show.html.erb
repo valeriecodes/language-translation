@@ -1,44 +1,44 @@
 <header class="app-bar promote-layer">
-  <div class="app-bar-container">
-    <button class="menu"><span class="icon-menu"></span></button>
+    <div class="app-bar-container">
+        <button class="menu"><span class="icon-menu"></span></button>
 
-    <div class="Heading">
-      <%= link_to articles_path, class: "Back" do %>
-        <span class="icon-chevron-left-thin"></span><span class="Back-text">Back</span>
-      <% end %>
-      <h1 class="title"><span>Photos</span></h1>
+        <div class="Heading">
+            <%= link_to articles_path, class: "Back" do %>
+                <span class="icon-chevron-left-thin"></span><span class="Back-text">Back</span>
+            <% end %>
+            <h1 class="title"><span>Photos</span></h1>
+        </div>
+
     </div>
-
-  </div>
 </header>
 
 <main>
-  <div class="Form u-pushTopBottom clear">
-    <div class="g--half">
-      <p><%= image_tag(@article.picture_url, width: 400) if @article.picture.present? %></p>
+    <div class="Form u-pushTopBottom clear">
+        <div class="g--half">
+            <p><%= image_tag(@article.picture_url, width: 400) if @article.picture.present? %></p>
+        </div>
+
+        <div class="g--half g--last">
+            <dl class="Info">
+                <dt>Phonetic Text</dt>
+                <dd><%= @article.phonetic.present? ? @article.phonetic : "N/A" %></dd>
+
+                <dt>English Text</dt>
+                <dd><%= @article.english.present? ? @article.english : "N/A" %></dd>
+
+                <dt>Category</dt>
+                <dd><%= @article.category.try(:name).present? ? @article.category.try(:name) : "N/A" %></dd>
+
+                <dt>Language</dt>
+                <dd><%= @article.language.present? ? @article.language.name : "N/A"  %></dd>
+            </dl>
+
+            <% if can?(:delete, @article) && @article.draft? %>
+                <%= link_to 'Publish', publish_article_path(@article), method: :post %>
+            <% else %>
+                <%= link_to 'Unpublish', unpublish_article_path(@article), method: :post %>
+            <% end %>
+        </div>
+
     </div>
-
-    <div class="g--half g--last">
-      <dl class="Info">
-        <dt>Phonetic Text</dt>
-        <dd><%= @article.phonetic.present? ? @article.phonetic : "N/A" %></dd>
-
-        <dt>English Text</dt>
-        <dd><%= @article.english.present? ? @article.english : "N/A" %></dd>
-
-        <dt>Category</dt>
-        <dd><%= @article.category.try(:name).present? ? @article.category.try(:name) : "N/A" %></dd>
-
-        <dt>Language</dt>
-        <dd><%= @article.language.present? ? @article.language.name : "N/A"  %></dd>
-      </dl>
-
-      <% if can?(:delete, @article) && @article.draft? %>
-        <%= link_to 'Publish', publish_article_path(@article), method: :post %>
-      <% else %>
-        <%= link_to 'Unpublish', unpublish_article_path(@article), method: :post %>
-      <% end %>
-    </div>
-
-  </div>
 </main>

@@ -13,5 +13,6 @@ class Category < ActiveRecord::Base
 
   validates :name, presence: true
 
+  # default order when calling the Category model
   default_scope -> { order('created_at DESC') }
 end
