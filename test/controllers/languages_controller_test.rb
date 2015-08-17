@@ -16,7 +16,7 @@ class LanguagesControllerTest < ActionController::TestCase
   end
 
   test "the truth" do
-     assert true
+    assert true
   end
 
   test "index should render correct template and layout" do
@@ -28,14 +28,14 @@ class LanguagesControllerTest < ActionController::TestCase
 
   test "should create language and go to its show page" do
     assert_difference('Language.count') do
-        post :create, language: {name: 'Chuukese'}
+      post :create, language: {name: 'Chuukese'}
     end
     assert_redirected_to edit_language_path(assigns(:language))
   end
 
   test "should not create language without its name" do
     assert_no_difference('Language.count') do
-        post :create, language: {name: nil}
+      post :create, language: {name: nil}
     end
   end
 
@@ -44,12 +44,12 @@ class LanguagesControllerTest < ActionController::TestCase
     category = create(:category)
 
     article = Article.create!({
-      language_id: language.id, 
-      category_id: category.id, 
-      english: "Foods", 
-      phonetic: "Keema",
-      picture: Rack::Test::UploadedFile.new(File.join(Rails.root, 'test', 'support', 'picture', 'logo.jpg'))
-    })
+                                  language_id: language.id,
+                                  category_id: category.id,
+                                  english: "Foods",
+                                  phonetic: "Keema",
+                                  picture: Rack::Test::UploadedFile.new(File.join(Rails.root, 'test', 'support', 'picture', 'logo.jpg'))
+                              })
 
     assert_difference('Language.count',-1) do
       delete :destroy, id: language.id

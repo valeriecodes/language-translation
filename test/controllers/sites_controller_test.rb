@@ -15,7 +15,7 @@ class SitesControllerTest < ActionController::TestCase
   end
 
   test "the truth" do
-     assert true
+    assert true
   end
 
   test "index should render correct template and layout" do
@@ -29,7 +29,7 @@ class SitesControllerTest < ActionController::TestCase
     country = Country.create({name: 'Azerbaijan', organization_id: @user.organization.id })
 
     assert_difference('Site.count') do
-        post :create, site: {name: 'Devoll', country_id: country.id}
+      post :create, site: {name: 'Devoll', country_id: country.id}
     end
     assert_redirected_to site_path(assigns(:site))
   end

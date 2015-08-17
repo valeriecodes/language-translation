@@ -4,7 +4,7 @@ class CountriesControllerTest < ActionController::TestCase
   include Devise::TestHelpers
 
   test "the truth" do
-     assert true
+    assert true
   end
 
   setup do
@@ -25,14 +25,14 @@ class CountriesControllerTest < ActionController::TestCase
 
   test "should create country and go to its show page" do
     assert_difference('Country.count') do
-        post :create, country: {name: 'Albania'}
+      post :create, country: {name: 'Albania'}
     end
     assert_redirected_to country_path(assigns(:country))
   end
 
   test "should not create country without its name" do
     assert_no_difference('Country.count') do
-        post :create, country: {name: nil}
+      post :create, country: {name: nil}
     end
   end
 
@@ -41,7 +41,7 @@ class CountriesControllerTest < ActionController::TestCase
     site = Site.create!({country_id: country.id, name:'Leh'})
 
     assert_difference('Country.count',-1) do
-      puts Country.count 
+      puts Country.count
       delete :destroy, id: country.id
       assert_response :redirect
       puts Country.count
