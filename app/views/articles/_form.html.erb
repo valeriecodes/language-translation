@@ -5,8 +5,8 @@
   <div class="g--half">
 
   <div class="Form-group">
-    <%= f.label :picture %>
-    <%= image_tag(@article.picture_url, width: 400) if @article.picture.present? %>
+    <%= f.label :picture %><br />
+    <%= image_tag(@article.picture_url) if @article.picture.present? %>
     <%= f.file_field :picture, class: "Form-control" %> 
 
     <% if @article.picture.present? %>

@@ -1,0 +1,19 @@
+staging: 
+  access_key: aws_access_key
+  secret_key: aws_secret_key
+  fog_directory: aws_fog_directory
+
+production:
+  access_key: aws_access_key
+  secret_key: aws_secret_key
+  fog_directory: aws_fog_directory
+
+development:
+  access_key: aws_access_key
+  secret_key: aws_secret_key
+  fog_directory: aws_fog_directory
+
+test: 
+  access_key: aws_access_key
+  secret_key: aws_secret_key
+  fog_directory: aws_fog_directory

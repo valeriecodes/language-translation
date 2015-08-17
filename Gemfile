@@ -7,7 +7,10 @@ gem 'pg'
 # pg_search builds ActiveRecord named scopes that take advantage of PostgreSQL's full text search
 gem 'pg_search'
 
-gem 'carrierwave'
+gem 'carrierwave', '~> 0.10.0'
+# The Ruby cloud services library
+gem 'fog', '~> 1.33.0'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets

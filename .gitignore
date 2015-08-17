@@ -20,6 +20,7 @@ vendor/cache/
 
 # Ignore config.
 config/database.yml
+config/aws.yml
 
 # Ignore unnecessary files
 *.swp
