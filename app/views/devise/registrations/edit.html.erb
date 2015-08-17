@@ -1,49 +1,65 @@
-<div class="row">
-  <div class="col-md-12">
+<header class="app-bar promote-layer">
+  <div class="app-bar-container">
+    <button class="menu"><span class="icon-menu"></span></button>
 
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {method: :put, class: "form-horizontal" }) do |f| %>
-    <fieldset>
-    <legend>Edit <%= resource_name.to_s.humanize %> Profile</legend>
-    <%= devise_error_messages! %>
+    <div class="Heading">
+      <%= link_to root_path, class: "Back" do %>
+        <span class="icon-chevron-left-thin"></span><span class="Back-text">Back</span>
+      <% end %>
+      <h1 class="title"><span>Edit Your Profile</span></h1>
+    </div>
 
-    <div class="form-group">
-       <%= f.label :organization_id, "Organization", class: "control-label col-sm-3" %>
+    <ul class="app-bar-actions">
+      <li>
+        <button class="button button--primary" form="_form">Submit</button>
+      </li>
+    </ul>
+
+  </div>
+</header>
+
+<main>
+  <div class="Form u-pushTopBottom clear Form--dual">
+  <div class="Form--dualDivider">
+    <div class="g--half">
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {method: :put, id: "_form" }) do |f| %>
+
+  <%= devise_error_messages! %>
+
+
+
+    <div class="Form-group">
+       <%= f.label :organization_id, "Organization" %>
        <div class="col-sm-3">
-          <%= f.collection_select(:organization_id, Organization.all, :id, :name, prompt: true) %>
+         <%= f.collection_select(:organization_id, Organization.all, :id, :name, {prompt: true}, {class: "Form-control"} ) %>
        </div>
     </div>
 
-    <div class="form-group">
-      <%= f.label :email, class: "control-label col-sm-3" %>
+    <div class="Form-group">
+      <%= f.label :email %>
       <div class="col-sm-3">
-        <%= f.email_field :email, class: "form-control" %>
+        <%= f.email_field :email, class: "Form-control" %>
       </div>
     </div>
 
-    <div class="form-group">
-      <%= f.label :username, class: "control-label col-sm-3" %>
-      <div class="col-sm-3">
-        <%= f.text_field :username, class: "form-control" %>
-      </div>
+    <div class="Form-group">
+      <%= f.label :username %>
+      <%= f.text_field :username, class: "Form-control" %>
     </div>
 
-    <div class="form-group">
-      <%= f.label :first_name, class: "control-label col-sm-3" %>
-      <div class="col-sm-3">
-        <%= f.text_field :first_name, class: "form-control" %>
-      </div>
+    <div class="Form-group">
+      <%= f.label :first_name %>
+      <%= f.text_field :first_name, class: "Form-control" %>
     </div>
 
-    <div class="form-group">
-      <%= f.label :last_name, class: "control-label col-sm-3" %>
-      <div class="col-sm-3">
-        <%= f.text_field :last_name, class: "form-control" %>
-      </div>
+    <div class="Form-group">
+      <%= f.label :last_name %>
+      <%= f.text_field :last_name, class: "Form-control" %>
     </div>
 
-    <div class="form-group">
-      <%= f.label :gender, class: "control-label col-sm-3" %>
-      <div class="col-sm-3">
+    <div class="Form-group">
+      <%= f.label :gender %>
+      <div>
         <label>
           <%= f.radio_button :gender, 'Male', checked:true %> Male
         </label>
@@ -53,25 +69,19 @@
       </div>
     </div>
 
-    <div class="form-group">
-      <%= f.label :location, class: "control-label col-sm-3" %>
-      <div class="col-sm-3">
-        <%= f.collection_select(:location, Country.all, :name, :name, :include_blank => "None") %>
-      </div>
+    <div class="Form-group">
+      <%= f.label :location %>
+      <%= f.collection_select(:location, Country.all, :name, :name, {include_blank: "None"}, {class: "Form-control"}) %>
     </div>
 
-    <div class="form-group">
-      <%= f.label :lang, "Language Contribution", class: "control-label col-sm-3" %>
-      <div class="col-sm-3">
-        <%= f.collection_select(:lang, Language.all, :name, :name, :include_blank => "None") %>
-      </div>
+    <div class="Form-group">
+      <%= f.label :lang, "Language Contribution" %>
+      <%= f.collection_select(:lang, Language.all, :name, :name, {include_blank: "None"}, {class: "Form-control"}) %>
     </div>
 
-    <div class="form-group">
-      <%= f.label :contact, "Contact Number", class: "control-label col-sm-3" %>
-      <div class="col-sm-3">
-        <%= f.text_field :contact, class: "form-control" %>
-      </div>
+    <div class="Form-group">
+      <%= f.label :contact, "Contact Number" %>
+      <%= f.text_field :contact, class: "Form-control" %>
     </div>
 
     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
@@ -79,74 +89,55 @@
     <% end %>
     <br/>
 
-    <hr />
-    <div class="form-group">
+    <div class="Form-group">
       <span class="help-inline">Fill out the following fields only if you wish to change your password.</span>
     </div>
 
-    <div class="form-group">
-      <%= f.label :password, class: "control-label col-sm-3" %>
-      <div class="col-sm-3">
-        <%= f.password_field :password, class: "form-control" %>
-      </div>
+    <div class="Form-group">
+      <%= f.label :password %>
+      <%= f.password_field :password, class: "Form-control" %>
     </div>
 
-    <div class="form-group">
-      <%= f.label :password_confirmation, class: "control-label col-sm-3" %>
-      <div class="col-sm-3">
-        <%= f.password_field :password_confirmation, class: "form-control" %>
-      </div>
+    <div class="Form-group">
+      <%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation, class: "Form-control" %>
     </div>
 
-    <div class="form-group">
+    <div class="Form-group">
       <div>
-        <%= f.label :current_password, class: "control-label col-sm-3" %>
-        <div class="col-sm-3">
-          <%= f.password_field :current_password, class: "form-control" %>
-        </div>
-        <span class="help-inline">( If you don't want to change your username or password then leave this field blank. )</span>
+        <%= f.label :current_password %>
+        <%= f.password_field :current_password, class: "Form-control" %>
+        <span class="help-inline">(If you don't want to change your username or password then leave this field blank.)</span>
       </div>
     </div>
 
-    <div class="form-group form-actions">
-      <div class="col-sm-offset-3 col-sm-3">
-        <button class="btn btn-primary" type="submit">Update</button>
-      </div>
-    </div>
-
-    </fieldset>
   <% end %>
+    </div>
 
-  <hr />
-
-  <h3>API key</h3>
-
-  <div class="api_key">
-
-    <fieldset>
-    <div class="form-group">
-      <div class="col-sm-3">
-        <p rows="1" onclick="this.focus();this.select()" class="form-control">
+  <div class="g--half g--last">
+    <dl class="Info">
+      <dt>API key</dt>
+      <dd>
+        <span rows="1" onclick="this.focus();this.select()" class="form-control">
           <%= current_user.authentication_token %>
+        </span>
+        <span class="help-inline"><%= link_to "Regenerate", users_regenerate_api_key_path, method: :post, class: "Info-more" %></span>
+      </dd>
+    </dl>
+
+
+    <div class="Form-group">
+      <h3>Cancel my account</h3>
+      <div>
+        <p>Unhappy? <br />
+          <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "button button--danger" %>
         </p>
       </div>
     </div>
-    </fieldset>
-
-    <span class="help-inline"><%= link_to "Regenerate", users_regenerate_api_key_path, method: :post %></span>
-    </ul>
   </div>
 
-  <hr />
-  <h3>Cancel my account</h3>
-
-  <fieldset>
-    <div class="form-group">
-      <div>
-        <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-danger" %></p>
-      </div>
-    </div>
-  </fieldset>
-
   </div>
-</div>
+
+    <div class="clear"></div>
+  </div>
+</main>

@@ -1,5 +1,3 @@
-<%= render partial: "search_form" %>
-
 <%= react_component 'UsersIndexBox', {
         users: @users,
         organizations: Organization.order(:id) ,
@@ -9,4 +7,6 @@
     } %>
 
 
+<footer>
 <%= react_component 'PaginatorSection', {totalPages: @pagination[:total_pages], currentPage: @pagination[:current_page], path: users_path } %>
+</footer>

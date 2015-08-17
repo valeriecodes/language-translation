@@ -17,6 +17,7 @@
   "dependencies": {
     "bootstrap": "~3.3.5",
     "underscore": "~1.8.3",
-    "react-bootstrap": "~0.24.3"
+    "react-bootstrap": "~0.24.3",
+    "font-source-sans-pro": "~0.1.0"
   }
 }

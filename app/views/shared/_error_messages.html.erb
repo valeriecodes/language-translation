@@ -1,8 +1,8 @@
 <% error_message_object = error_messages.is_a?(ActionView::Helpers::FormBuilder) ? error_messages.object : error_messages %>
 
-<%= content_tag :div, class: "error_body" do %>
+<%= content_tag :div, class: "ErrorExplanation" do %>
   <div class="alert error_message">
-    <%= content_tag :h3, "#{pluralize(error_message_object.errors.count, "error")} prohibited this #{error_message_object.class.name.try(:downcase)} from being saved:" %>
+    <%= content_tag :h2, "Prohibited this #{error_message_object.class.name.try(:downcase)} from being saved:" %>
 
     <ul>
       <% error_message_object.errors.full_messages.each do |msg| %>
@@ -11,5 +11,6 @@
         <% end %>
       <% end %>
     </ul>
+    <a href="#" class="Close Close--cross"><span class="icon-close"></span></a>
   </div>
 <% end if error_message_object.errors.any? %>

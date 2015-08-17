@@ -9,42 +9,48 @@ class LanguagesController < ApplicationController
     @languages = Language.page(params[:page]).per(20)
   end
 
- def create
-  @language = Language.new(language_params)
- 
-  if @language.save
-   redirect_to @language
-  else
-   render 'new'
+  def show
+    respond_to do |format|
+      format.html { render nothing: true }
+    end
   end
- end
 
- def edit
-  @language = Language.find(params[:id])
- end
-
- def destroy
-  @language = Language.find(params[:id])
-  @language.destroy
+  def create
+    @language = Language.new(language_params)
  
-  redirect_to languages_path
- end
-
- def show
-  @language = Language.find(params[:id])
- end
-
- def update
-  @language = Language.find(params[:id])
- 
-  if @language.update(language_params)
-    redirect_to @language
-  else
-    render 'edit'
+    if @language.save
+      redirect_to edit_language_path(@language)
+    else
+      render 'new'
+    end
   end
- end
+
+  def edit
+    @language = Language.find(params[:id])
+  end
+
+  def destroy
+    @language = Language.find(params[:id])
+    @language.destroy
+   
+    redirect_to languages_path
+  end
+
+  def show
+    @language = Language.find(params[:id])
+  end
+
+  def update
+    @language = Language.find(params[:id])
+
+    if @language.update(language_params)
+      redirect_to edit_language_path(@language)
+    else
+      render 'edit'
+    end
+  end
  
- private
+  private
   def language_params
     params.require(:language).permit(:name)
   end

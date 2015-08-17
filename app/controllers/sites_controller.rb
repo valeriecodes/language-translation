@@ -7,6 +7,7 @@ class SitesController < ApplicationController
     else
       @countries = current_user.organization.countries
     end
+
     @site = Site.new
   end
 
@@ -33,6 +34,12 @@ class SitesController < ApplicationController
   end
 
   def edit
+    if current_user.has_role? :superadmin
+      @countries = Country.all
+    else
+      @countries = current_user.organization.countries
+    end
+
     @site = Site.find(params[:id])
   end
 

@@ -71,13 +71,26 @@
           <h4>Something's wrong. Please check if you have entered the username correctly</h4>
         </Alert>`
 
-    `<div className="SitesShowBox">
-      <h1>{this.state.site.name} <span className="h4">{this.state.country.name}</span></h1>
-      <br/>
-      {alert}
-      <VolunteersList data={this.state.volunteers} onRoleAddition={this.handleVolunteerAddition} onRoleRemoval={this.handleRoleRemoval}/>
-      <ContributorsList data={this.state.contributors} onRoleAddition={this.handleContributorAddition} onRoleRemoval={this.handleRoleRemoval}/>
-    </div>`
+    `<div>
+      <header className="app-bar promote-layer">
+        <div className="app-bar-container">
+          <button className="menu"><span className="icon-menu"></span></button>
+          <div className="Heading">
+            <a href="/sites" className="Back"><span className="icon-chevron-left-thin"></span><span className="Back-text">Back</span></a>
+            <h1 className="title"><span>Post</span></h1>
+          </div>
+        </div>
+      </header>
+      <main>
+        <div className="SitesShowBox">
+          <h1>{this.state.site.name} <span className="h4">{this.state.country.name}</span></h1>
+          <br/>
+          {alert}
+          <VolunteersList data={this.state.volunteers} onRoleAddition={this.handleVolunteerAddition} onRoleRemoval={this.handleRoleRemoval}/>
+          <ContributorsList data={this.state.contributors} onRoleAddition={this.handleContributorAddition} onRoleRemoval={this.handleRoleRemoval}/>
+        </div>
+       </main>
+     </div>`
 
 @VolunteersList = React.createClass
   handleRoleAddition: ->

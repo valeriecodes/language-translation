@@ -30,7 +30,7 @@ class LanguagesControllerTest < ActionController::TestCase
     assert_difference('Language.count') do
         post :create, language: {name: 'Chuukese'}
     end
-    assert_redirected_to language_path(assigns(:language))
+    assert_redirected_to edit_language_path(assigns(:language))
   end
 
   test "should not create language without its name" do

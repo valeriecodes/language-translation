@@ -37,10 +37,38 @@
     volunteers = @state.volunteers
     contributors = @state.contributors
 
-    `<div className="UsersIndexBox">
-      <h3>Members</h3>
-      <UsersIndexList users={users} organizations={organizations} admins={admins} volunteers={volunteers}
-        contributors={contributors} onUserApproval={this.handleUserApproval}/>
+    `<div>
+      <header className="app-bar promote-layer">
+       <div className="app-bar-container">
+         <button className="menu"><span className="icon-menu"></span></button>
+         
+         <div className="Heading">
+           <h1 className="title"><span>Members</span></h1>
+         </div>
+       </div>
+      </header>
+
+      <main className="UsersIndexBox">
+        <div className="AppControls">
+          <div className="AppControls--box AppControls-left">
+            <form className="Form Form--inline AppControls-search">
+              <div className="Form-group">
+                <input type="search" className="Form-control" id="search" name="q" placeholder="Search Members" />
+              </div>
+              <button type="submit" className="btn btn-default icon-search">Search</button>
+            </form>
+          </div>
+
+          <div className="AppControls--box AppControls-middle"></div>
+
+          <div className="AppControls--box AppControls-right">
+            <a className="button--icontext button--ricontext" href="/members/new"><i className="icon-plus"></i> <span>New Member</span></a>
+          </div>
+        </div>
+
+        <UsersIndexList users={users} organizations={organizations} admins={admins} volunteers={volunteers}
+          contributors={contributors} onUserApproval={this.handleUserApproval}/>
+      </main>
     </div>`
 
 
@@ -62,23 +90,11 @@
         else 'Guest'
       `<UserNode key={user.id} user={user} organization={organization} role={role} onUserApproval={clickApproval}/>`)
 
-    `<table className="UserIndexList table table-striped">
-      <thead>
-        <tr>
-          <th>Organization</th>
-          <th>Name</th>
-          <th>Gender</th>
-          <th>Email</th>
-          <th>Username</th>
-          <th>Location</th>
-          <th>Language</th>
-          <th>Mobile</th>
-          <th>Role</th>
-          <th>Login Approval</th>
-        </tr>
-      </thead>
-      <tbody>{userNodes}</tbody>
-    </table>`
+    `<div className="CardListTable">
+      <ul className="CardListTable-body">
+        {userNodes}
+      </ul>
+    </div>`
 
 
 @UserNode = React.createClass
@@ -133,17 +149,44 @@
           {modal}
         </div>`
 
-    show_url = "members/" + @props.user.id
+    show_url = "/members/" + @props.user.id
 
-    `<tr>
-      <td>{this.props.organization.name}</td>
-      <td><a href={show_url}>{this.props.user.first_name} {this.props.user.last_name}</a></td>
-      <td>{this.props.user.gender}</td>
-      <td>{this.props.user.email}</td>
-      <td>{this.props.user.username}</td>
-      <td>{this.props.user.location}</td>
-      <td>{this.props.user.lang}</td>
-      <td>{this.props.user.contact}</td>
-      <td>{this.props.role}</td>
-      <td>{login_approval}</td>
-    </tr>`
+    `<li>
+      <ul className="CardListTableRow">
+        <li className="CardListTable-cal u-w100px" data-th="Name">
+          <div className="CardListTable-content">
+            <a href={show_url}>{this.props.user.first_name} {this.props.user.last_name}</a>
+          </div>
+        </li>
+        <li className="CardListTable-cal u-w100px" data-th="Organization">
+          <div className="CardListTable-content">
+            {this.props.organization.name}
+          </div>
+        </li>
+        <li className="CardListTable-cal u-w100px" data-th="Email">
+          <div className="CardListTable-content">
+            {this.props.user.email}
+          </div>
+        </li>
+        <li className="CardListTable-cal u-w80px" data-th="Location">
+          <div className="CardListTable-content">
+            {this.props.user.location}
+          </div>
+        </li>
+        <li className="CardListTable-cal u-w80px" data-th="Contact">
+          <div className="CardListTable-content">
+            {this.props.user.content}
+          </div>
+        </li>
+        <li className="CardListTable-cal u-w80px" data-th="Role">
+          <div className="CardListTable-content">
+            {this.props.role}
+          </div>
+        </li>
+        <li className="CardListTable-cal u-w80px" data-th="Role">
+          <div className="CardListTable-content">
+            {login_approval}
+          </div>
+        </li>
+      </ul>
+    </li>`

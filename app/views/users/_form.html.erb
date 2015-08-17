@@ -1,83 +1,61 @@
-<div class="row">
-  <div class="col-md-12">
-    <%= form_for @user, html: { class: "form-horizontal" } do |f| %>
+<%= form_for @user, html: {class: "Form--dual", id: "_form"} do |f| %>
+<%= render partial: "shared/error_messages", object: @user %>
 
-    <%= render partial: "shared/error_messages", object: @user %>
+<div class="Form--dualDivider">
+  <div class="g--half">
 
-    <div class="form-group">
-      <%= f.label :organization_id, "Organization", class: "control-label col-sm-3" %>
-      <div class="col-sm-3">
-        <%= f.collection_select(:organization_id, Organization.all, :id, :name, prompt: true) %>
-      </div>
+  <div class="Form-group">
+    <%= f.label :organization_id, "Organization" %>
+    <%= f.collection_select(:organization_id, Organization.all, :id, :name, {prompt: true}, {class: "Form-control"}) %>
+  </div>
+
+  <div class="Form-group">
+    <%= f.label :email %>
+    <%= f.email_field :email, class: "Form-control" %>
+  </div>
+
+  <div class="Form-group">
+    <%= f.label :username %>
+    <%= f.text_field :username, class: "Form-control" %>
+  </div>
+
+  <div class="Form-group">
+    <%= f.label :first_name %>
+    <%= f.text_field :first_name, class: "Form-control" %>
+  </div>
+
+  <div class="Form-group">
+    <%= f.label :last_name %>
+    <%= f.text_field :last_name, class: "Form-control" %>
+  </div>
+
+  <div class="Form-group">
+    <%= f.label :gender %>
+    <div>
+      <label>
+        <%= f.radio_button :gender, 'Male', checked:true %> Male
+      </label>
+      <label>
+        <%= f.radio_button :gender, 'Female' %> Female
+      </label>
     </div>
+  </div>
 
-    <div class="form-group">
-      <%= f.label :email, class: "control-label col-sm-3" %>
-      <div class="col-sm-3">
-        <%= f.email_field :email, class: "form-control" %>
-      </div>
-    </div>
+  <div class="Form-group">
+    <%= f.label :location %>
+    <%= f.collection_select(:location, Country.all, :name, :name, {include_blank: "None"}, {class: "Form-control"}) %>
+  </div>
 
-    <div class="form-group">
-      <%= f.label :username, class: "control-label col-sm-3" %>
-      <div class="col-sm-3">
-        <%= f.text_field :username, class: "form-control" %>
-      </div>
-    </div>
+  <div class="Form-group">
+    <%= f.label :lang, "Language Contribution" %>
+    <%= f.collection_select(:lang, Language.all, :name, :name, {include_blank: "None"}, {class: "Form-control"}) %>
+  </div>
 
-    <div class="form-group">
-      <%= f.label :first_name, class: "control-label col-sm-3" %>
-      <div class="col-sm-3">
-        <%= f.text_field :first_name, class: "form-control" %>
-      </div>
-    </div>
+  <div class="Form-group">
+    <%= f.label :contact, "Contact Number" %>
+    <%= f.text_field :contact, class: "Form-control" %>
+  </div>
 
-    <div class="form-group">
-      <%= f.label :last_name, class: "control-label col-sm-3" %>
-      <div class="col-sm-3">
-        <%= f.text_field :last_name, class: "form-control" %>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :gender, class: "control-label col-sm-3" %>
-      <div class="col-sm-3">
-        <label>
-          <%= f.radio_button :gender, 'Male', checked:true %> Male
-        </label>
-        <label>
-          <%= f.radio_button :gender, 'Female' %> Female
-        </label>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :location, class: "control-label col-sm-3" %>
-      <div class="col-sm-3">
-        <%= f.collection_select(:location, Country.all, :name, :name, :include_blank => "None") %>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :lang, "Language Contribution", class: "control-label col-sm-3" %>
-      <div class="col-sm-3">
-        <%= f.collection_select(:lang, Language.all, :name, :name, :include_blank => "None") %>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :contact, "Contact Number", class: "control-label col-sm-3" %>
-      <div class="col-sm-3">
-        <%= f.text_field :contact, class: "form-control" %>
-      </div>
-    </div>
-
-    <div class="form-group form-actions">
-      <div class="col-sm-offset-3 col-sm-3">
-        <button class="btn btn-primary" type="submit">Update</button>
-      </div>
-    </div>
-
-    <% end %>
   </div>
 </div>
+<% end %>

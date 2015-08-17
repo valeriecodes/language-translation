@@ -11,6 +11,12 @@ class CategoriesController < ApplicationController
     respond_with(@categories)
   end
 
+  def show
+    respond_with(@product) do |format|
+      format.html { render nothing: true }
+    end
+  end
+
   def new
     @category = Category.new
 
@@ -23,7 +29,7 @@ class CategoriesController < ApplicationController
     respond_with(@category) do |format|
       if @category.save
         flash[:notice] = "Category successfully created."
-        format.html { redirect_to category_path(@category) }
+        format.html { redirect_to edit_category_path(@category) }
       else
         flash[:error] = "Sorry, failed to create category due to errors."
         format.html { render 'new' }
@@ -37,7 +43,7 @@ class CategoriesController < ApplicationController
     respond_with(@category) do |format|
       if @category.update(category_params)
         flash[:notice] = "Category successfully updated."
-        format.html { redirect_to category_path(@category) }
+        format.html { redirect_to edit_category_path(@category) }
       else
         flash[:error] = "Sorry, failed to update category due to errors."
         format.html { render 'edit' }

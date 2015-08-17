@@ -2,11 +2,11 @@
 #
 # Table name: sites
 #
-#  id              :integer          not null, primary key
-#  name            :string
-#  installation_id :integer
-#  created_at      :datetime
-#  updated_at      :datetime
+#  id         :integer          not null, primary key
+#  name       :string
+#  country_id :integer
+#  created_at :datetime
+#  updated_at :datetime
 #
 
 require 'test_helper'
