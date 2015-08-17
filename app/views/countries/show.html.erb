@@ -22,7 +22,9 @@
                 <dt>Organization</dt>
                 <dd>
                     <%= @country.organization.name %>
-                    <%= link_to 'Edit', edit_country_path(@country), class: "Info-more" %>
+                    <% if can? :update, @country %>
+                        <%= link_to 'Edit', edit_country_path(@country), class: "Info-more" %>
+                    <% end %>
                 </dd>
 
                 <dt>Name</dt>
