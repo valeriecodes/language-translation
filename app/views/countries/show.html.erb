@@ -41,7 +41,7 @@
             <h3 class="title u-push2xTop">Sites</h3>
 
             <dl class="Info">
-                <% @country.sites.each do |site| %>
+                <% @country.sites.reverse.each do |site| %>
                     <dt>#<%= site.id %></dt>
                     <dd><%= site.name %></dd>
                 <% end %>

@@ -26,20 +26,14 @@
 
                     <%= devise_error_messages! %>
 
-
-
                     <div class="Form-group">
                         <%= f.label :organization_id, "Organization" %>
-                        <div class="col-sm-3">
-                            <%= f.collection_select(:organization_id, Organization.all, :id, :name, {prompt: true}, {class: "Form-control"} ) %>
-                        </div>
+                        <%= f.collection_select(:organization_id, Organization.all, :id, :name, {prompt: true}, {class: "Form-control"} ) %>
                     </div>
 
                     <div class="Form-group">
                         <%= f.label :email %>
-                        <div class="col-sm-3">
-                            <%= f.email_field :email, class: "Form-control" %>
-                        </div>
+                        <%= f.email_field :email, class: "Form-control" %>
                     </div>
 
                     <div class="Form-group">

@@ -17,9 +17,9 @@
             <div class="Form-group">
                 <%= f.label :language_id, "Language" %>
                 <div>
-                    <% if current_user.has_any_role? :admin, :volunteer %>
+                    <% if current_user.has_any_role? :superadmin, :admin, {name: :volunteer, resource: :any} %>
                         <%= f.collection_select(:language_id, Language.all, :id, :name, {}, {class: "Form-control"}) %>
-                    <% elsif current_user.has_role? :contributor %>
+                    <% elsif current_user.has_role? :contributor, :any %>
                         <%= f.collection_select(:language_id, Language.where(name: current_user.lang), :id, :name, {}, {class: "Form-control"}) %>
                     <% end %>
                 </div>
@@ -27,9 +27,7 @@
 
             <div class="Form-group">
                 <%= f.label :category %>
-                <div class="col-sm-3">
-                    <%= f.collection_select(:category_id, @categories, :id, :name, {}, {class: "Form-control"}) %>
-                </div>
+                <%= f.collection_select(:category_id, @categories, :id, :name, {}, {class: "Form-control"}) %>
             </div>
 
             <div class="Form-group">
