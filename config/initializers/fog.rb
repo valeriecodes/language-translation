@@ -1,9 +1,3 @@
-## AWS configuration
-aws_config_path = File.join(Rails.root, 'config', 'aws.yml')
-raise "#{aws_config_path} is missing!" unless File.exists? aws_config_path
-
-aws_config = YAML.load_file(aws_config_path)[Rails.env].symbolize_keys
-
 # Fog configurations
 if Rails.env.test?
   CarrierWave.configure do |config|
@@ -11,6 +5,12 @@ if Rails.env.test?
     config.enable_processing = false
   end
 else
+  ## AWS configuration
+  aws_config_path = File.join(Rails.root, 'config', 'aws.yml')
+  raise "#{aws_config_path} is missing!" unless File.exists? aws_config_path
+
+  aws_config = YAML.load_file(aws_config_path)[Rails.env].symbolize_keys
+
   CarrierWave.configure do |config|
     config.storage = :fog
     config.fog_credentials = {
