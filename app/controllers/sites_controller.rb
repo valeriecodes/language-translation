@@ -1,6 +1,19 @@
 class SitesController < ApplicationController
   load_and_authorize_resource
 
+  def index
+    current_user.organization.countries.each do |a|
+      @sites << a.sites
+    end
+    @sites = @sites.page(params[:page]).per(20)
+  end
+
+  def show
+    @site = Site.find(params[:id])
+    @volunteers = User.with_role :volunteer, @site
+    @contributors = User.with_role :contributor, @site
+  end
+
   def new
     if current_user.has_role? :superadmin
       @countries = Country.all
@@ -11,11 +24,14 @@ class SitesController < ApplicationController
     @site = Site.new
   end
 
-  def index
-    current_user.organization.countries.each do |a|
-      @sites << a.sites
+  def edit
+    if current_user.has_role? :superadmin
+      @countries = Country.all
+    else
+      @countries = current_user.organization.countries
     end
-    @sites = @sites.page(params[:page]).per(20)
+
+    @site = Site.find(params[:id])
   end
 
   def create
@@ -33,29 +49,6 @@ class SitesController < ApplicationController
     end
   end
 
-  def edit
-    if current_user.has_role? :superadmin
-      @countries = Country.all
-    else
-      @countries = current_user.organization.countries
-    end
-
-    @site = Site.find(params[:id])
-  end
-
-  def destroy
-    @site = Site.find(params[:id])
-    @site.destroy
-
-    redirect_to sites_path
-  end
-
-  def show
-    @site = Site.find(params[:id])
-    @volunteers = User.with_role :volunteer, @site
-    @contributors = User.with_role :contributor, @site
-  end
-
   def update
     @site = Site.find(params[:id])
 
@@ -66,6 +59,19 @@ class SitesController < ApplicationController
     end
   end
 
+  def destroy
+    @site = Site.find(params[:id])
+    @site.destroy
+
+    redirect_to sites_path
+  end
+
+
+  #####CUSTOM METHODS#####
+
+  #Called from the Sites Show: app/assets/javascripts/components/sites/show.js.jsx.coffee
+  # It receives the :username, :site_id, and :act(action) and adds/removes the user as
+  # a volunteer/contributor of the given site. It returns the volunteer/contributor list.
   def add_role
     @user = User.where(username: params[:username]).first
     @site = Site.find(params[:site_id])
@@ -89,7 +95,6 @@ class SitesController < ApplicationController
       end
     end
   end
-
   def remove_role
     @user = User.find(params[:user_id])
     @site = Site.find(params[:site_id])
@@ -115,8 +120,8 @@ class SitesController < ApplicationController
   end
 
   private
+  # Never trust parameters from the scary internet, only allow the white list through.
   def site_params
     params.require(:site).permit(:name, :country_id)
   end
-
 end

@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
-  load_and_authorize_resource
-
   before_action :set_user, only: [:edit, :show, :destroy, :update]
+  load_and_authorize_resource
 
   def index
     if params[:q].blank?
@@ -13,30 +12,24 @@ class UsersController < ApplicationController
     @pagination = { current_page: @users.current_page, total_pages: @users.total_pages }
   end
 
-  def new
-   @user = User.new
+  def show
   end
 
-  def create
-   @user = User.new(user_params)
-
-   if @user.save
-    redirect_to @user
-   else
-    render 'new'
-   end
+  def new
+    @user = User.new
   end
 
   def edit
   end
 
-  def destroy
-   @user.destroy
+  def create
+    @user = User.new(user_params)
 
-   redirect_to users_path
-  end
-
-  def show
+    if @user.save
+      redirect_to @user
+    else
+      render 'new'
+    end
   end
 
   def update
@@ -47,7 +40,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    @user.destroy
+
+    redirect_to users_path
+  end
+
+  #####CUSTOM METHODS#####
+
   #Called from Users Index: app/assets/javascripts/components/users/index.js.jsx.coffee
+  # It receives the user_id and approves/disapproves the user, then returns the Users list.
   def approve_user
     @user = User.find(params[:user_id])
     @user.login_approval_at = Time.now
@@ -59,7 +61,6 @@ class UsersController < ApplicationController
       end
     end
   end
-
   def disapprove_user
     @user = User.find(params[:user_id])
     @user.login_approval_at = nil
@@ -73,6 +74,7 @@ class UsersController < ApplicationController
   end
 
   #Called from Users Show: app/assets/javascripts/components/users/show.js.jsx.coffee
+  # It receives the user_id and grants/revokes admin rights, then returns the user's roles.
   def grant_admin
     @user = User.find(params[:user_id])
     @user.add_role :admin
@@ -84,7 +86,6 @@ class UsersController < ApplicationController
       end
     end
   end
-
   def revoke_admin
     @user = User.find(params[:user_id])
     @user.remove_role :admin
@@ -96,13 +97,15 @@ class UsersController < ApplicationController
       end
     end
   end
- 
-  private
-  def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :username, :location, :lang, :contact, :gender, :organization_id)
-  end
 
+  private
+  # Use callbacks to share common setup or constraints between actions.
   def set_user
     @user = User.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def user_params
+    params.require(:user).permit(:first_name, :last_name, :email, :username, :location, :lang, :contact, :gender, :organization_id)
   end
 end
