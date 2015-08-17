@@ -14,5 +14,6 @@ class Country < ActiveRecord::Base
   belongs_to :organization
   belongs_to :user
   has_many :sites, dependent: :destroy
+
   validates_presence_of :name, :organization_id
 end

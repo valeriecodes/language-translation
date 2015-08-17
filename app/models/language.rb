@@ -9,7 +9,7 @@
 #
 
 class Language < ActiveRecord::Base
- has_many :articles, dependent: :destroy
+  has_many :articles, dependent: :destroy
 
- validates :name, presence: true
+  validates :name, presence: true
 end
