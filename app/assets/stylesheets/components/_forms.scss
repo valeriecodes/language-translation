@@ -191,3 +191,14 @@ textarea.Form-control { height: auto; }
 }
 
 .From-title { padding-top: 0; font-size: 18px; margin-bottom: 20px; }
+
+.AudioContainer {
+  .Media--file { width: 90%; }
+  .Close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: #D0021B;
+    text-decoration: none;
+  }
+} 

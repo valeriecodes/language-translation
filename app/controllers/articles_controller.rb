@@ -9,6 +9,7 @@ class ArticlesController < ApplicationController
 
   def new
     @article = Article.new
+    @article.audios.build
     @categories = Category.all
   end
 
@@ -87,6 +88,6 @@ class ArticlesController < ApplicationController
 
   private
   def set_article
-    @article = Article.includes(:category, :language).find(params[:id])
+    @article = Article.includes(:category, :language, :audios).find(params[:id])
   end
 end

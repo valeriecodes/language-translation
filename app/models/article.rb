@@ -20,6 +20,9 @@ class Article < ActiveRecord::Base
 
   belongs_to :language
   belongs_to :category
+  has_many :audios
+
+  accepts_nested_attributes_for :audios, reject_if: :all_blank, allow_destroy: true
 
   # default order when calling the Article model
   default_scope -> { order('created_at DESC') }
@@ -27,7 +30,6 @@ class Article < ActiveRecord::Base
   # CarrierWave integration for uploading pictures
   mount_uploader :picture, PictureUploader
 
-  #validates_presence_of :picture
   validates :picture, presence: true
 
   # PgSearch

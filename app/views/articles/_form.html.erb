@@ -1,4 +1,5 @@
 <%= form_for @article, html: {class: "Form--dual", id: "_form"} do |f| %>
+
     <%= render partial: "shared/error_messages", object: @article %>
 
     <div class="Form--dualDivider">
@@ -6,7 +7,7 @@
 
             <div class="Form-group">
                 <%= f.label :picture %>
-                <%= image_tag(@article.picture_url, width: 400) if @article.picture.present? %>
+                <%= image_tag(@article.picture_url) if @article.picture.present? %>
                 <%= f.file_field :picture, class: "Form-control" %>
 
                 <% if @article.picture.present? %>
@@ -48,6 +49,50 @@
                     <%= f.select :state, [["Unpublish", 'draft'], ['Publish', 'published']], {}, class: "Form-control" %>
                 </div>
             <% end %>
+
+        </div>
+
+        <div class="g--half g--last">
+
+          <h3>Audio Translations</h3>
+
+            <div class="clear">
+              <div class="g--half">
+                <div class="Form-group">
+                  <%= label_tag "Text" %>
+                </div>
+              </div>
+
+              <div class="g--half g--last">
+                <div class="Form-group">
+                  <%= label_tag "Audio File" %>
+                </div>
+              </div>
+              <div class="clear"></div>
+            </div>
+
+          <div class="AudioContainer">
+              <%= f.fields_for :audios do |audio|%>
+                <div class="clear audioBox">
+                  <div class="g--half">
+                    <div class="Form-group">
+                      <%= audio.text_field :content, class: "Form-control" %> 
+                    </div>
+                  </div>
+
+                  <div class="g--half g--last">
+                    <div class="Form-group">
+                      <%= audio.file_field :audio, class: "Form-control Media--file" %> 
+                      <%= audio.check_box :_destroy, class: "Form-control hide" %> 
+                      <a href="#" class="Close Close--cross u-fr removeAudioFile"><span class="icon-close"></span></a>
+                    </div>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              <% end %>
+          </div>
+
+          <a href="#" class="addMoreAudio">Add More</a>
 
         </div>
     </div>
