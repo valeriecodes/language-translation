@@ -151,6 +151,7 @@
 
     show_url = "/members/" + @props.user.id
 
+    organization_name = @props.organization.name if @props.organization
     `<li>
       <ul className="CardListTableRow">
         <li className="CardListTable-cal u-w100px" data-th="Name">
@@ -160,7 +161,7 @@
         </li>
         <li className="CardListTable-cal u-w100px" data-th="Organization">
           <div className="CardListTable-content">
-            {this.props.organization.name}
+            {organization_name}
           </div>
         </li>
         <li className="CardListTable-cal u-w100px" data-th="Email">

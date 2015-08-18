@@ -34,7 +34,7 @@
                     <ul class="CardListTableRow">
                         <li class="CardListTable-cal u-w30px" data-th="#">
                             <div class="CardListTable-content">
-                                <% if current_user.has_role? :admin %>
+                                <% if can? :update, language %>
                                     <%= link_to language.id, edit_language_path(language) %>
                                 <% else %>
                                     <%= language.id %>
@@ -48,7 +48,7 @@
                             </div>
                         </li>
 
-                        <% if current_user.has_role? :admin %>
+                        <% if can? :update, language %>
                             <li class="CardListTable-cal CardListTable-cal--noheading u-w60px tar" data-th="Action">
                                 <div class="CardListTable-content">
                                     <div class="dropdown">
@@ -57,9 +57,11 @@
                                             <li>
                                                 <%= link_to 'Edit', edit_language_path(language) %>
                                             </li>
-                                            <li>
-                                                <%= link_to 'Delete', language_path(language), method: :delete, data: { confirm: 'Are you sure?' } %>
-                                            </li>
+                                            <% if can? :destroy, language %>
+                                                <li>
+                                                    <%= link_to 'Delete', language_path(language), method: :delete, data: { confirm: 'Are you sure?' } %>
+                                                </li>
+                                            <% end %>
                                         </ul>
                                     </div>
                                 </div>
