@@ -1,0 +1,85 @@
+<header class="app-bar promote-layer">
+    <div class="app-bar-container">
+        <button class="menu"><span class="icon-menu"></span></button>
+
+        <div class="Heading">
+            <h1 class="title"><span>Countries</span></h1>
+        </div>
+    </div>
+</header>
+<main>
+    <div class="AppControls">
+        <div class="AppControls--box AppControls-left">
+            <form class="Form Form--inline AppControls-search">
+                <div class="Form-group">
+                    <input type="search" class="Form-control" id="search" placeholder="Search Country" />
+                </div>
+                <button type="submit" class="btn btn-default icon-search">Search</button>
+            </form>
+        </div>
+
+        <div class="AppControls--box AppControls-middle"></div>
+
+        <div class="AppControls--box AppControls-right">
+            <a class="button--icontext button--ricontext" href="<%= new_country_path %>"><i class="icon-plus"></i> <span>New Country</span></a>
+        </div>
+    </div>
+
+    <div class="CardListTable">
+        <ul class="CardListTable-body">
+
+            <% @countries.each do |country| %>
+                <li>
+                    <ul class="CardListTableRow">
+                        <li class="CardListTable-cal u-w30px" data-th="#">
+                            <div class="CardListTable-content">
+                                <%= link_to country.id, country_path(country) %>
+                            </div>
+                        </li>
+
+                        <li class="CardListTable-cal u-w180px" data-th="Organization">
+                            <div class="CardListTable-content">
+                                <%= country.organization.name %>
+                            </div>
+                        </li>
+
+                        <li class="CardListTable-cal u-w130px" data-th="Country">
+                            <div class="CardListTable-content">
+                                <%= country.name %>
+                            </div>
+                        </li>
+
+                        <li class="CardListTable-cal u-w130px"  data-th="Manager">
+                            <div class="CardListTable-content">
+                                <%= link_to country.user.username, user_path(country.user) if (country.user) %>
+                            </div>
+                        </li>
+
+                        <% if can? :update, country %>
+                            <li class="CardListTable-cal CardListTable-cal--noheading u-w60px tar" data-th="Action">
+                                <div class="CardListTable-content">
+                                    <div class="dropdown">
+                                        <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="button--icon" href="#"><i class="icon-action"></i></a>
+                                        <ul class="dropdown-menu u-rightPopup">
+                                            <li>
+                                                <%= link_to 'Edit', edit_country_path(country) %>
+                                            </li>
+                                            <% if can? :destroy, country %>
+                                                <li>
+                                                    <%= link_to 'Delete', country_path(country), method: :delete, class: "btn btn-danger btn-xs", data: {confirm: 'Are you sure?'} %>
+                                                </li>
+                                            <% end %>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                        <% end %>
+
+                    </ul>
+                </li>
+            <% end %>
+        </ul>
+    </div>
+
+    <%= paginate @countries %>
+</main>

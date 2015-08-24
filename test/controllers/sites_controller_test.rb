@@ -15,7 +15,7 @@ class SitesControllerTest < ActionController::TestCase
   end
 
   test "the truth" do
-     assert true
+    assert true
   end
 
   test "index should render correct template and layout" do
@@ -26,25 +26,25 @@ class SitesControllerTest < ActionController::TestCase
   end
 
   test "should create site and go to its show page" do
-    installation = Installation.create({installation: 'Azerbaijan', organization_id: @user.organization.id })
+    country = Country.create({name: 'Azerbaijan', organization_id: @user.organization.id })
 
     assert_difference('Site.count') do
-        post :create, site: {name: 'Devoll', installation_id: installation.id}
+      post :create, site: {name: 'Devoll', country_id: country.id}
     end
     assert_redirected_to site_path(assigns(:site))
   end
 
   test "should not create site without its name" do
-    installation = Installation.create({installation: 'Azerbaijan', organization_id: @user.organization.id })
+    country = Country.create({name: 'Azerbaijan', organization_id: @user.organization.id })
 
     assert_no_difference('Site.count') do
-      post :create, site: {name: nil, installation_id: installation.id }
+      post :create, site: {name: nil, country_id: country.id }
     end
   end
 
   test "should delete site along with all volunteers and contributors under it" do
-    installation = Installation.create({installation: 'Azerbaijan', organization_id: @user.organization.id })
-    site = Site.create!({installation_id: installation.id, name: 'Leh'})
+    country = Country.create({name: 'Azerbaijan', organization_id: @user.organization.id })
+    site = Site.create!({country_id: country.id, name: 'Leh'})
 
     #volunteer = Volunteer.create({site_id: site.id, vname: 'Saumya'})
     #contributor = Contributor.create!({site_id: site.id, name: 'Dipika'})
@@ -61,7 +61,7 @@ class SitesControllerTest < ActionController::TestCase
     #assert_nil Contributor.find_by_id(contributor.id)
     #assert_nil Contributor.find_by_site_id(site.id)
 
-    assert_not_nil Installation.find_by_id(installation.id)
+    assert_not_nil Country.find_by_id(country.id)
   end
 
 end

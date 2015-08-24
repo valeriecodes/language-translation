@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
-  load_and_authorize_resource
-
   before_action :set_user, only: [:edit, :show, :destroy, :update]
+  load_and_authorize_resource
 
   def index
     if params[:q].blank?
@@ -31,18 +30,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def edit
-  end
-
-  def destroy
-    @user.destroy
-
-    redirect_to users_path
-  end
-
-  def show
-  end
-
   def update
     if @user.update(user_params)
       redirect_to @user
@@ -51,7 +38,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    @user.destroy
+
+    redirect_to users_path
+  end
+
+  #####CUSTOM METHODS#####
+
   #Called from Users Index: app/assets/javascripts/components/users/index.js.jsx.coffee
+  # It receives the user_id and approves/disapproves the user, then returns the Users list.
   def approve_user
     @user = User.find(params[:user_id])
     @user.login_approval_at = Time.now
@@ -77,6 +73,7 @@ class UsersController < ApplicationController
   end
 
   #Called from Users Show: app/assets/javascripts/components/users/show.js.jsx.coffee
+  # It receives the user_id and grants/revokes admin rights, then returns the user's roles.
   def grant_admin
     @user = User.find(params[:user_id])
     @user.add_role :admin
@@ -100,13 +97,15 @@ class UsersController < ApplicationController
       end
     end
   end
- 
-  private
-  def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :username, :location, :lang, :contact, :gender, :organization_id, :accept_invitation, :password)
-  end
 
+  private
+  # Use callbacks to share common setup or constraints between actions.
   def set_user
     @user = User.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def user_params
+    params.require(:user).permit(:first_name, :last_name, :email, :username, :location, :lang, :contact, :gender, :organization_id, :accept_invitation, :password))
   end
 end

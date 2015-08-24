@@ -10,7 +10,8 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+ * Whatever comes next overrides the first. This way, we can organize multiple CSS libraries together.
  *= require bootstrap/dist/css/bootstrap
- *= require custom
+ *= require custom-web-starter-kit
  *= require_self
  */

@@ -14,18 +14,18 @@ ActiveAdmin.register_page "Dashboard" do
     #
     columns do
       column do
-        panel "Posts" do
-          Installation.unscoped.order("installation").map do |post|
-            li link_to(post.installation, admin_post_path(post))
+        panel "Countries" do
+          Country.unscoped.order("name").map do |country|
+            li link_to(country.name, admin_country_path(country))
           end
         end
       end
 
       column do
         panel "Sites" do
-          Site.unscoped.order("installation_id").map do |site|
-            installation_name = Installation.find(site.installation_id).installation
-            li link_to(site.name + " (" + installation_name + ")", admin_post_path(site))
+          Site.unscoped.order("country_id").map do |site|
+            country_name = Country.find(site.country_id).name
+            li link_to(site.name + " (" + country_name + ")", admin_site_path(site))
           end
         end
       end
@@ -56,8 +56,8 @@ ActiveAdmin.register_page "Dashboard" do
         panel "Articles" do
           ul do
             Article.unscoped.order("updated_at").last(20).map do |article|
-              language_name = Language.find(article.language_id).name
-              category_name = Category.find(article.category_id).name
+              language_name = if article.language_id then Language.find(article.language_id).name else 'Language not selected' end
+              category_name = if article.category_id then Category.find(article.category_id).name else 'Category not selected' end
               li link_to(article.english + " (" + language_name + ", " + category_name + ")", admin_article_path(article))
             end
           end

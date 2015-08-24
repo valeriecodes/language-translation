@@ -1,34 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Peace Corps</title>
-  <%= stylesheet_link_tag    'application' %>
-  <%= javascript_include_tag 'application' %>
-  <%= csrf_meta_tags %> 
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>Peace Corps</title>
+
+    <%= stylesheet_link_tag    'application' %>
+    <%= javascript_include_tag 'application' %>
+    <%= csrf_meta_tags %>
 </head>
+
 <body>
+    <%= yield %>
 
-<%= render "shared/header" %>
-
-<div class="container">
-  <% if user_signed_in? %>
-    <div class="subnav">
-      <%= render_navigation(level: 2) %>
-    </div>
-  <% end %>
-
-  <% if notice %>
-     <p class="alert alert-success"><%= notice %></p>
-  <% end %>
-
-  <% if alert %>
-     <p class="alert alert-danger"><%= alert %></p>
-  <% end %>
-
-  <%= yield %>
-
-  <%= render "shared/footer" %>
-</div>
-
+    <%= render "shared/header" %>
 </body>
 </html>

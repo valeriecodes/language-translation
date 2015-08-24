@@ -1,27 +1,78 @@
-<p id="notice"><%= notice %></p>
+<header class="app-bar promote-layer">
+    <div class="app-bar-container">
+        <button class="menu"><span class="icon-menu"></span></button>
 
-<h1>Listing Organizations</h1>
+        <div class="Heading">
+            <h1 class="title"><span>Organizations</span></h1>
+        </div>
+    </div>
+</header>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<main>
+    <div class="AppControls">
+        <div class="AppControls--box AppControls-left">
+            <form class="Form Form--inline AppControls-search">
+                <div class="Form-group">
+                    <input type="search" class="Form-control" id="search" placeholder="Search Organizations" />
+                </div>
+                <button type="submit" class="btn btn-default icon-search">Search</button>
+            </form>
+        </div>
 
-  <tbody>
-    <% @organizations.each do |organization| %>
-      <tr>
-        <td><%= organization.name %></td>
-        <td><%= link_to 'Show', organization %></td>
-        <td><%= link_to 'Edit', edit_organization_path(organization) %></td>
-        <td><%= link_to 'Destroy', organization, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+        <div class="AppControls--box AppControls-middle"></div>
 
-<br>
+        <div class="AppControls--box AppControls-right">
+            <a class="button--icontext button--ricontext" href="<%= new_organization_path %>"><i class="icon-plus"></i> <span>New Organization</span></a>
+        </div>
+    </div>
 
-<%= link_to 'New Organization', new_organization_path %>
+    <div class="CardListTable">
+        <ul class="CardListTable-body">
+
+            <% @organizations.each do |organization| %>
+                <li>
+                    <ul class="CardListTableRow">
+                        <li class="CardListTable-cal u-w30px" data-th="#">
+                            <div class="CardListTable-content">
+                                <% if can? :update, organization %>
+                                    <%= link_to organization.id, edit_organization_path(organization) %>
+                                <% else %>
+                                    <%= organization.id %>
+                                <% end %>
+                            </div>
+                        </li>
+
+                        <li class="CardListTable-cal u-w300px" data-th="Name">
+                            <div class="CardListTable-content">
+                                <%= organization.name %>
+                            </div>
+                        </li>
+
+                        <% if can? :update, organization %>
+                            <li class="CardListTable-cal CardListTable-cal--noheading u-w60px tar" data-th="Action">
+                                <div class="CardListTable-content">
+                                    <div class="dropdown">
+                                        <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="button--icon" href="#"><i class="icon-action"></i></a>
+                                        <ul class="dropdown-menu u-rightPopup">
+                                            <li>
+                                                <%= link_to 'Edit', edit_organization_path(organization) %>
+                                            </li>
+                                            <li>
+                                                <% if can? :destroy, organization %>
+                                                    <%= link_to 'Destroy', organization, method: :delete, data: { confirm: 'Are you sure?' } %>
+                                                <% end %>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                        <% end %>
+
+                    </ul>
+                </li>
+            <% end %>
+        </ul>
+    </div>
+
+    <%= paginate @organizations %>
+</main>

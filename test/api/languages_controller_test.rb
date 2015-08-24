@@ -19,9 +19,7 @@ class API::LanguagesControllerTest < ActionController::TestCase
     describe "when all language renders" do
       before(:each) do
         3.times {
-          create(:language, { 
-            name: "Chuukese"
-          })
+          create(:language, { name: "Chuukese" })
         }
       end
 
@@ -35,8 +33,8 @@ class API::LanguagesControllerTest < ActionController::TestCase
   end
 
   describe "Get #show" do
-    describe "when fetch one language" do 
-      before(:each) do 
+    describe "when fetch one language" do
+      before(:each) do
         @language = create(:language, name: "Chuukese")
       end
 
@@ -52,14 +50,14 @@ class API::LanguagesControllerTest < ActionController::TestCase
   end
 
   describe "POST #create" do
-    describe "when a language is successfully created" do 
-      before(:each) do 
+    describe "when a language is successfully created" do
+      before(:each) do
         attributes = attributes_for(:language, name: "Chuukese")
 
         post :create, { format: :json, auth_token: @user.authentication_token, language: attributes }
       end
 
-      it "renders json response for the record just created" do 
+      it "renders json response for the record just created" do
         language = json_response["language"]
 
         assert_equal 201, response.status
@@ -75,7 +73,7 @@ class API::LanguagesControllerTest < ActionController::TestCase
         post :create, { format: :json, auth_token: @user.authentication_token, language: attributes }
       end
 
-      it "render an error json for language" do 
+      it "render an error json for language" do
         error_response = json_response
 
         assert_equal 422, response.status
@@ -86,13 +84,13 @@ class API::LanguagesControllerTest < ActionController::TestCase
     end
   end
 
-  describe "PUT/PATCH #update" do 
-    before(:each) do 
+  describe "PUT/PATCH #update" do
+    before(:each) do
       @language = create(:language, name: "Chuukese")
     end
 
-    describe "when is successfully updated" do 
-      before(:each) do 
+    describe "when is successfully updated" do
+      before(:each) do
         put :update, { format: :json, auth_token: @user.authentication_token, id: @language.id, language: { name: "English" }}
       end
 
@@ -104,11 +102,11 @@ class API::LanguagesControllerTest < ActionController::TestCase
     end
 
     describe "when is not updated" do
-      before(:each) do 
+      before(:each) do
         put :update, { format: :json, auth_token: @user.authentication_token, id: @language.id, language: { name: "" }}
       end
 
-      it "render an error json for the resource" do 
+      it "render an error json for the resource" do
         language = json_response
 
         assert_equal 422, response.status
@@ -119,12 +117,12 @@ class API::LanguagesControllerTest < ActionController::TestCase
   end
 
   describe "DELETE #destroy" do
-    describe "delete" do 
+    describe "delete" do
       before(:each) do
         @language = create(:language, name: "Chuukese")
       end
 
-      it "render josn response for the deleted object" do 
+      it "render josn response for the deleted object" do
         delete :destroy, { format: :json, auth_token: @user.authentication_token, id: @language.id }
 
         language = json_response

@@ -1,9 +1,12 @@
 # Configures your navigation
 SimpleNavigation::Configuration.run do |navigation|
-   navigation.selected_class = 'active'
+  navigation.selected_class = 'active'
 
   # Define the primary navigation
   navigation.items do |primary|
+    primary.dom_class = 'MainMenu sidebarNav'
+
+    # Superadmins, Admins, and Volunteers have access to members. Admins and Volunteers have access to those that belong to their own organization only.
     if current_user and current_user.has_any_role? :superadmin, :admin, {name: :volunteer, resource: :any}
       primary.item :users, 'Members', users_path, highlights_on: :subpath do |sub|
         sub.dom_class = 'nav nav-pills'
@@ -11,41 +14,12 @@ SimpleNavigation::Configuration.run do |navigation|
       end
     end
 
-    if current_user and current_user.has_any_role? :superadmin, :admin
-      primary.item :posts, "Posts", installations_path, highlights_on: :subpath do |sub|
-        sub.dom_class = 'nav nav-pills'
-        sub.item :photos, 'New post', new_installation_path
-      end
-    end
-
-    if current_user and current_user.has_any_role? :superadmin, :admin, {name: :volunteer, resource: :any}
-      primary.item :sites, "Sites", sites_path, highlights_on: :subpath do |sub|
-        sub.dom_class = 'nav nav-pills'
-        sub.item :photos, 'New site', new_site_path
-      end
-    end
-
-    if current_user and current_user.has_any_role? :superadmin, :admin, {name: :volunteer, resource: :any}
-      primary.item :languages, "Languages", languages_path, highlights_on: :subpath do |sub|
-        sub.dom_class = 'nav nav-pills'
-        sub.item :photos, 'New language', new_language_path
-      end
-    end
-
-    if current_user and current_user.has_any_role? :superadmin, :admin, {name: :volunteer, resource: :any}
-      primary.item :category, "Category", categories_path, highlights_on: :subpath do |sub|
-        sub.dom_class = 'nav nav-pills'
-        sub.item :category, 'New Category', new_category_path
-      end
-    end
-
+    # Superadmins, Admins, Volunteers, and Contributors have access to the Articles.
     if current_user and current_user.has_any_role? :superadmin, :admin, {name: :volunteer, resource: :any}, {name: :contributor, resource: :any}
-      primary.item :photos, "Photos", articles_path, highlights_on: :subpath do |sub|
+      primary.item :articles, "Articles", articles_path, highlights_on: :subpath do |sub|
         sub.dom_class = 'nav nav-pills'
-        sub.item :photos, 'New photo', new_article_path
+        sub.item :new_article, 'New article', new_article_path
       end
     end
-
-    primary.dom_class = 'nav'
   end
 end

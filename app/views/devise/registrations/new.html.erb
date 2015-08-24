@@ -1,79 +1,70 @@
-<div class="row">
-  <div class="col-md-12">
+<div class="User-content">
+    <h3>Create New Account</h3>
 
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: "form-horizontal"}) do |f| %>
-   <fieldset>
-    <legend>Sign Up Form</legend>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: "Form"}) do |f| %>
+        <%= render partial: "shared/error_messages", object: resource %>
 
-      <%= devise_error_messages! %>
-
-      <div class="form-group">
-        <%= f.label :organization_id, "Organization", class: "control-label col-sm-3" %>
-        <div class="col-sm-3">
-          <%= f.collection_select(:organization_id, Organization.all, :id, :name, prompt: true) %>
+        <div class="Form-group">
+            <%= f.label :organization_id, "Organization" %>
+            <%= f.collection_select(:organization_id, Organization.all, :id, :name, {prompt: true}, {class: "Form-control"}) %>
         </div>
-      </div>
 
-      <div class="form-group">
-        <%= f.label :email, class: "control-label col-sm-3" %>
-        <div class="col-sm-3">
-          <%= f.text_field :email, class: "form-control" %>
+        <div class="Form-group">
+            <%= f.label :email %>
+            <%= f.text_field :email, class: "Form-control" %>
         </div>
-      </div>
 
-      <div class="form-group">
-        <%= f.label :username, class: "control-label col-sm-3" %>
-        <div class="col-sm-3">
-          <%= f.text_field :username, class: "form-control" %>
+        <div class="Form-group">
+            <%= f.label :username %>
+            <%= f.text_field :username, class: "Form-control" %>
         </div>
-      </div>
-      
-      <div class="form-group">
-        <%= f.label :first_name, class: "control-label col-sm-3" %>
-        <div class="col-sm-3">
-          <%= f.text_field :first_name, class: "form-control" %>
+
+        <div class="Form-group">
+            <%= f.label :first_name %>
+            <%= f.text_field :first_name, class: "Form-control" %>
         </div>
-      </div>
 
-      <div class="form-group">
-        <%= f.label :last_name, class: "control-label col-sm-3" %>
-        <div class="col-sm-3">
-          <%= f.text_field :last_name, class: "form-control" %>
+        <div class="Form-group">
+            <%= f.label :last_name %>
+            <%= f.text_field :last_name, class: "Form-control" %>
         </div>
-      </div>
 
-<!-- Roles should be applied upon signing up on organizations -->
-
-      <div class="form-group">
-        <%= f.label :language, class: "control-label col-sm-3" %>
-        <div class="col-sm-3">
-          <%= f.collection_select(:lang, Language.all, :name, :name, include_blank: "All", class: "form-control") %>
+        <div class="Form-group">
+            <%= f.label :gender %>
+            <div>
+                <label>
+                    <%= f.radio_button :gender, 'Male', checked:true %> Male
+                </label>
+                <label>
+                    <%= f.radio_button :gender, 'Female' %> Female
+                </label>
+            </div>
         </div>
-      </div>
 
-      <div class="form-group">
-        <%= f.label :password, class: "control-label col-sm-3" %>
-        <div class="col-sm-3">
-          <%= f.password_field :password, class: "form-control" %>
+        <div class="Form-group">
+            <%= f.label :lang %>
+            <%= f.collection_select(:lang, Language.all, :name, :name, {include_blank: "None"}, {class: "Form-control"}) %>
         </div>
-      </div>
 
-      <div class="form-group">
-        <%= f.label :password_confirmation, class: "control-label col-sm-3" %>
-        <div class="col-sm-3">
-          <%= f.password_field :password_confirmation, class: "form-control" %>
+        <div class="Form-group">
+            <%= f.label :password %>
+            <%= f.password_field :password, class: "Form-control" %>
         </div>
-      </div>
 
-      <div class="form-group form-actions">
-        <div class="col-sm-offset-3 col-sm-3">
-          <button class="btn btn-primary" type="submit">Sign Up</button>
+        <div class="Form-group">
+            <%= f.label :password_confirmation %>
+            <%= f.password_field :password_confirmation, class: "Form-control" %>
         </div>
-      </div>
 
-      </fieldset>
-
+        <div>
+            <button class="button button--primary" type="submit">Sign Up</button>
+            <%- if controller_name != 'sessions' %>
+                <%= link_to "Sign in", new_session_path(resource_name), class: "u-fr links u-links" %>
+            <% end -%>
+        </div>
     <% end %>
+</div>
 
-  </div>
+<div class="User-footer">
+    <p class="u-pushTop20">&nbsp;</p>
 </div>

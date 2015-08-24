@@ -43,10 +43,11 @@ class User < ActiveRecord::Base
 
   rolify
   include PgSearch
+  before_save :ensure_authentication_token
 
   belongs_to :organization
-  
-  # Include default devise modules. Others available are:
+
+  # DEVISE: Include devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :validatable,
          :recoverable, :rememberable, :trackable, :token_authenticatable, :invitable
@@ -57,17 +58,18 @@ class User < ActiveRecord::Base
 
   validates_presence_of :username, :first_name, :last_name, :organization_id
 
-  before_save :ensure_authentication_token
+  # default order when calling the User model
+  default_scope -> { order('created_at DESC') }
 
-  # Search 
+  # PgSearch
   pg_search_scope :user_search,
-    against: :tsv_data,
-    using: {
-      tsearch: {
-        dictionary: 'english',
-        any_word: true,
-        prefix: true,
-        tsvector_column: 'tsv_data'
-      }
-    }
+                  against: :tsv_data,
+                  using: {
+                      tsearch: {
+                          dictionary: 'english',
+                          any_word: true,
+                          prefix: true,
+                          tsvector_column: 'tsv_data'
+                      }
+                  }
 end

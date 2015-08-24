@@ -1,39 +1,60 @@
-<% if user_signed_in? %>
+<header class="app-bar promote-layer">
+    <div class="app-bar-container">
+        <button class="menu"><span class="icon-menu"></span></button>
 
-<p><b><%= link_to 'Edit profile', edit_user_registration_path %></b></p>
+        <div class="Heading">
+            <h1 class="title"><span>Home</span></h1>
+        </div>
+    </div>
+</header>
 
-<dl class="dl-horizontal">
-  <dt>First Name</dt>
-  <dd><%= current_user.first_name %></dd>
+<main>
+    <div class="Form u-pushTopBottom clear">
+        <div class="g--half">
 
-  <dt>Last Name</dt>
-  <dd><%= current_user.last_name %></dd>
+            <h3 class="title">User</h3>
+            <div class="User u-pushTopBottom">
+                <a href="#" class="User-link">
+                    <%= image_tag( "user.png", class: "image" )%>
+                </a>
+            </div>
 
-  <dt>Email</dt>
-  <dd><%= current_user.email %></dd>
+            <dl class="Info">
+                <dt>Name</dt>
+                <dd>
+                    <%= "#{current_user.first_name} #{current_user.last_name}" %>
+                    <%= link_to 'Edit profile', edit_user_registration_path, class: "Info-more" %>
+                </dd>
 
-  <dt>Gender</dt>
-  <dd><%= current_user.gender %></dd>
+                <dt>Email</dt>
+                <dd><%= current_user.email %></dd>
 
-  <dt>Location</dt>
-  <dd><%= current_user.location %></dd>
+                <% unless current_user.gender.blank? %>
+                    <%= content_tag :dt, "Gender" %>
+                    <%= content_tag :dd, current_user.gender %>
+                <% end  %>
 
-  <dt>Language Contribution</dt>
-  <dd><%= current_user.lang %></dd>
+                <% unless current_user.lang.blank? %>
+                    <%= content_tag :dt, "Language Contribution" %>
+                    <%= content_tag :dd, current_user.lang %>
+                <% end  %>
 
-  <dt>Contact Number</dt>
-  <dd><%= current_user.contact %></dd>
+                <% unless current_user.location.blank? %>
+                    <%= content_tag :dt, "Location" %>
+                    <%= content_tag :dd, current_user.location %>
+                <% end  %>
 
-  <% if !current_user.login_approval_at %>
-    <dd><b>You first need to be approved to use your account. Ask your administrator for an approval.</b></dd>
-  <% end %>
-</dl>
+                <% unless current_user.contact.blank? %>
+                    <%= content_tag :dt, "Contact Number" %>
+                    <%= content_tag :dd, current_user.contact %>
+                <% end %>
+            </dl>
+        </div>
 
-<hr/>
+        <% if !current_user.login_approval_at %>
+            <p><b>You first need to be approved to use your account. Ask your administrator for an approval.</b></p>
+        <% end %>
 
-<% else %>
-
-<h3>Please login to use this application.</h3>
-<h3>If you are a new user the please sign up.</h3>
-
-<% end %>
+        <div class="clear"></div>
+    </div>
+</main>

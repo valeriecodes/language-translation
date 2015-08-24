@@ -10,6 +10,7 @@
 
 class Organization < ActiveRecord::Base
   has_many :users
-  has_many :installations
+  has_many :countries
+
   validates :name, presence: true
 end

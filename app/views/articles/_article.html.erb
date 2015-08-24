@@ -1,17 +1,57 @@
-<div class="article" data-id="<%= article.id %>" data-time="<%= article.created_at.to_i %>">
-<tr>
-  <td>
-    <% if article.language.present? %>
-      <%= link_to article.language.name, article_path(article) %>
-    <% end %>
-  </td>
-  <td><%= article.category.name %></td>
-  <td><%= article.english %></td>
-  <td><%= article.phonetic %></td>
-  <td><%= image_tag(article.picture_url, width: 50) if article.picture.present? %></td>
-  <td><%= link_to 'Edit', edit_article_path(article) %></td>
-  <% if current_user.has_any_role? :admin, :volunteer %>
-    <td><%= link_to 'Delete', article_path(article), method: :delete, class: "btn btn-danger btn-xs", data: { confirm: 'Are you sure?' } %></td>
-  <% end %>
-</tr>
-</div>
+<li>
+    <ul class="CardListTableRow">
+
+        <li class="CardListTable-cal u-w180px" data-th="Picture">
+            <div class="CardListTable-content">
+                <%= link_to image_tag(article.picture_url, width: 50), article_path(article) if article.picture.present? %>
+            </div>
+        </li>
+
+        <li class="CardListTable-cal u-w180px" data-th="English Text">
+            <div class="CardListTable-content">
+                <%= article.english %>
+            </div>
+        </li>
+
+        <li class="CardListTable-cal u-w180px" data-th="Phonetic Text">
+            <div class="CardListTable-content">
+                <%= article.phonetic %>
+            </div>
+        </li>
+
+        <li class="CardListTable-cal u-w180px" data-th="Category">
+            <div class="CardListTable-content">
+                <%= article.category.try(:name) %>
+            </div>
+        </li>
+
+        <li class="CardListTable-cal u-w180px" data-th="Language">
+            <div class="CardListTable-content">
+                <% if article.language.present? %>
+                    <%= article.language.name %>
+                <% end %>
+            </div>
+        </li>
+
+        <% if can? :update, article %>
+            <li class="CardListTable-cal CardListTable-cal--noheading u-w60px tar" data-th="Action">
+                <div class="CardListTable-content">
+                    <div class="dropdown">
+                        <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="button--icon" href="#"><i class="icon-action"></i></a>
+                        <ul class="dropdown-menu u-rightPopup">
+                            <li>
+                                <%= link_to 'Edit', edit_article_path(article) %>
+                            </li>
+                            <% if can? :destroy, article %>
+                                <li>
+                                    <%= link_to 'Delete', article_path(article), method: :delete, class: "btn btn-danger btn-xs", data: { confirm: 'Are you sure?' } %>
+                                </li>
+                            <% end %>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+        <% end %>
+
+    </ul>
+</li>

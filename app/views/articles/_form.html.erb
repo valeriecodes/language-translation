@@ -1,68 +1,52 @@
-<div class="row">
-  <div class="col-md-12">
-    <%= form_for @article, html: {class: "form-horizontal"} do |f| %>
-
+<%= form_for @article, html: {class: "Form--dual", id: "_form"} do |f| %>
     <%= render partial: "shared/error_messages", object: @article %>
 
-    <div class="form-group">
-      <%= f.label :language_id, "Language", class: "control-label col-sm-3" %>
-      <div class="col-sm-3">
-        <% if current_user.has_any_role? :admin, :volunteer %>
-          <%= f.collection_select(:language_id, Language.all, :id, :name ) %>
-        <% elsif current_user.has_role? :contributor %>
-          <%= f.collection_select(:language_id, Language.where(name: current_user.lang), :id, :name) %>
-        <% end %>
-      </div>
-    </div>
+    <div class="Form--dualDivider">
+        <div class="g--half">
 
-    <div class="form-group">
-      <%= f.label :category, class: "control-label col-sm-3" %>
-      <div class="col-sm-3">
-        <%= f.collection_select(:category_id, @categories, :id, :name) %>
-      </div>
-    </div>
+            <div class="Form-group">
+                <%= f.label :picture %>
+                <%= image_tag(@article.picture_url, width: 400) if @article.picture.present? %>
+                <%= f.file_field :picture, class: "Form-control" %>
 
-    <div class="form-group">
-      <%= f.label :english, "English Text", class: "control-label col-sm-3" %>
-      <div class="col-sm-3">
-        <%= f.text_field :english, class: "form-control" %>
-      </div>
-    </div>
+                <% if @article.picture.present? %>
+                    <span class="help-inline">( If you wish to change the picture, click on browse and upload the new file.)</span>
+                <% end %>
+            </div>
 
-    <div class="form-group">
-      <%= f.label :phonetic, "Phonetic Text", class: "control-label col-sm-3" %>
-      <div class="col-sm-3">
-        <%= f.text_field :phonetic, class: "form-control" %>
-      </div>
-    </div>
+            <div class="Form-group">
+                <%= f.label :language_id, "Language" %>
+                <div>
+                    <% if current_user.has_any_role? :superadmin, :admin, {name: :volunteer, resource: :any} %>
+                        <%= f.collection_select(:language_id, Language.all, :id, :name, {}, {class: "Form-control"}) %>
+                    <% elsif current_user.has_role? :contributor, :any %>
+                        <%= f.collection_select(:language_id, Language.where(name: current_user.lang), :id, :name, {}, {class: "Form-control"}) %>
+                    <% end %>
+                </div>
+            </div>
 
-    <div class="form-group">
-      <%= f.label :picture, class: "control-label col-sm-3" %>
-      <div class="col-sm-3">
-        <%= image_tag(@article.picture_url, :width => 400) if @article.picture.present? %>
-        <%= f.file_field :picture %> 
-      </div>
+            <div class="Form-group">
+                <%= f.label :category %>
+                <%= f.collection_select(:category_id, @categories, :id, :name, {}, {class: "Form-control"}) %>
+            </div>
 
-      <% if @article.picture.present? %>
-      <span class="help-inline">( If you wish to change the picture, click on browse and upload the new file.)</span>
-      <% end %>
-    </div>
+            <div class="Form-group">
+                <%= f.label :english, "English Text" %>
+                <%= f.text_field :english, class: "Form-control" %>
+            </div>
 
-    <% if can?(:delete, Article) %>
-      <div class="form-group">
-        <%= f.label :state, "Publish", class: "control-label col-sm-3" %>
-        <div class="col-sm-3">
-          <%= f.select :state, [["Unpublish", 'draft'], ['Publish', 'published']], {}, class: "form-control" %>
+            <div class="Form-group">
+                <%= f.label :phonetic, "Phonetic Text" %>
+                <%= f.text_field :phonetic, class: "Form-control" %>
+            </div>
+
+            <% if can?(:delete, Article) %>
+                <div class="Form-group">
+                    <%= f.label :state, "Publish" %>
+                    <%= f.select :state, [["Unpublish", 'draft'], ['Publish', 'published']], {}, class: "Form-control" %>
+                </div>
+            <% end %>
+
         </div>
-      </div>
-    <% end %>
-
-    <div class="form-group form-actions">
-      <div class="col-sm-offset-3 col-sm-3">
-        <button class="btn btn-primary" type="submit">Save</button>
-      </div>
     </div>
-
-    <% end %>
-  </div>
-</div>
+<% end %>

@@ -23,14 +23,14 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_devise_permitted_parameters
-     registration_params = [:first_name, :last_name, :email,  :username, :password, :password_confirmation, :location,
-         :lang, :contact, :gender, :organization_id]
+    registration_params = [:first_name, :last_name, :email,  :username, :password, :password_confirmation, :location,
+                           :lang, :contact, :gender, :organization_id]
 
-     if params[:action] == 'update'
-         devise_parameter_sanitizer.for(:account_update) { |u| u.permit(registration_params << :current_password)}
-     elsif params[:action] == 'create'
-         devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(registration_params) }
-     end
+    if params[:action] == 'update'
+      devise_parameter_sanitizer.for(:account_update) { |u| u.permit(registration_params << :current_password)}
+    elsif params[:action] == 'create'
+      devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(registration_params) }
+    end
   end
 
   def unauthorized_action(exception)

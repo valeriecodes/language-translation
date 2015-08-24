@@ -16,28 +16,62 @@
 //= require turbolinks
 //= require react
 //= require react_ujs
+//= require react-bootstrap
 //= require plugins/paginator
 //= require components
 //= require underscore
-//= require_tree .
 
 $(function() {
-		  if ($("#articles").length > 0) {
-          //FIXME - Need to fix this later by Isuri
-		      //setTimeout(updateArticles, 10000);
-		  }
+    if ($("#articles").length > 0) {
+        //FIXME - Need to fix this later by Isuri
+        //setTimeout(updateArticles, 10000);
+    }
 });
 
 function updateArticles (data) {
-	  if ($(".article").length > 0) {
-		        var article_id = $(".article:first").attr("data-id");
-		        var after = $(".article:first").attr("data-time");
-	                var len = $(".article").length
-	  } else {
-		        var after = "0";
-	  }
-          $.getScript('/articles.js?article_id=' + article_id + "&after=" + after + "&len=" + len ); 
-          setTimeout(updateArticles, 10000);
+    if ($(".article").length > 0) {
+        var article_id = $(".article:first").attr("data-id");
+        var after = $(".article:first").attr("data-time");
+        var len = $(".article").length
+    } else {
+        var after = "0";
+    }
+    $.getScript('/articles.js?article_id=' + article_id + "&after=" + after + "&len=" + len );
+    setTimeout(updateArticles, 10000);
 }
 
+$(document).ready(function(){
+    /*
+     Mobile menu
+     */
+    var querySelector = document.querySelector.bind(document);
 
+    var navdrawerContainer = querySelector('.navdrawer-container');
+    var body = document.body;
+    var appbarElement = querySelector('.app-bar');
+    var menuBtn = querySelector('.menu');
+    var main = querySelector('main');
+
+    function closeMenu() {
+        body.classList.remove('open');
+        appbarElement.classList.remove('open');
+        navdrawerContainer.classList.remove('open');
+    }
+
+    function toggleMenu() {
+        body.classList.toggle('open');
+        appbarElement.classList.toggle('open');
+        navdrawerContainer.classList.toggle('open');
+        navdrawerContainer.classList.add('opened');
+    }
+
+    main.addEventListener('click', closeMenu);
+    menuBtn.addEventListener('click', toggleMenu);
+
+    navdrawerContainer.addEventListener('click', function (event) {
+        if (event.target.nodeName === 'A' || event.target.nodeName === 'LI') {
+            closeMenu();
+        }
+    });
+
+})

@@ -1,16 +1,9 @@
 class ArticlesController < ApplicationController
-  include StrongParams
-  
   before_action :set_article, only: [:show, :edit, :update, :destroy, :publish, :unpublish]
-
   load_and_authorize_resource
+  include StrongParams
 
   respond_to :html, :json
-
-  def new
-    @article = Article.new
-    @categories = Category.all
-  end
 
   def index
     if params[:q].blank?
@@ -20,28 +13,27 @@ class ArticlesController < ApplicationController
     end
   end
 
-  def create
-    @article = Article.new(article_params)
- 
-    if @article.save
-      redirect_to @article
-    else
-      @categories = Category.all
-      render 'new'
-    end
+  def show
+  end
+
+  def new
+    @article = Article.new
+    @categories = Category.all
   end
 
   def edit
     @categories = Category.all
   end
 
-  def destroy
-    @article.destroy
+  def create
+    @article = Article.new(article_params)
 
-    redirect_to articles_path
-  end
-
-  def show
+    if @article.save
+      redirect_to @article
+    else
+      @categories = Category.all
+      render 'new'
+    end
   end
 
   def update
@@ -53,6 +45,15 @@ class ArticlesController < ApplicationController
     end
   end
 
+  def destroy
+    @article.destroy
+
+    redirect_to articles_path
+  end
+
+  #####CUSTOM METHODS#####
+
+  # AASM-related methods
   def publish
     respond_with(@article) do |format|
       if @article.publish!
@@ -68,7 +69,6 @@ class ArticlesController < ApplicationController
       end
     end
   end
-
   def unpublish
     respond_with(@article) do |format|
       if @article.unpublish!
@@ -84,8 +84,8 @@ class ArticlesController < ApplicationController
       end
     end
   end
- 
- private
+
+  private
   def set_article
     @article = Article.includes(:category, :language).find(params[:id])
   end

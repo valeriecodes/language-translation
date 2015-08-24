@@ -1,8 +1,7 @@
-<%= react_component 'UsersShowBox', {
-        current_user_roles: current_user.roles.map{|a| a.name},
-        user: @user,
-        user_roles: @user.roles.map{|a| a.name},
-        organization: @user.organization
-    } %>
-
-<%= link_to 'Edit', edit_user_path(@user) %>
+<%= react_component 'UsersShowBox',
+                    {
+                            current_user_roles: current_user.roles.map{|a| a.name},
+                            user: @user,
+                            user_roles: @user.roles.map{|a| a.name},
+                            organization: @user.organization
+                    } %>

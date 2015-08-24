@@ -1,11 +1,15 @@
-<%= form_for(@organization) do |f| %>
-  <%= render partial: "shared/error_messages", object: @organization %>
+<%= form_for @organization, html: {class: "Form--dual", id: "_form"} do |f| %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <%= render partial: "shared/error_messages", object: @organization %>
+
+    <div class="Form--dualDivider">
+        <div class="g--half">
+
+            <div class="Form-group">
+                <%= f.label :name, "Name" %>
+                <%= f.text_field :name, class: "Form-control" %>
+            </div>
+
+        </div>
+    </div>
 <% end %>

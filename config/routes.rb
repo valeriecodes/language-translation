@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  # Route config for ActiveAdmin
   ActiveAdmin.routes(self)
 
   devise_for :users, skip: [:sessions, :passwords, :registrations, :confirmations, :invitations]
@@ -39,11 +40,12 @@ Rails.application.routes.draw do
 
   resources :organizations
 
-  resources :installations do
+  resources :countries do
     resources :sites
   end
 
   resources :sites
+  # Routes for custom methods (for use with ReactJS)
   post "sites/add_role", to: "sites#add_role"
   post "sites/remove_role", to: "sites#remove_role"
 
@@ -64,11 +66,10 @@ Rails.application.routes.draw do
   namespace :api do
     resources :users
     resources :articles
-    resources :installations
+    resources :countries
     resources :categories
     resources :languages
   end
- 
 
   # You can have the root of your site routed with "root"
   root 'welcome#index'

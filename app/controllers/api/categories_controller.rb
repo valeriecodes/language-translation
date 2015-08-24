@@ -61,7 +61,7 @@ class API::CategoriesController < API::BaseController
       end
     end
   end
- 
+
   private
   def category_params
     params.require(:category).permit(:name)

@@ -1,22 +1,78 @@
-<h1>Listing categories</h1>
- 
-<br />
+<header class="app-bar promote-layer">
+    <div class="app-bar-container">
+        <button class="menu"><span class="icon-menu"></span></button>
 
-<table class="table table-striped">
-  <tr>
-    <th>Name</th>
-    <th colspan="2"></th>
-  </tr>
- 
-  <% @categories.each do |category| %>
-    <tr>
-      <td><%= category.name %></td>
-      <td><%= link_to 'Show', category_path(category) %></td>
-      <td><%= link_to 'Edit', edit_category_path(category) %>
-      <%= link_to 'Delete', category_path(category), method: :delete, class: "btn btn-danger btn-xs", data: { confirm: 'Are you sure?' } %></td>
-    </tr>
-  <% end %>
-</table>
-<hr/>
+        <div class="Heading">
+            <h1 class="title"><span>Categories</span></h1>
+        </div>
+    </div>
+</header>
 
-<%= paginate @categories %>
+<main>
+    <div class="AppControls">
+        <div class="AppControls--box AppControls-left">
+            <form class="Form Form--inline AppControls-search">
+                <div class="Form-group">
+                    <input type="search" class="Form-control" id="search" placeholder="Search Categories" />
+                </div>
+                <button type="submit" class="btn btn-default icon-search">Search</button>
+            </form>
+        </div>
+
+        <div class="AppControls--box AppControls-middle"></div>
+
+        <div class="AppControls--box AppControls-right">
+            <a class="button--icontext button--ricontext" href="<%= new_category_path %>"><i class="icon-plus"></i> <span>New Category</span></a>
+        </div>
+    </div>
+
+    <div class="CardListTable">
+        <ul class="CardListTable-body">
+
+            <% @categories.each do |category| %>
+                <li>
+                    <ul class="CardListTableRow">
+                        <li class="CardListTable-cal u-w30px" data-th="#">
+                            <div class="CardListTable-content">
+                                <% if can? :update, category %>
+                                    <%= link_to category.id, edit_category_path(category) %>
+                                <% else %>
+                                    <%= category.id %>
+                                <% end %>
+                            </div>
+                        </li>
+
+                        <li class="CardListTable-cal u-w300px" data-th="Name">
+                            <div class="CardListTable-content">
+                                <%= category.name %>
+                            </div>
+                        </li>
+
+                        <% if can? :update, category %>
+                            <li class="CardListTable-cal CardListTable-cal--noheading u-w60px tar" data-th="Action">
+                                <div class="CardListTable-content">
+                                    <div class="dropdown">
+                                        <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="button--icon" href="#"><i class="icon-action"></i></a>
+                                        <ul class="dropdown-menu u-rightPopup">
+                                            <li>
+                                                <%= link_to 'Edit', edit_category_path(category) %>
+                                            </li>
+                                            <% if can? :destroy, category %>
+                                                <li>
+                                                    <%= link_to 'Delete', category_path(category), method: :delete, data: { confirm: 'Are you sure?' } %>
+                                                </li>
+                                            <% end %>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                        <% end %>
+
+                    </ul>
+                </li>
+            <% end %>
+        </ul>
+    </div>
+
+    <%= paginate @categories %>
+</main>
