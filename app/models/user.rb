@@ -37,13 +37,12 @@
 #
 
 class User < ActiveRecord::Base
-  attr_accessor :accept_invitation
+  attr_accessor :no_invitation
 
   GENGER={male: "Male", female: "Female"}
 
   rolify
   include PgSearch
-  before_save :ensure_authentication_token
 
   belongs_to :organization
 
@@ -61,15 +60,28 @@ class User < ActiveRecord::Base
   # default order when calling the User model
   default_scope -> { order('created_at DESC') }
 
+  after_create  :send_invitation
+  before_save   :ensure_authentication_token
+  before_create :test
+
   # PgSearch
   pg_search_scope :user_search,
-                  against: :tsv_data,
-                  using: {
-                      tsearch: {
-                          dictionary: 'english',
-                          any_word: true,
-                          prefix: true,
-                          tsvector_column: 'tsv_data'
-                      }
-                  }
+    against: :tsv_data,
+    using: {
+        tsearch: {
+            dictionary: 'english',
+            any_word: true,
+            prefix: true,
+            tsvector_column: 'tsv_data'
+        }
+    }
+
+  private
+  def send_invitation
+    invite! if no_invitation=="0"
+  end
+
+  def test
+    puts no_invitation
+  end
 end

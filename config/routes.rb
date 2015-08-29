@@ -6,27 +6,27 @@ Rails.application.routes.draw do
   devise_for :users, skip: [:sessions, :passwords, :registrations, :confirmations, :invitations]
 
   devise_scope :user do
-    post    :forgot_password,   to: "devise/passwords#create",     as: :user_password
-    get     :forgot_password,   to: "devise/passwords#new",        as: :new_user_password
-    get     :reset_password,    to: "devise/passwords#edit",       as: :edit_user_password
-    put     :reset_password,    to: "devise/passwords#update",     as: :reset_user_password
+    post    :forgot_password,   to: "passwords#create",     as: :user_password
+    get     :forgot_password,   to: "passwords#new",        as: :new_user_password
+    get     :reset_password,    to: "passwords#edit",       as: :edit_user_password
+    put     :reset_password,    to: "passwords#update",     as: :reset_user_password
 
-    delete  :logout,            to: "devise/sessions#destroy",     as: :destroy_user_session
-    post    :login,             to: "devise/sessions#create",      as: :user_session
-    get     :login,             to: "devise/sessions#new",         as: :new_user_session
+    delete  :logout,            to: "sessions#destroy",     as: :destroy_user_session
+    post    :login,             to: "sessions#create",      as: :user_session
+    get     :login,             to: "sessions#new",         as: :new_user_session
 
     post    :signup,            to: "registrations#create",   as: :user_registration
     get     :signup,            to: "registrations#new",      as: :new_user_registration
     get     :profile,           to: "registrations#edit",     as: :edit_user_registration
     put     :profile,           to: "registrations#update",   as: :update_user_registration
-    post    :regenerate_api_key,to: "registrations#regenerate_api_key"
+    post    :regenerate_api_key,to: "registrations#regenerate_api_key", as: :regenerate_api_key
 
-    post    :activate,          to: "devise/confirmations#create", as: :user_confirmation
-    get     :activate,          to: "devise/confirmations#new",    as: :new_user_confirmation
-    get     :confirmation,      to: "devise/confirmations#show"
+    post    :activate,          to: "confirmations#create", as: :user_confirmation
+    get     :activate,          to: "confirmations#new",    as: :new_user_confirmation
+    get     :confirmation,      to: "confirmations#show"
 
-    get     :accept_invitation, to: "devise/invitations#edit",     as: :user_invitation
-    put     :accept_invitation, to: "devise/invitations#update"
+    get     :accept_invitation, to: "invitations#edit",     as: :user_invitation
+    put     :accept_invitation, to: "invitations#update"
   end
 
   resources :users, path: :members do 

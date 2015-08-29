@@ -18,11 +18,12 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    ## Set default organization
+    @user.organization = current_user.organization
+    @user.no_invitation = user_params[:no_invitation]
 
     respond_to do |format|
-      if @user.save
-        @user.invite!(current_user) if params[:user][:accept_invitation] == "0"
-         
+      if @user.save  
         format.html { redirect_to users_path }
       else
         format.html { render 'new' }
@@ -106,6 +107,6 @@ class UsersController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :username, :location, :lang, :contact, :gender, :organization_id, :accept_invitation, :password))
+    params.require(:user).permit(:first_name, :last_name, :email, :username, :location, :lang, :contact, :gender, :no_invitation, :password)
   end
 end

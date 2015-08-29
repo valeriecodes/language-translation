@@ -5,11 +5,6 @@
         <div class="g--half">
 
             <div class="Form-group">
-                <%= f.label :organization_id, "Organization" %>
-                <%= f.collection_select(:organization_id, Organization.all, :id, :name, {prompt: true}, {class: "Form-control"}) %>
-            </div>
-
-            <div class="Form-group">
                 <%= f.label :email %>
                 <%= f.email_field :email, class: "Form-control" %>
             </div>
@@ -31,10 +26,11 @@
 
             <div class="Form-group">
                 <%= f.label :gender %>
-                <div>
+                <div class="Form-control--radio">
                     <label>
                         <%= f.radio_button :gender, 'Male', checked:true %> Male
                     </label>
+
                     <label>
                         <%= f.radio_button :gender, 'Female' %> Female
                     </label>
@@ -56,17 +52,18 @@
                 <%= f.text_field :contact, class: "Form-control" %>
             </div>
 
-          <div class="Form-group">
-              <label for="user_accept_invitation" class="checkbox">
-                <%= f.check_box :accept_invitation %> Don't send invitation email
-              </label>
-            </div>
-          </div>
+            <% if f.object.new_record? %>
+              <div class="Form-group">
+                  <label for="user_no_invitation">
+                    <%= f.check_box :no_invitation, class: "noInvitation" %> Don't send invitation email
+                  </label>
+              </div>
 
-          <div class="Form-group">
-            <%= f.label :password %>
-            <%= f.password_field :password, class: "Form-control" %>
-          </div>
+              <div class="Form-group withPassword <%= f.object.no_invitation ? "" : "hide" %>">
+                  <%= f.label :password %>
+                  <%= f.password_field :password, class: "Form-control" %>
+              </div>
+            <% end %>
 
         </div>
     </div>
