@@ -62,7 +62,6 @@ class User < ActiveRecord::Base
 
   after_create  :send_invitation
   before_save   :ensure_authentication_token
-  before_create :test
 
   # PgSearch
   pg_search_scope :user_search,
@@ -79,9 +78,5 @@ class User < ActiveRecord::Base
   private
   def send_invitation
     invite! if no_invitation=="0"
-  end
-
-  def test
-    puts no_invitation
   end
 end
