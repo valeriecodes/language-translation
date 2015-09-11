@@ -12,23 +12,22 @@ class UsersController < ApplicationController
     @pagination = { current_page: @users.current_page, total_pages: @users.total_pages }
   end
 
-  def show
-  end
-
   def new
     @user = User.new
   end
 
-  def edit
-  end
-
   def create
     @user = User.new(user_params)
+    ## Set default organization
+    @user.organization = current_user.organization
+    @user.no_invitation = user_params[:no_invitation]
 
-    if @user.save
-      redirect_to @user
-    else
-      render 'new'
+    respond_to do |format|
+      if @user.save  
+        format.html { redirect_to users_path }
+      else
+        format.html { render 'new' }
+      end
     end
   end
 
@@ -61,6 +60,7 @@ class UsersController < ApplicationController
       end
     end
   end
+
   def disapprove_user
     @user = User.find(params[:user_id])
     @user.login_approval_at = nil
@@ -86,6 +86,7 @@ class UsersController < ApplicationController
       end
     end
   end
+
   def revoke_admin
     @user = User.find(params[:user_id])
     @user.remove_role :admin
@@ -106,6 +107,6 @@ class UsersController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :username, :location, :lang, :contact, :gender, :organization_id)
+    params.require(:user).permit(:first_name, :last_name, :email, :username, :location, :lang, :contact, :gender, :no_invitation, :password)
   end
 end

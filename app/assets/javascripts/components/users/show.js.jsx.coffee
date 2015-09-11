@@ -68,6 +68,9 @@
               <dt>Name</dt>
               <dd>{user.first_name} {user.last_name}</dd>
 
+              <dt>Username</dt>
+              <dd>{user.username}</dd>
+
               <dt>Email</dt>
               <dd>{user.email}</dd>
 

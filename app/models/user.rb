@@ -4,7 +4,7 @@
 #
 #  id                     :integer          not null, primary key
 #  email                  :string           default(""), not null
-#  encrypted_password     :string           default(""), not null
+#  encrypted_password     :string           default("")
 #  reset_password_token   :string
 #  reset_password_sent_at :datetime
 #  remember_created_at    :datetime
@@ -23,39 +23,60 @@
 #  gender                 :string
 #  lang                   :string
 #  tsv_data               :tsvector
+#  invitation_token       :string
+#  invitation_created_at  :datetime
+#  invitation_sent_at     :datetime
+#  invitation_accepted_at :datetime
+#  invitation_limit       :integer
+#  invited_by_id          :integer
+#  invited_by_type        :string
+#  invitations_count      :integer          default(0)
 #  authentication_token   :string
 #  login_approval_at      :datetime
 #  organization_id        :integer
 #
 
 class User < ActiveRecord::Base
+  attr_accessor :no_invitation
+
+  GENGER={male: "Male", female: "Female"}
+
   rolify
   include PgSearch
-  before_save :ensure_authentication_token
 
   belongs_to :organization
 
   # DEVISE: Include devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :token_authenticatable
+  devise :database_authenticatable, :registerable, :validatable,
+         :recoverable, :rememberable, :trackable, :token_authenticatable, :invitable
+
+  default_scope -> { order('created_at DESC') }
 
   validates_uniqueness_of :username
-  validates_confirmation_of :password, length: { in: 6..20 }
-  validates_presence_of :username, :email, :first_name, :last_name, :organization_id
+
+  validates_presence_of :username, :first_name, :last_name, :organization_id
 
   # default order when calling the User model
   default_scope -> { order('created_at DESC') }
 
+  after_create  :send_invitation
+  before_save   :ensure_authentication_token
+
   # PgSearch
   pg_search_scope :user_search,
-                  against: :tsv_data,
-                  using: {
-                      tsearch: {
-                          dictionary: 'english',
-                          any_word: true,
-                          prefix: true,
-                          tsvector_column: 'tsv_data'
-                      }
-                  }
+    against: :tsv_data,
+    using: {
+        tsearch: {
+            dictionary: 'english',
+            any_word: true,
+            prefix: true,
+            tsvector_column: 'tsv_data'
+        }
+    }
+
+  private
+  def send_invitation
+    invite! if no_invitation=="0"
+  end
 end

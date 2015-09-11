@@ -112,13 +112,12 @@
                 <dl class="Info">
                     <dt>API key</dt>
                     <dd>
-        <span rows="1" onclick="this.focus();this.select()" class="form-control">
-          <%= current_user.authentication_token %>
-        </span>
-                        <span class="help-inline"><%= link_to "Regenerate", users_regenerate_api_key_path, method: :post, class: "Info-more" %></span>
+                        <span rows="1" onclick="this.focus();this.select()" class="form-control">
+                          <%= current_user.authentication_token %>
+                        </span>
+                        <span class="help-inline"><%= link_to "Regenerate", regenerate_api_key_path, method: :post, class: "Info-more" %></span>
                     </dd>
                 </dl>
-
 
                 <div class="Form-group">
                     <h3>Cancel my account</h3>

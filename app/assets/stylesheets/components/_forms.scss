@@ -64,6 +64,12 @@
           }
       }
     }
+    .Form-control--radio { 
+      label {
+        padding-right: 10px;
+        input  { margin-left: 1px;  }
+      }
+    }
   }
   input[type="search"] {
     box-sizing: border-box;
@@ -121,7 +127,7 @@
     }
   }
 
-    .Form-control--date { position: relative;
+  .Form-control--date { position: relative;
       &:before {
           font-family: 'vgo';
   speak: none;

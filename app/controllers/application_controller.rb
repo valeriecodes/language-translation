@@ -9,28 +9,12 @@ class ApplicationController < ActionController::Base
     params[resource] &&= send(method) if respond_to?(method, true)
   end
 
-# rescue_from ActionController::RoutingError do |exception|
-#     redirect_to root_url, alert: exception.message
-# end
-
-# rescue_from Exception do |exception|
-#     redirect_to root_url, alert: exception.message
-# end
-#
-# rescue_from ActiveRecord::RecordNotFound do |exception|
-#     redirect_to root_url, alert: exception.message
-# end
-#
-# rescue_from CanCan::AccessDenied do |exception|
-#     redirect_to root_url, alert: exception.message
-# end
-
   before_action :authenticate_user!
-# if user is not logged in, then page will be redirected to login page
-
   before_action :configure_devise_permitted_parameters, if: :devise_controller?
 
   alias :authorize_user! authorize!
+
+  rescue_from CanCan::AccessDenied, with: :unauthorized_action
 
   def access_denied(exception)
     redirect_to root_path, alert: exception.message
@@ -40,7 +24,7 @@ class ApplicationController < ActionController::Base
 
   def configure_devise_permitted_parameters
     registration_params = [:first_name, :last_name, :email,  :username, :password, :password_confirmation, :location,
-                           :lang, :contact, :gender]
+                           :lang, :contact, :gender, :organization_id]
 
     if params[:action] == 'update'
       devise_parameter_sanitizer.for(:account_update) { |u| u.permit(registration_params << :current_password)}
@@ -49,9 +33,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def unauthorized_action(exception)
+    respond_to do |format| 
+      format.html { redirect_to main_app.root_url, alert: exception.message}
+      format.json { render json: { errors: [exception.message] }, status: :forbidden }
+    end
+  end
+  
 end
-
-# customising devise generated tables.
-
-# flash messages/errors are present in config/locals/devise.en.yml
-# authentification criteria, password length, etc. is present in config/initialisers/devise.rb
