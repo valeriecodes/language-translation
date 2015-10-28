@@ -86,6 +86,10 @@ group :test, :development do
   gem 'rails-erd'
   gem 'factory_girl_rails'                    # Is a fixtures replacement with a straightforward definition syntax
   gem 'git'
+
+  ## Deploy with Capistrano
+  gem 'capistrano', '~> 2.15.5'
+  gem 'capistrano-ext', '~> 1.2.1'
 end
 
 gem 'memory_test_fix'
