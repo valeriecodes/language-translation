@@ -13,32 +13,46 @@
 </header>
 
 <main>
-    <div class="Form u-pushTopBottom clear">
-        <div class="g--half">
-            <p><%= image_tag(@article.picture_url, width: 400) if @article.picture.present? %></p>
-        </div>
+  <div class="Form u-pushTopBottom clear">
+      <div class="g--half">
+        <%= image_tag(@article.picture_url) if @article.picture.present? %>
+      </div>
 
-        <div class="g--half g--last">
-            <dl class="Info">
-                <dt>Phonetic Text</dt>
-                <dd><%= @article.phonetic.present? ? @article.phonetic : "N/A" %></dd>
+      <div class="g--half g--last">
+        <dl class="Info">
+          <dt>Phonetic Text</dt>
+          <dd><%= @article.phonetic.present? ? @article.phonetic : "N/A" %>  <%= link_to 'Edit', edit_article_path(@article), class: "Info-more" %></dd>
 
-                <dt>English Text</dt>
-                <dd><%= @article.english.present? ? @article.english : "N/A" %></dd>
+          <dt>English Text</dt>
+          <dd><%= @article.english.present? ? @article.english : "N/A" %></dd>
 
-                <dt>Category</dt>
-                <dd><%= @article.category.try(:name).present? ? @article.category.try(:name) : "N/A" %></dd>
+          <dt>Category</dt>
+          <dd><%= @article.category.try(:name).present? ? @article.category.try(:name) : "N/A" %></dd>
 
-                <dt>Language</dt>
-                <dd><%= @article.language.present? ? @article.language.name : "N/A"  %></dd>
-            </dl>
+          <dt>Language</dt>
+          <dd><%= @article.language.present? ? @article.language.name : "N/A"  %></dd>
+      </dl>
 
-            <% if can?(:delete, @article) && @article.draft? %>
-                <%= link_to 'Publish', publish_article_path(@article), method: :post %>
-            <% else %>
-                <%= link_to 'Unpublish', unpublish_article_path(@article), method: :post %>
-            <% end %>
-        </div>
+      <% if can?(:delete, @article) && @article.draft? %>
+        <%= link_to 'Publish', publish_article_path(@article), method: :post %>
+      <% else %>
+        <%= link_to 'Unpublish', unpublish_article_path(@article), method: :post %>
+      <% end %>
+
+      <h3 class="u-pushTop20">Audio Translations</h3>
+
+      <dl class="Info">
+        <% @article.audios.each do |audio| %>
+          <% if audio.audio.present? %>
+            <dt><%= audio.content %></dt>
+            <dd>
+              <%= link_to image_tag("icons/audio_icon.png", width: 24), "#", class: "jpayAudio" %>
+              <%= audio_tag audio.audio %>
+            </dd>
+          <% end %>
+        <% end %>
+      </dl>
+    </div>
 
     </div>
 </main>

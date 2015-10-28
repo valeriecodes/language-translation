@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150804172305) do
+ActiveRecord::Schema.define(version: 20150818001514) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,16 @@ ActiveRecord::Schema.define(version: 20150804172305) do
 
   add_index "articles", ["language_id"], name: "index_articles_on_language_id", using: :btree
   add_index "articles", ["tsv_data"], name: "index_articles_tsv", using: :gin
+
+  create_table "audios", force: :cascade do |t|
+    t.text     "content"
+    t.string   "audio"
+    t.integer  "article_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "audios", ["article_id"], name: "index_audios_on_article_id", using: :btree
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -147,6 +157,7 @@ ActiveRecord::Schema.define(version: 20150804172305) do
 
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
 
+  add_foreign_key "audios", "articles"
   add_foreign_key "countries", "organizations"
   add_foreign_key "countries", "users"
   add_foreign_key "users", "organizations"
