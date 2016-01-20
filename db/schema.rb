@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150818001514) do
+ActiveRecord::Schema.define(version: 20151208031448) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 20150818001514) do
     t.integer  "language_id"
     t.tsvector "tsv_data"
     t.integer  "category_id"
-    t.string   "state",       default: "draft"
+    t.integer  "state",       default: 0
   end
 
   add_index "articles", ["language_id"], name: "index_articles_on_language_id", using: :btree
@@ -128,6 +128,9 @@ ActiveRecord::Schema.define(version: 20150818001514) do
     t.string   "gender"
     t.string   "lang"
     t.tsvector "tsv_data"
+    t.string   "authentication_token"
+    t.datetime "login_approval_at"
+    t.integer  "organization_id"
     t.string   "invitation_token"
     t.datetime "invitation_created_at"
     t.datetime "invitation_sent_at"
@@ -136,9 +139,6 @@ ActiveRecord::Schema.define(version: 20150818001514) do
     t.integer  "invited_by_id"
     t.string   "invited_by_type"
     t.integer  "invitations_count",      default: 0
-    t.string   "authentication_token"
-    t.datetime "login_approval_at"
-    t.integer  "organization_id"
   end
 
   add_index "users", ["authentication_token"], name: "index_users_on_authentication_token", unique: true, using: :btree

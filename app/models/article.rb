@@ -16,7 +16,6 @@
 
 class Article < ActiveRecord::Base
   include PgSearch
-  include AASM
 
   belongs_to :language
   belongs_to :category
@@ -26,6 +25,7 @@ class Article < ActiveRecord::Base
 
   # default order when calling the Article model
   default_scope -> { order('created_at DESC') }
+  default_value_for :state, 0
 
   # CarrierWave integration for uploading pictures
   mount_uploader :picture, PictureUploader
@@ -44,17 +44,5 @@ class Article < ActiveRecord::Base
                       }
                   }
 
-  # AASM
-  aasm column: :state do
-    state :draft, initial: true
-    state :published
-
-    event :publish do
-      transitions from: :draft, to: :published
-    end
-
-    event :unpublish do
-      transitions from: :published, to: :draft
-    end
-  end
+  enum state:   [:draft, :published]
 end

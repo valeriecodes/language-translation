@@ -56,7 +56,7 @@ class ArticlesController < ApplicationController
 
   def publish
     respond_with(@article) do |format|
-      if @article.publish!
+      if @article.published!
         flash[:notice] = "The article has been published."
 
         format.html { redirect_to article_path(@article) }
@@ -72,7 +72,7 @@ class ArticlesController < ApplicationController
 
   def unpublish
     respond_with(@article) do |format|
-      if @article.unpublish!
+      if @article.draft!
         flash[:notice] = "The article has been drafted."
 
         format.html { redirect_to article_path(@article) }

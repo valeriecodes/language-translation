@@ -61,8 +61,6 @@ gem 'active_model_serializers'
 gem 'kaminari'
 
 gem 'simple-navigation'
-# AASM - State machines for Ruby classes
-gem 'aasm'
 # A lightweight Sass tool set
 gem 'bourbon'
 
