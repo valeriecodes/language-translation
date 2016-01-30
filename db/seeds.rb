@@ -17,7 +17,7 @@
 
     users = User.create!([
         { organization: organizations.first, username: 'admin1' , first_name: 'Adam', last_name: 'Wilkins',
-        login_approval_at: Time.now, password: 'admin1', password_confirmation: 'admin1', email: 'saumyagurtu@gmail.com'},
+        login_approval_at: Time.now, password: 'admin1', password_confirmation: 'admin1', email: 'admin@min.main'},
         { organization: organizations.second, username: 'admin2' , first_name: 'Neil', last_name: 'Bohr',
         login_approval_at: Time.now, password: 'admin2', password_confirmation: 'admin2', email: 'ad@min.two'},
         { organization: organizations.fourth, username: 'superadmin', first_name: 'Super', last_name: 'Admin',
