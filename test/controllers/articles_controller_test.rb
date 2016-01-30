@@ -52,12 +52,12 @@ class ArticlesControllerTest < ActionController::TestCase
     category = create(:category)
 
     article = Article.create!({
-                                  language_id: @language.id,
-                                  category_id: category.id,
-                                  english: "Foods",
-                                  phonetic: "Keema",
-                                  picture: Rack::Test::UploadedFile.new(File.join(Rails.root, 'test', 'support', 'picture', 'logo.jpg'))
-                              })
+        language_id: @language.id,
+        category_id: category.id,
+        english: "Foods",
+        phonetic: "Keema",
+        picture: Rack::Test::UploadedFile.new(File.join(Rails.root, 'test', 'support', 'picture', 'logo.jpg'))
+    })
 
     assert_difference('Article.count',-1) do
       delete :destroy, language_id: @language.id, id: article.id
@@ -66,6 +66,40 @@ class ArticlesControllerTest < ActionController::TestCase
 
     assert_nil Article.find_by_id(article.id)
     assert_not_nil Language.find_by_id(@language.id)
+  end
+
+  test "article change state to publish" do
+    @category = create(:category)
+    @article = Article.create!({
+      language_id: @language.id,
+      category_id: @category.id,
+      english: "Foods",
+      phonetic: "Keema",
+      picture: Rack::Test::UploadedFile.new(File.join(Rails.root, 'test', 'support', 'picture', 'logo.jpg'))
+    })
+
+    assert_equal "draft", @article.state
+
+    post :publish, id: @article
+    assert_equal "published", assigns(:article).state
+  end
+
+  test "article change state to unpublish" do
+    @category = create(:category)
+    @article = Article.create!({
+      language_id: @language.id,
+      category_id: @category.id,
+      english: "Foods",
+      phonetic: "Keema",
+      picture: Rack::Test::UploadedFile.new(File.join(Rails.root, 'test', 'support', 'picture', 'logo.jpg'))
+    })
+
+    @article.published!
+
+    assert_equal "published", @article.state
+
+    post :unpublish, id: @article
+    assert_equal "draft", assigns(:article).state
   end
 
 end
