@@ -12,7 +12,13 @@
 </head>
 
 <body>
-    <%= yield %>
+<% flash.each do |name, msg| %>
+    <%= content_tag :section, msg, :id => "flash_#{name}", :class => "flash" %>
+<% end %>
+<p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+
+ <%= yield %>
 
     <%= render "shared/header" %>
 </body>
